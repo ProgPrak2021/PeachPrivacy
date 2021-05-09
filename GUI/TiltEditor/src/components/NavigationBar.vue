@@ -1,6 +1,6 @@
 <template>
     <div id="menue" >
-        <b-navbar class="navbar navbar-custom" toggleable="lg" type="light" variant="info">
+        <b-navbar class="navbar" id="nbar" toggleable="lg" type="dark" variant="info">
             <b-navbar-brand href="#">
                <img src="../assets/tiltLogo.jpg" alt="" height="50">
             </b-navbar-brand>
@@ -63,52 +63,12 @@
 </script>
 
 <style >
-.navbar-custom {
-            background-color: red !important;
+#nbar{
+    background-color: whitesmoke  !important;
 }
-
-#menue{
-     background-color: whitesmoke !important;
-}
-.navbar{
-     background-color: whitesmoke !important;
-} 
-.navbar-dark {
-     background-color: whitesmoke !important;
-} 
-.bg-info {
-     background-color: whitesmoke !important;
-} 
-.navbar-expand-lg{
-     background-color: whitesmoke !important;
-} 
-
 /**Menübar */
 .nav-link{
     color: #649A9C !important; 
     background-color: whitesmoke !important;
 }
-
-/*
-.b-navbar{
-    background-color: whitesmoke !important;
-}
-
-.navbar-brand-logo{
-    height:50px;
-    width:70px;
-}
-
-.navbar {
-    background-color: red !important;
-    border-color: #649A9C !important;
-}
-
-.navbar-brand{
-    color: #649A9C !important; 
-}
-.dropdown-item{
-    color: #649A9C;
-}
-*/
 </style>
