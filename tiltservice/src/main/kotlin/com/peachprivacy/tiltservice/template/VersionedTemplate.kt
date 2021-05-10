@@ -16,6 +16,8 @@ class VersionedTemplate {
 
     var version: Int? = null
 
+    var changelog: String? = null
+
     @ManyToMany
     @JoinTable(
         name = "template_inheritance",
@@ -29,5 +31,17 @@ class VersionedTemplate {
 
     var created: LocalDateTime = LocalDateTime.now()
 
+    @OneToMany(mappedBy = "versionedTemplate")
+    var declaredClasses: List<DeclaredClass> = mutableListOf()
 
+    @OneToMany(mappedBy = "versionedTemplate")
+    var declaredFields: List<DeclaredField> = mutableListOf()
+
+    @OneToMany(mappedBy = "versionedTemplate")
+    var definedFields: List<DefinedField> = mutableListOf()
+
+
+    override fun toString(): String {
+        return "VersionedTemplate(id=$id, template=$template, version=$version, changelog=$changelog, parents=$parents, children=$children, created=$created, declaredClasses=$declaredClasses, declaredFields=$declaredFields, definedFields=$definedFields)"
+    }
 }
