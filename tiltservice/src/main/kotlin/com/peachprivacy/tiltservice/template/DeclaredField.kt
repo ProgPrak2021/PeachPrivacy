@@ -11,7 +11,7 @@ class DeclaredField {
 
     lateinit var name: String
 
-    var description: String = ""
+    var description: String? = null
 
     @ManyToOne
     @JoinColumn(name = "versioned_template_id")
