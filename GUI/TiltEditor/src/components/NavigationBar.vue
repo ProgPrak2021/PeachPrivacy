@@ -43,12 +43,15 @@
                 </b-nav-item-dropdown>
 
                 <b-nav-item-dropdown right>
-                <!-- Using 'button-content' slot -->
-                <template #button-content>
-                    <em>Benutzer</em>
-                </template>
-                <b-dropdown-item href="#">Profile</b-dropdown-item>
-                <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                    <!-- Using 'button-content' slot -->
+                    <template #button-content>
+                        <em>Benutzer</em>
+                    </template>
+                    <b-dropdown-item href="#">Profile</b-dropdown-item>
+                    <b-dropdown-item href="#">
+                        <login-modal></login-modal>
+                    </b-dropdown-item>
+                    <b-dropdown-item href="#">Abmelden</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
             </b-collapse>
@@ -57,8 +60,21 @@
 </template>
 
 <script>
+    import LoginpModal from "./LoginForm.vue";
+
     export default {
-          name: "NavigationBar"
+        name: "NavigationBar",
+        components: {
+        'login-modal':LoginpModal
+        },
+
+        methods: {
+            login: function() {
+                console.log("Login Funktion");
+                //this.$root.$emit("bv::show::modal", "your-modal-id");
+                return
+            }
+        }
     }
 </script>
 
@@ -70,5 +86,9 @@
 .nav-link{
     color: #649A9C !important; 
     background-color: whitesmoke !important;
+}
+.ml-auto{
+    color: black !important; 
+    background-color: red !important;
 }
 </style>
