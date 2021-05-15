@@ -15,25 +15,21 @@ repositories {
     mavenCentral()
 }
 
-extra["springCloudGcpVersion"] = "2.0.0"
 extra["springCloudVersion"] = "2020.0.2"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.postgresql:postgresql")
+
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("com.google.cloud:spring-cloud-gcp-starter")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.springframework.cloud:spring-cloud-starter-config")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-}
+    // implementation("org.springframework.cloud:spring-cloud-starter-config")
+    // implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
 
-dependencyManagement {
-    imports {
-        mavenBom("com.google.cloud:spring-cloud-gcp-dependencies:${property("springCloudGcpVersion")}")
-        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
-    }
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("com.h2database:h2")
 }
 
 tasks.withType<KotlinCompile> {
