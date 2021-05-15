@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     id("org.springframework.boot") version "2.4.5"
@@ -30,6 +31,10 @@ dependencies {
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.h2database:h2")
+}
+
+tasks.getByName<BootBuildImage>("bootBuildImage") {
+    imageName = "europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/tiltservice:${project.version}"
 }
 
 tasks.withType<KotlinCompile> {

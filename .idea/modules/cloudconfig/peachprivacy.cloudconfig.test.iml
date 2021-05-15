@@ -193,5 +193,4 @@
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.latencyutils:LatencyUtils:2.0.3" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Gradle: org.junit.platform:junit-platform-engine:1.7.1" level="project" />
   </component>
-  <component name="TestModuleProperties" production-module="peachprivacy.cloudconfig.main" />
 </module>
