@@ -48,9 +48,8 @@
                         <em>Benutzer</em>
                     </template>
                     <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <b-dropdown-item href="#">
-                        <login-modal></login-modal>
-                    </b-dropdown-item>
+                    <b-dropdown-item href="#"  v-b-modal.modal-1 size="sm" >Anmelden </b-dropdown-item>
+                    <login-modal></login-modal>
                     <b-dropdown-item href="#">Abmelden</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
