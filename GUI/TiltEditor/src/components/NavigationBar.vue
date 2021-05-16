@@ -47,13 +47,16 @@
                     <template #button-content>
                         <em>Benutzer</em>
                     </template>
-                    <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <div  v-if="loginV">
-                        <b-dropdown-item href="#" @click="logout" >Abmelden</b-dropdown-item>
+                    <div>
+                        <b-dropdown-item href="#" v-b-modal.modal-profile size="sm">Profile</b-dropdown-item>
+                        <profile-modal v-bind:user="user"></profile-modal>
+                    </div>
+                    <div  v-if="!loginV">
+                      <b-dropdown-item href="#" v-b-modal.modal-login size="sm" >Anmelden </b-dropdown-item>
+                      <login-modal @login-success="login"></login-modal>
                     </div>
                     <div v-else>
-                        <b-dropdown-item href="#" v-b-modal.modal-1 size="sm" >Anmelden </b-dropdown-item>
-                        <login-modal>@login-success="login"</login-modal>
+                      <b-dropdown-item href="#" @click="logout"  >Abmelden</b-dropdown-item>
                     </div>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
@@ -64,30 +67,35 @@
 
 <script>
     import LoginpModal from "./LoginForm.vue";
+    import ProfileModal from "./ProfileForm.vue";
 
     export default {
         name: "NavigationBar",
         components: {
-        'login-modal':LoginpModal
+        'login-modal':LoginpModal,
+        'profile-modal':ProfileModal
         },
          data() {
             return {
-                username: "",
+                user:{
+                  email: "",
+                  password: ""
+                },
                 loginV:   false
             };
         },
 
         methods: {
-            login: function(username){
+            login: function(usr){
                 //ToDo
-                this.username = username;
+                this.user = usr;
                 this.loginV=true;
-                console.log("login called")
+                console.log("login called: Username = " + this.user.email+ " loginV = " + this.loginV)
             },
             logout: function(){
                 //ToDo
-                console.log("call Logout")
                 this.loginV=false;
+                console.log("call Logout" + " loginV = " + this.loginV )
             }
         }
     }
