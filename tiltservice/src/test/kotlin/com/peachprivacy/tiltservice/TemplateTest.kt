@@ -16,12 +16,14 @@ class TemplateTest {
     lateinit var templateRepository: TemplateRepository
     @Autowired
     lateinit var versionedTemplateRepository: VersionedTemplateRepository
+    /*
     @Autowired
     lateinit var declaredClassRepository: DeclaredClassRepository
     @Autowired
     lateinit var declaredFieldRepository: DeclaredFieldRepository
     @Autowired
     lateinit var definedFieldRepository: DefinedFieldRepository
+    */
 
     @Test
     fun dbRootProjectPersonTest() {
@@ -36,6 +38,7 @@ class TemplateTest {
             changelog = "Initial version"
             template = rootTemplate
         })
+        /*
         val rootTextClass = declaredClassRepository.save(DeclaredClass().apply {
             name = "text"
             versionedTemplate = rootTemplateV1
@@ -56,6 +59,7 @@ class TemplateTest {
             type = rootNumberClass
             versionedTemplate = rootTemplateV1
         })
+        */
 
         val personTemplate = templateRepository.save(Template().apply {
             name = "Person Template"
@@ -67,6 +71,7 @@ class TemplateTest {
             version = 1
             parents = listOf(rootTemplateV1)
         })
+        /*
         val personNameField = declaredFieldRepository.save(DeclaredField().apply {
             name = "name"
             type = rootTextClass
@@ -82,6 +87,7 @@ class TemplateTest {
             value = "Person"
             versionedTemplate = personTemplateV1
         })
+        */
 
         val personTemplateV2 = versionedTemplateRepository.save(VersionedTemplate().apply {
             template = personTemplate
@@ -89,6 +95,7 @@ class TemplateTest {
             version = 2
             parents = listOf(rootTemplateV1)
         })
+        /*
         val personHeightField = declaredFieldRepository.save(DeclaredField().apply {
             name = "height"
             type = rootNumberClass
@@ -101,6 +108,7 @@ class TemplateTest {
             // Das hier ist nur (sinnloses) beispielfeld
             versionedTemplate = personTemplateV2
         })
+         */
 
         val personImplTemplate = templateRepository.save(Template().apply {
             name = "Implemented Person"
@@ -116,6 +124,7 @@ class TemplateTest {
                 personTemplateV1
             )
         })
+        /*
         val definedPersonNameField = definedFieldRepository.save(DefinedField().apply {
             field = personNameField
             value = "Patrick Hein"
@@ -131,6 +140,7 @@ class TemplateTest {
             value = "183cm"
             versionedTemplate = personImplV1
         })
+         */
 
         /*templateRepository.getOne(personTemplate.id!!).apply {
             println(toString())

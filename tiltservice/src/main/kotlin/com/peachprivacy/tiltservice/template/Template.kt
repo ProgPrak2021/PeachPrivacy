@@ -11,6 +11,8 @@ class Template {
 
     lateinit var name: String
 
+    var iconUrl: String? = null
+
     var baseDescription: String? = null
 
     var detailedDescription: String? = null
@@ -22,6 +24,6 @@ class Template {
 
 
     override fun toString(): String {
-        return "Template(id=$id, name='$name', baseDescription=$baseDescription, detailedDescription=$detailedDescription, versions=$versions, authority='$authority')"
+        return "Template(id=$id, name='$name', iconUrl='$iconUrl', baseDescription=$baseDescription, detailedDescription=$detailedDescription, versions=$versions, authority='$authority')"
     }
 }
