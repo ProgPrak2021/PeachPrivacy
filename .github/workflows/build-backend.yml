@@ -1,4 +1,4 @@
-name: Push PeachPrivacy to DockerHub
+name: Build PeachPrivacy BackEnd
 on:
   push:
     branches: [master]
