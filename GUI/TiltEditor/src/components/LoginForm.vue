@@ -37,7 +37,7 @@ export default {
     login() {
         console.log("Samy: Username = " + this.username + " Passwort = " + this.passwort);
        //Login Aufruf für an den Server  
-        axios.post('http://localhost:8081/api/auth/login', {
+        axios.post('/api/auth/login', {
             email: this.username,
             password: this.password,
         }).then(response =>{
