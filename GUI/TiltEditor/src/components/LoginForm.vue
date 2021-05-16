@@ -31,13 +31,11 @@ export default {
                 return 'Noch ' + len.toString() + ' Zeichen übrig';
             }
 
-
 },
   methods: {
     login() {
-        console.log("Samy: Username = " + this.username + " Passwort = " + this.passwort);
        //Login Aufruf für an den Server  
-        axios.post('http://localhost:8081/api/auth/login', {
+        axios.post('http://34.89.150.159:8080/api/auth/login', {
             email: this.username,
             password: this.password,
         }).then(response =>{
@@ -46,6 +44,7 @@ export default {
         }).catch(function (error) {
             console.log(error);
         })
+       this.$emit("login-success", this.username);
        console.log("Username= " + this.username + "Passwort= " + this.passwort);
     },
   },

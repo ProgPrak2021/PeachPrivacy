@@ -48,9 +48,13 @@
                         <em>Benutzer</em>
                     </template>
                     <b-dropdown-item href="#">Profile</b-dropdown-item>
-                    <b-dropdown-item href="#"  v-b-modal.modal-1 size="sm" >Anmelden </b-dropdown-item>
-                    <login-modal></login-modal>
-                    <b-dropdown-item href="#">Abmelden</b-dropdown-item>
+                    <div  v-if="loginV">
+                        <b-dropdown-item href="#" @click="logout" >Abmelden</b-dropdown-item>
+                    </div>
+                    <div v-else>
+                        <b-dropdown-item href="#" v-b-modal.modal-1 size="sm" >Anmelden </b-dropdown-item>
+                        <login-modal>@login-success="login"</login-modal>
+                    </div>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
             </b-collapse>
@@ -66,12 +70,24 @@
         components: {
         'login-modal':LoginpModal
         },
+         data() {
+            return {
+                username: "",
+                loginV:   false
+            };
+        },
 
         methods: {
-            login: function() {
-                console.log("Login Funktion");
-                //this.$root.$emit("bv::show::modal", "your-modal-id");
-                return
+            login: function(username){
+                //ToDo
+                this.username = username;
+                this.loginV=true;
+                console.log("login called")
+            },
+            logout: function(){
+                //ToDo
+                console.log("call Logout")
+                this.loginV=false;
             }
         }
     }
