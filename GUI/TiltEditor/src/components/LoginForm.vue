@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-modal id="modal-login" title="Anmelden" @ok="login">
+    <b-modal id="modal-login" title="Anmelden" hide-header-close @ok="login">
             <b-form-group id="ctrtUsername" label="Benutzername *">
                 <b-form-input v-model="user.email" placeholder="Bitte Email als Benutzername eingeben." trim aria-required=""></b-form-input>
             </b-form-group>
