@@ -1,14 +1,26 @@
 <template>
   <div>
     <b-modal id="modal-profile" title="Profile">
-            <img src="../assets/benutzer.jpg" alt="" height="50">
-            <div>{{user.email}}</div>
-            <div> Registrieren</div>
-            <div href="#" v-b-modal.modal-register size="sm">Register</div>
-                        <register-modal></register-modal>
-            <div><button> Profilbild ändern</button></div>
-            <div><button> Passwort ändern</button></div>
-
+      <b-row>
+        <b-col>
+          <img src="../assets/benutzer.jpg" alt="" height="50">
+        </b-col>
+        <b-col>
+          <div>{{user.email}}</div>
+        </b-col>
+      </b-row>
+      <b-row id="profile_actions">
+        <b-col>
+          <div href="#" v-b-modal.modal-register size="sm">Registeren</div>
+          <register-modal></register-modal>
+        </b-col>
+        <b-col>
+          <div href="#" v-b-modal.modal-change-avatar size="sm">Profilbild ändern</div>
+        </b-col>
+        <b-col>
+          <div href="#" v-b-modal.modal-change-avatar size="sm">Passwort ändern</div>
+        </b-col>
+      </b-row>
     </b-modal>
   </div>
 </template>
@@ -28,5 +40,9 @@ export default {
 <style scoped>
   .button{
   margin: 5px;
+
 }
+  #profile_actions{
+    background-color: #FF876C;
+  }
 </style>
