@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository
 import java.util.*
 
 @Repository
-interface VersionedTemplateRepository : JpaRepository<VersionedTemplate, UUID>
+interface ProjectRepository : JpaRepository<Project, UUID>

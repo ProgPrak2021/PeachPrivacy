@@ -13,9 +13,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension
 @ExtendWith(SpringExtension::class)
 class TemplateTest {
     @Autowired
-    lateinit var templateRepository: TemplateRepository
+    lateinit var projectRepository: ProjectRepository
     @Autowired
-    lateinit var versionedTemplateRepository: VersionedTemplateRepository
+    lateinit var templateRepository: TemplateRepository
     /*
     @Autowired
     lateinit var declaredClassRepository: DeclaredClassRepository
@@ -27,16 +27,16 @@ class TemplateTest {
 
     @Test
     fun dbRootProjectPersonTest() {
-        val rootTemplate = templateRepository.save(Template().apply {
+        val rootTemplate = projectRepository.save(Project().apply {
             name = "Root Template"
             baseDescription = "Root template defining basic types like text and number"
             detailedDescription = "Lorem ipsum blabla basic fields to define stuff bliblablub"
             authority = "public"
         })
-        val rootTemplateV1 = versionedTemplateRepository.save(VersionedTemplate().apply {
+        val rootTemplateV1 = templateRepository.save(Template().apply {
             version = 1
             changelog = "Initial version"
-            template = rootTemplate
+            project = rootTemplate
         })
         /*
         val rootTextClass = declaredClassRepository.save(DeclaredClass().apply {
@@ -61,13 +61,13 @@ class TemplateTest {
         })
         */
 
-        val personTemplate = templateRepository.save(Template().apply {
+        val personTemplate = projectRepository.save(Project().apply {
             name = "Person Template"
             baseDescription = "Define a person!"
             authority = "public"
         })
-        val personTemplateV1 = versionedTemplateRepository.save(VersionedTemplate().apply {
-            template = personTemplate
+        val personTemplateV1 = templateRepository.save(Template().apply {
+            project = personTemplate
             version = 1
             parents = listOf(rootTemplateV1)
         })
@@ -89,8 +89,8 @@ class TemplateTest {
         })
         */
 
-        val personTemplateV2 = versionedTemplateRepository.save(VersionedTemplate().apply {
-            template = personTemplate
+        val personTemplateV2 = templateRepository.save(Template().apply {
+            project = personTemplate
             changelog = "I forgot to specify the project version!"
             version = 2
             parents = listOf(rootTemplateV1)
@@ -110,15 +110,15 @@ class TemplateTest {
         })
          */
 
-        val personImplTemplate = templateRepository.save(Template().apply {
+        val personImplTemplate = projectRepository.save(Project().apply {
             name = "Implemented Person"
             baseDescription = "My custom person!"
             detailedDescription = "I wanted to define a person while I went to the ice cream store and blablabla..."
             authority = "insertuserUUIDhere"
         })
-        val personImplV1 = versionedTemplateRepository.save(VersionedTemplate().apply {
+        val personImplV1 = templateRepository.save(Template().apply {
             version = 1
-            template = personImplTemplate
+            project = personImplTemplate
             parents = mutableListOf(
                 rootTemplateV1, // Muss eig nicht speziell angegeben werden - auch hier nur Beispiel für Mehrfacherben
                 personTemplateV1

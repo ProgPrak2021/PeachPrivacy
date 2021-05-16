@@ -1,5 +1,6 @@
 package com.peachprivacy.tiltservice.template
 
+import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
@@ -9,21 +10,29 @@ class Template {
     @GeneratedValue
     var id: UUID? = null
 
-    lateinit var name: String
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    lateinit var project: Project
 
-    var iconUrl: String? = null
+    var version: Int? = null
 
-    var baseDescription: String? = null
+    var changelog: String? = null
 
-    var detailedDescription: String? = null
+    @ManyToMany
+    @JoinTable(
+        name = "template_inheritance",
+        joinColumns = [JoinColumn(name = "child_id")],
+        inverseJoinColumns = [JoinColumn(name = "parent_id")]
+    )
+    var parents: List<Template> = mutableListOf()
 
-    @OneToMany(mappedBy = "template")
-    var versions: List<VersionedTemplate> = mutableListOf()
+    @ManyToMany(mappedBy = "parents")
+    var children: List<Template> = mutableListOf()
 
-    lateinit var authority: String
+    var created: LocalDateTime = LocalDateTime.now()
 
 
     override fun toString(): String {
-        return "Template(id=$id, name='$name', iconUrl='$iconUrl', baseDescription=$baseDescription, detailedDescription=$detailedDescription, versions=$versions, authority='$authority')"
+        return "Template(id=$id, template=$project, version=$version, changelog=$changelog, parents=$parents, children=$children, created=$created)"
     }
 }
