@@ -1,11 +1,11 @@
 <template>
   <div>
     <b-modal id="modal-login" title="Anmelden" hide-header-close @ok="login">
-            <b-form-group id="ctrtUsername" label="Benutzername *">
-                <b-form-input v-model="user.email" placeholder="Bitte Email als Benutzername eingeben." trim aria-required=""></b-form-input>
+            <b-form-group id="ctrtUsername" label="E-Mail *">
+                <b-form-input type="email" v-model="user.email" placeholder="Bitte Email als Benutzername eingeben." trim aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group id="ctrlPasswort" label="Passwort *" v-bind:description="descriptionPasswort" aria-required>
-                <b-form-input type = "password" v-model="user.password" placeholder="Bitte Passwort eingeben (10 Zeichen)." trim aria-required ></b-form-input>
+                <b-form-input type = "password" v-model="user.password" placeholder="Bitte Passwort eingeben (Min. 10 Zeichen)." trim aria-required ></b-form-input>
             </b-form-group>
     </b-modal>
   </div>
@@ -36,16 +36,18 @@ export default {
   methods: {
     login() {
        //Login Aufruf für an den Server
-      console.log("Username= " + this.user.email + " Passwort= " + this.user.password);
+      console.log("Email= " + this.user.email + " Passwort= " + this.user.password);
 
-        axios.post('http://34.89.150.159:8080/api/auth/login', this.user).then(response =>{
+        axios.post('/api/auth/login', {
+            email: this.email,
+            password: this.password,
+        }).then(response => {
            console.log(response.data);
-
         }).catch(function (error) {
             console.log(error);
         })
        this.$emit('login-success', this.user);
-       console.log("Username= " + this.user.email + " Passwort= " + this.user.password);
+       console.log("Email= " + this.user.email + " Passwort= " + this.user.password);
     },
   },
 };
