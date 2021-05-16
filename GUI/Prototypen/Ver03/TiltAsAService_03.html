@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<!--Verwendung einer Vorlage aus dem Modul Webtechnologien-->
+<head>
+    <title>Tilt as a Service</title>
+    <meta charset="UTF-8"> 
+    <!--Stylesheet für Bootstrap, von https://getbootstrap.com/-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <!--Stylesheet von mir-->
+        <link rel="stylesheet" href="style.css"> 
+        <!--Sheet für JS, von https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+        <!--Sheet von https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+        <!--Sheet von https://getbootstrap.com/docs/4.1/getting-started/introduction/-->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- <nav class="navbar-expand-lg">-->
+        <!--NavbarCode auf eigenes Bsp angepasst, Grundgerüst von https://getbootstrap.com/docs/4.1/components/navbar/-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-light" href="#">
+            <!--Bild von Patrick designed, Patricks Quelle: ?-->
+            <img src="tiltLogo.jpg" alt="" height="50">
+        </a>
+        <!-- <a class="navbar-brand" href="#">TILT as a Service</a> -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Building blocks
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Meta</a>
+                        <a class="dropdown-item" href="#">Controller</a>
+                        <a class="dropdown-item" href="#">Data Protection Officer</a>
+                        <a class="dropdown-item" href="#">Adequacy decisions</a>
+                        <a class="dropdown-item" href="#">Access/Data portability</a>
+                        <a class="dropdown-item" href="#">Right to complain</a>
+                        <a class="dropdown-item" href="#">Automated decision making</a>
+                        <a class="dropdown-item" href="#">Notification on change</a>
+                        <a class="dropdown-item" href="#">Adequacy decisions</a>
+                        <a class="dropdown-item" href="#">Access/Data portability</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Sprache wählen
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Deutsch</a>
+                        <a class="dropdown-item" href="#">Englisch</a>
+<!--                    <a class="dropdown-pic" id="dropdown_1" height="15" href="#"><img src="united-kingdom-flag-png-xl.png" alt="Englisch">Englisch</a>
+                        <a class="dropdown-pic" id="dropdown_2" height="15" href="#"><img src="51cNvRZc0nL._AC_SX425_.jpg" alt="Deutsch">Deutsch</a>
+-->
+                    </div>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input id="Login" class="form-control mr-sm-2" type="login" placeholder="Benutzername" aria-label="Login">
+                <input id="Login" class="form-control mr-sm-2" type="login" placeholder="Passwort" aria-label="Login">
+                <button id="Login-btn" class="btn btn-outline-success my-2 my-sm-0" type="submit">Login</button>
+            </form>
+<!--
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Sprache wählen
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-pic" id="dropdown" href="#"><img src="united-kingdom-flag-png-xl.png" alt="Englisch"></a>
+                        <a class="dropdown-pic" id="dropdown" href="#"><img src="51cNvRZc0nL._AC_SX425_.jpg" alt="Deutsch"></a>
+                    </div>
+                </li>
+            </ul>
+-->
+        </div>
+    </nav>
+    <form method="GET">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="tilt-block">
+                        <table>
+                                <p>
+                                    <tr>
+                                        <td>
+                                            <h3>Meta:</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Identifikationsnummer:</td>
+                                        <td><input type="number" name="idNum" required autofocus></td> 
+                                    </tr>
+                                    <tr>
+                                        <td>Name:</td>
+                                        <td><input type="text" name="name" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Erstellungsdatum:</td>
+                                        <td><input type="date" name="crDate" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Letzte Änderung:</td>
+                                        <td><input type="date" name="modDate"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Version:</td>
+                                        <td><input type="number" name="version"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Länderkennung:</td>
+                                        <td><input type="text" name="langCode" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Status:</td>
+                                        <td><input type="text" name="status"list="stati"></td>
+                                        <datalist id="stati">
+                                            <option value="fertiggestellt"></option>
+                                            <option value="in Bearbeitung"></option>
+                                        </datalist>
+                                    </tr>
+                                    <tr>
+                                        <td>URL:</td>
+                                        <td><input type="url" name="url"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hash:</td>
+                                        <td><input type="text" name="hash"></td>
+                                    </tr>
+                                </p>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="tilt-block">
+                        <table>
+                            <div class="block">
+                                <p>
+                                    <tr>
+                                        <td>
+                                            <h3>Controller:</h3>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Firmenname:</td>
+                                        <td><input type="text" name="cpName" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bereich:</td>
+                                        <td><input type="text" name="division" ></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Adresse:</td>
+                                        <td><p>
+                                            <!--CoolapseCode auf eigenes Bsp angepasst, Grundgerüst von https://getbootstrap.com/docs/4.1/components/collapse/---->
+                                            <a id="TableButton" class="btn btn-primary" data-toggle="collapse" href="#Adresse" role="button" aria-expanded="false"
+                                                aria-controls="Adresse">Adresse spezifizieren</a>
+                                        </p>
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="collapse multi-collapse" id="Adresse">
+                                                    <div class="card card-body">
+                                                        Name: <input type="text" name="adressName" required>
+                                                        Straße: <input type="text" name="straße" required>
+                                                        Hausnummer: <input type="text" name="hausnummer" required>
+                                                        Postleitzahl: <input type="number" name="postleitzahl" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Länderkennung:</td>
+                                        <td><input type="text" name="countryCode" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Version:</td>
+                                        <td><input type="number" name="version"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sprache:</td>
+                                        <td><input type="text" name="langCode"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Vertreter:</td>
+                                        <td>
+                                            <p>
+                                                <a id="TableButton" class="btn btn-primary" data-toggle="collapse" href="#Vertreter" role="button" aria-expanded="false"
+                                                    aria-controls="Vertreter">Vertreter spezifizieren</a>
+                                            </p>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="collapse multi-collapse" id="Vertreter">
+                                                        <div class="card card-body">
+                                                            Name: <input type="text" name="vertreterName" required>
+                                                            Email: <input type="email" name="vertreterEmail" required>
+                                                            Telefon: <input type="tel" name="vertreterTelefon" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </div>
+                                </p>
+                        </table>
+                    </div>
+                </div>
+            </div>    
+        <!-- <input type="submit" value="Jetzt regisrieren"> -->
+        </div>    
+</form>
+</body>
+
+</html>
