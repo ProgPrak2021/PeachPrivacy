@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-modal id="modal-login" title="Anmelden" hide-header-close @ok="login">
-            <b-form-group id="ctrtUsername" label="E-Mail *">
+            <b-form-group id="ctrtEmail" label="E-Mail *">
                 <b-form-input type="email" v-model="user.email" placeholder="Bitte Email als Benutzername eingeben." trim aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group id="ctrlPasswort" label="Passwort *" v-bind:description="descriptionPasswort" aria-required>
@@ -38,10 +38,7 @@ export default {
        //Login Aufruf für an den Server
       console.log("Email= " + this.user.email + " Passwort= " + this.user.password);
 
-        axios.post('/api/auth/login', {
-            email: this.email,
-            password: this.password,
-        }).then(response => {
+        axios.post('/api/auth/login', this.user).then(response => {
            console.log(response.data);
         }).catch(function (error) {
             console.log(error);
