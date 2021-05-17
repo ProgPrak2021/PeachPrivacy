@@ -1,0 +1,23 @@
+package com.peachprivacy.tiltservice.template
+
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.repository.findByIdOrNull
+import org.springframework.stereotype.Service
+import java.util.*
+
+@Service
+class ProjectService @Autowired constructor(
+    private val projectRepository: ProjectRepository
+) {
+    fun get(id: UUID): Project? {
+        return projectRepository.findByIdOrNull(id)
+    }
+
+    fun create(project: Project): UUID {
+        return projectRepository.save(project).id!!
+    }
+
+    fun delete(id: UUID) {
+        return projectRepository.deleteById(id)
+    }
+}
