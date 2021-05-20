@@ -1,2 +1,2 @@
 rootProject.name = "peachprivacy"
-include("userservice", "templateservice", "tiltservice", "cloudconfig")
+include("userservice", "templateservice", "tiltservice", "gateway", "cloudconfig")
