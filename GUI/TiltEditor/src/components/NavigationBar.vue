@@ -1,5 +1,6 @@
 <template>
     <div id="menue" >
+        <!--Navbar auf eigenes Bsp angepasst, Grundgerüst von https://bootstrap-vue.org/docs/components/navbar---->
         <b-navbar class="navbar" id="nbar" toggleable="lg" type="dark" variant="info">
             <b-navbar-brand href="#">
                <img src="../assets/tiltLogo.jpg" alt="" height="50">

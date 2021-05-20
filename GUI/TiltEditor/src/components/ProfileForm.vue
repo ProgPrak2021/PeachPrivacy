@@ -3,7 +3,7 @@
     <b-modal id="modal-profile"  title ="Profile" ok-only hide-header-close>
       <b-row>
         <b-col>
-          <img src="../assets/tiltLogo.jpg" alt="" height="50">
+          <img src="../assets/benutzer.jpg" alt="" height="50">
         </b-col>
         <b-col>
           <div>{{user.email}}</div>
