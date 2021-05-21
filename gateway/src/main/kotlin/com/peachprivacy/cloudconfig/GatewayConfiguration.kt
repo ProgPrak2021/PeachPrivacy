@@ -16,7 +16,7 @@ class GatewayConfiguration(val authenticationFilter: AuthenticationFilter) {
         route("userservice") {
             path("/api/auth/**")
                 .uri("lb://userservice")
-            path("/api/user/**")
+            path("/api/account/**")
                 .authorized()
                 .uri("lb://userservice")
         }

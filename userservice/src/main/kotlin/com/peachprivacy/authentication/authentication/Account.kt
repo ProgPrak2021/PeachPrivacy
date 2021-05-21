@@ -1,4 +1,4 @@
-package com.peachprivacy.userservice.authentication
+package com.peachprivacy.authentication.authentication
 
 import javax.persistence.*
 
@@ -15,4 +15,7 @@ class Account {
     lateinit var password: String
 
     lateinit var role: String
+
+    @Column(nullable = true, unique = true)
+    var emailToken: String? = null
 }

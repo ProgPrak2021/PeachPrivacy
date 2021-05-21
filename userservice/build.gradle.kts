@@ -18,6 +18,7 @@ repositories {
 extra["springCloudVersion"] = "2020.0.2"
 
 dependencies {
+    implementation(project(":authentication"))
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
