@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.peachprivacy"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -31,6 +31,10 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
+}
+
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootBuildImage>("bootBuildImage") {
+    imageName = "europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/gateway:${project.version}"
 }
 
 tasks.withType<KotlinCompile> {
