@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.springframework.boot.gradle.tasks.bundling.BootBuildImage
 
 plugins {
     id("org.springframework.boot") version "2.4.5"
@@ -9,7 +10,7 @@ plugins {
 }
 
 group = "com.peachprivacy"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
@@ -20,7 +21,6 @@ extra["springCloudVersion"] = "2020.0.2"
 dependencies {
     implementation(project(":authentication"))
     implementation("org.springframework.boot:spring-boot-starter-validation")
-    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -39,6 +39,10 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
+}
+
+tasks.getByName<BootBuildImage>("bootBuildImage") {
+    imageName = "europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/userservice:${project.version}"
 }
 
 tasks.withType<KotlinCompile> {
