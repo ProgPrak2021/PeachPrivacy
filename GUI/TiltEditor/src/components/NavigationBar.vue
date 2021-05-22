@@ -13,7 +13,10 @@
                 <b-nav-item href="#">Home</b-nav-item>
                 <b-nav-item-dropdown text="Templates verwalten" right>
                   <b-dropdown-item href="#">Neues Template</b-dropdown-item>
-                  <b-dropdown-item href="#">Template öffnen</b-dropdown-item>
+                   <div>
+                        <b-dropdown-item href="#" v-b-modal.modal-open size="sm">Template öffnen</b-dropdown-item>
+                        <openTemplate-modal ></openTemplate-modal>
+                    </div>
                   <b-dropdown-item href="#">Template speichern</b-dropdown-item>
                   <b-dropdown-item href="#">Template schließen</b-dropdown-item>
                 </b-nav-item-dropdown>
@@ -69,12 +72,13 @@
 <script>
     import LoginpModal from "./LoginForm.vue";
     import ProfileModal from "./ProfileForm.vue";
-
+    import OpenTemplateModal from "./OpenTemplateForm.vue";
     export default {
         name: "NavigationBar",
         components: {
         'login-modal':LoginpModal,
-        'profile-modal':ProfileModal
+        'profile-modal':ProfileModal,
+        'openTemplate-modal':OpenTemplateModal
         },
          data() {
             return {
