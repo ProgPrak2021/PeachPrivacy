@@ -49,6 +49,7 @@ export default {
         console.log(response.data);
       }).catch(function (error) {
         console.log(error);
+        alert('Password oder Email ist falsch');
       })
       this.$emit('login-success', this.user);
       console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
