@@ -80,6 +80,7 @@ export default {
       })
       this.$emit('register-success', this.user);
       console.log(this.register_response);
+      alert('register-success');
       console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
     },
     handleOk(bvModalEvt) {
