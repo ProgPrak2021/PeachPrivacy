@@ -1,16 +1,16 @@
 package com.peachprivacy.templateservice.validation
 
 sealed class HandledConflict<T>(
-    open val originalValues: MutableList<T> = mutableListOf(),
-    open val mergingStrategy: MergingStrategy
+    open val candidates: MutableList<T> = mutableListOf(),
+    open val merge: MergingStrategy
 )
 
 data class UnresolvedConflict<T>(
-    override val originalValues: MutableList<T> = mutableListOf()
-): HandledConflict<T>(originalValues, MergingStrategy.NONE)
+    override val candidates: MutableList<T> = mutableListOf()
+): HandledConflict<T>(candidates, MergingStrategy.NONE)
 
 data class ResolvedConflict<T>(
-    override val originalValues: MutableList<T> = mutableListOf(),
-    override val mergingStrategy: MergingStrategy = MergingStrategy.SINGLE,
+    override val candidates: MutableList<T> = mutableListOf(),
+    override val merge: MergingStrategy = MergingStrategy.SINGLE,
     val value: T?
-): HandledConflict<T>(originalValues, mergingStrategy)
+): HandledConflict<T>(candidates, merge)
