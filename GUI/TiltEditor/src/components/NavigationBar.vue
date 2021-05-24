@@ -1,5 +1,6 @@
 <template>
     <div id="menue" >
+        <!--Navbar auf eigenes Bsp angepasst, Grundgerüst von https://bootstrap-vue.org/docs/components/navbar---->
         <b-navbar class="navbar" id="nbar" toggleable="lg" type="dark" variant="info">
             <b-navbar-brand href="#">
                <img src="../assets/tiltLogo.jpg" alt="" height="50">
@@ -12,18 +13,22 @@
                 <b-nav-item href="#">Home</b-nav-item>
                 <b-nav-item-dropdown text="Templates verwalten" right>
                   <b-dropdown-item href="#">Neues Template</b-dropdown-item>
-                  <b-dropdown-item href="#">Template öffnen</b-dropdown-item>
+                   <div>
+                        <b-dropdown-item href="#" v-b-modal.modal-open size="sm">Template öffnen</b-dropdown-item>
+                        <openTemplate-modal ></openTemplate-modal>
+                    </div>
                   <b-dropdown-item href="#">Template speichern</b-dropdown-item>
                   <b-dropdown-item href="#">Template schließen</b-dropdown-item>
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown text="Building blocks" right>
-                  <b-dropdown-item href="#">Meta</b-dropdown-item>
-                  <b-dropdown-item href="#">Controller</b-dropdown-item>
-                  <b-dropdown-item href="#">Data Protection Officer</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showMeta" @click="toggleForm('toggleMeta')">Meta</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showController" @click="toggleForm('toggleController')" >Controller</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showDataManager" @click="toggleForm('toggleDataManager')">Data Protection Officer</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showPurpose" @click="toggleForm('toggleChangesOfPurpose')">Changes of purpose</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
                   <b-dropdown-item href="#">Right to complain</b-dropdown-item>
-                  <b-dropdown-item href="#">Automated decision making</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showAutomatedDecision" @click="toggleForm('toggleAutomatedDecision')" >Automated decision making</b-dropdown-item>
                   <b-dropdown-item href="#">Notification on change</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
@@ -68,12 +73,13 @@
 <script>
     import LoginpModal from "./LoginForm.vue";
     import ProfileModal from "./ProfileForm.vue";
-
+    import OpenTemplateModal from "./OpenTemplateForm.vue";
     export default {
         name: "NavigationBar",
         components: {
         'login-modal':LoginpModal,
-        'profile-modal':ProfileModal
+        'profile-modal':ProfileModal,
+        'openTemplate-modal':OpenTemplateModal
         },
          data() {
             return {
@@ -84,7 +90,15 @@
                 loginV:   false
             };
         },
-
+        props: {
+            forms : {
+                showMeta:Boolean,
+                showController:Boolean,
+                showDataManager: Boolean,
+                showAutomatedDecision: Boolean,
+                showPurpose: Boolean
+            }
+        },
         methods: {
             login: function(usr){
                 //ToDo
@@ -96,12 +110,26 @@
                 //ToDo
                 this.loginV=false;
                 console.log("call Logout" + " loginV = " + this.loginV )
+            },
+            toggleForm: function(toggle){
+                 console.log("call toggleForm" + toggle )
+                /*
+                if (toggle.equals("toggleMeta")){
+                    this.props.forms.showMeta = !this.props.forms.showMeta;
+                } else if (toggle.equals("toggleController")){
+                    this.props.forms.showController = !this.props.forms.showController;
+                } */
+
+                this.$emit('toggle-entry', toggle);
             }
         }
     }
 </script>
 
 <style >
+.active{
+    background-color: #649A9C !important;
+}
 #nbar{
     background-color: whitesmoke  !important;
 }
@@ -113,5 +141,5 @@
 .ml-auto{
     color: black !important; 
     background-color: red !important;
-}
+}  
 </style>
