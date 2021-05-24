@@ -80,13 +80,20 @@ export default {
       })
       this.$emit('register-success', this.user);
       console.log(this.register_response);
-      alert('register-success');
+      alert('Sie erhlaten eine Bestätigungsemail');
       console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
     },
     handleOk(bvModalEvt) {
       // Prevent modal from closing
+      if(this.user.email.length===0||this.user.password.l===0) {
+        bvModalEvt.preventDefault();
+        alert('Geben Sie was ein');
+        return;
+      }
+
       if(!this.state||!this.status) {
-        bvModalEvt.preventDefault()
+        bvModalEvt.preventDefault();
+        alert('Fehler');
         return;
       }
       // Trigger submit handler
