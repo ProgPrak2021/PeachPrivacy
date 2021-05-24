@@ -21,14 +21,14 @@
                   <b-dropdown-item href="#">Template schließen</b-dropdown-item>
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown text="Building blocks" right>
-                  <b-dropdown-item href="#" @click="toggleForm('toggleMeta')" >Meta</b-dropdown-item>
-                  <b-dropdown-item href="#" @click="toggleForm('toggleController')" >Controller</b-dropdown-item>
-                  <b-dropdown-item href="#" @click="toggleForm('toggleDataManager')">Data Protection Officer</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showMeta" @click="toggleForm('toggleMeta')">Meta</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showController" @click="toggleForm('toggleController')" >Controller</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showDataManager" @click="toggleForm('toggleDataManager')">Data Protection Officer</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
-                  <b-dropdown-item href="#" @click="toggleForm('toggleChangesOfPurpose')">Changes of purpose</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showPurpose" @click="toggleForm('toggleChangesOfPurpose')">Changes of purpose</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
                   <b-dropdown-item href="#">Right to complain</b-dropdown-item>
-                  <b-dropdown-item href="#" @click="toggleForm('toggleAutomatedDecision')" >Automated decision making</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showAutomatedDecision" @click="toggleForm('toggleAutomatedDecision')" >Automated decision making</b-dropdown-item>
                   <b-dropdown-item href="#">Notification on change</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
@@ -127,6 +127,9 @@
 </script>
 
 <style >
+.active{
+    background-color: #649A9C !important;
+}
 #nbar{
     background-color: whitesmoke  !important;
 }
@@ -138,5 +141,5 @@
 .ml-auto{
     color: black !important; 
     background-color: red !important;
-}
+}  
 </style>

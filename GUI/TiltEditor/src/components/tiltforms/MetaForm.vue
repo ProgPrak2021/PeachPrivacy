@@ -43,19 +43,32 @@ export default {
   data() {
     return {
          meta: {
-            _id: "f1424f86-ca0f-4f0c-9438-43cc00509931",
-            name: "Green Company",
-            created: "2020-04-03T15:53:05.929588",
-            modified: "2020-04-03T15:53:05.929588",
-            version: 2,
-            language: "de",
-            status: "active",
-            url: "https://green-bikes.de/privacy",
-            _hash: "be81d309088dde861ab5fc4d62d4bbfe0aeef3e3baf2f5362c1086f451f0a1e7"
-        }
-    };
-  },
-};
+                _id: this.pmeta._id,
+                name: this.pmeta.name,
+                created: this.pmeta.created,
+                modified: this.pmeta.modified,
+                version:this.pmeta.version,
+                language: this.pmeta.language,
+                status: this.pmeta.status,
+                url: this.pmeta.url,
+                _hash:this.pmeta._hash
+            }
+       }
+    },
+    props: {
+        pmeta: {
+                _id: String,
+                name: String,
+                created: Date,
+                modified: Date,
+                version: Number,
+                language: String,
+                status: String,
+                url: String,
+                _hash: String
+            }
+    },
+ };
 </script>
 
 <style scoped>

@@ -59,4 +59,7 @@ export default {
   color: #2c3e50;
   background-color: #FF876C;
 }
+body{
+  background-color: #FF876C;
+}
 </style>
