@@ -283,17 +283,33 @@ export default {
 <!--<style scoped> -->
 <style>
     #tildForm{
-    background-color: #FF876C !important;
+        background-color: white !important;
     }
-    .container-fluid{
-    background-color: #FF876C !important;
+   
+    .tilt-block {
+      background-color: #FF876C !important;
+      border-style: solid;
+      border-color: #D9304F;
+      padding:5px 5px 5px 5px;
+      margin: 5px 5px 5px 5px;
     }
-    .row{
-    background-color: #FF876C !important;
-    }
+    
     h3{
         letter-spacing: 1px;
         padding: 15px;
         color: #D9304F;
+    }
+
+    .form-group{
+        text-align: left;
+        color: #D9304F;
+    }
+    .form-control{
+        border-color:#D9304F;
+        border-radius: 5px 5px 5px 5px;
+        border-width: 100%;
+        color: #D9304F;
+        padding:5px 5px 5px 5px;
+        margin: 5px 5px 5px 0px;
     }
 </style>
