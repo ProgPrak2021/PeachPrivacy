@@ -1,4 +1,4 @@
-package com.peachprivacy.tiltservice.template
+package com.peachprivacy.tiltservice.project
 
 import java.util.*
 import javax.persistence.*

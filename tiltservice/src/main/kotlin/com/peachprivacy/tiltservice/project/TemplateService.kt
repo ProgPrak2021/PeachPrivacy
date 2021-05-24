@@ -1,4 +1,4 @@
-package com.peachprivacy.tiltservice.template
+package com.peachprivacy.tiltservice.project
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.repository.findByIdOrNull

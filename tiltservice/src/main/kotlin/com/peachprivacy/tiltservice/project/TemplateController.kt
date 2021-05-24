@@ -1,4 +1,4 @@
-package com.peachprivacy.tiltservice.template
+package com.peachprivacy.tiltservice.project
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -9,29 +9,29 @@ import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 @RestController
-@RequestMapping("/api/tilt")
-class ProjectController @Autowired constructor(
-    private val projectService: ProjectService
+@RequestMapping("/api/tilt/templates")
+class TemplateController @Autowired constructor(
+    private val templateService: TemplateService
 ) {
-    @GetMapping("/projects/{id}")
-    fun getById(@PathVariable id: UUID): ResponseEntity<Project> {
-        return projectService.get(id)?.let { template ->
+    @GetMapping("/{id}")
+    fun getById(@PathVariable id: UUID): ResponseEntity<Template> {
+        return templateService.get(id)?.let { template ->
             ResponseEntity.ok(template)
         } ?: ResponseEntity.notFound().build()
     }
 
-    @PostMapping("/projects")
-    fun create(@RequestBody project: Project, httpRequest: HttpServletRequest): ResponseEntity<Project> {
-        return projectService.create(project).let { id ->
+    @PostMapping()
+    fun create(@RequestBody template: Template, httpRequest: HttpServletRequest): ResponseEntity<Template> {
+        return templateService.create(template).let { id ->
             val handlerUri = httpRequest.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString()
             val uri = URI("$handlerUri/$id")
             ResponseEntity.created(uri).build()
         }
     }
 
-    @DeleteMapping("/projects/{id}")
-    fun deleteById(@PathVariable id: UUID): ResponseEntity<Project> {
-        projectService.delete(id)
+    @DeleteMapping("/{id}")
+    fun deleteById(@PathVariable id: UUID): ResponseEntity<Template> {
+        templateService.delete(id)
         return ResponseEntity.noContent().build()
     }
 }
