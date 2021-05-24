@@ -7,7 +7,7 @@
       </tr>  
       <b-form id="modal-controller" title="AutomatedDecisionMaking" >
         <b-form-group id="ctrlinUse" label="In Use">
-            <b-form-input v-model="automatedDecisionMaking.inUse" aria-required=""></b-form-input>
+            <b-form-checkbox v-model="automatedDecisionMaking.inUse" aria-required=""></b-form-checkbox>
         </b-form-group>
         <b-form-group id="ctrllogicInvolved" label="Logic Involved">
             <b-form-input v-model="automatedDecisionMaking.logicInvolved" aria-required=""></b-form-input>

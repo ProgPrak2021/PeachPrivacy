@@ -39,7 +39,7 @@
 
 <script>
 export default {
-  name: "meta",
+  name: "tilt_meta",
   data() {
     return {
          meta: {

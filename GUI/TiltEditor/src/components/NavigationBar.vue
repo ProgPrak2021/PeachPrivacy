@@ -21,13 +21,14 @@
                   <b-dropdown-item href="#">Template schließen</b-dropdown-item>
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown text="Building blocks" right>
-                  <b-dropdown-item href="#" disabled:forms.showMeta  @click="toggleForm('toggleMeta')" >Meta</b-dropdown-item>
-                  <b-dropdown-item href="#" disabled:forms.showController @click="toggleForm('toggleController')" >Controller</b-dropdown-item>
-                  <b-dropdown-item href="#">Data Protection Officer</b-dropdown-item>
+                  <b-dropdown-item href="#" @click="toggleForm('toggleMeta')" >Meta</b-dropdown-item>
+                  <b-dropdown-item href="#" @click="toggleForm('toggleController')" >Controller</b-dropdown-item>
+                  <b-dropdown-item href="#" @click="toggleForm('toggleDataManager')">Data Protection Officer</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
+                  <b-dropdown-item href="#" @click="toggleForm('toggleChangesOfPurpose')">Changes of purpose</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
                   <b-dropdown-item href="#">Right to complain</b-dropdown-item>
-                  <b-dropdown-item href="#">Automated decision making</b-dropdown-item>
+                  <b-dropdown-item href="#" @click="toggleForm('toggleAutomatedDecision')" >Automated decision making</b-dropdown-item>
                   <b-dropdown-item href="#">Notification on change</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
@@ -92,7 +93,10 @@
         props: {
             forms : {
                 showMeta:Boolean,
-                showController:Boolean
+                showController:Boolean,
+                showDataManager: Boolean,
+                showAutomatedDecision: Boolean,
+                showPurpose: Boolean
             }
         },
         methods: {
@@ -108,11 +112,14 @@
                 console.log("call Logout" + " loginV = " + this.loginV )
             },
             toggleForm: function(toggle){
+                 console.log("call toggleForm" + toggle )
+                /*
                 if (toggle.equals("toggleMeta")){
                     this.props.forms.showMeta = !this.props.forms.showMeta;
                 } else if (toggle.equals("toggleController")){
                     this.props.forms.showController = !this.props.forms.showController;
-                } 
+                } */
+
                 this.$emit('toggle-entry', toggle);
             }
         }

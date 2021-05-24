@@ -3,22 +3,19 @@
           <div class="container-fluid">
               <div class="row">
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showMeta">
-                       <tilt-meta-2 id="tildMetaForm2" />
+                       <tilt-meta id="tildMetaForm" />
                   </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showController" >
                        <tilt-controller id="tildController" />
                   </div>
-                  <div class="col-12 col-md-6 col-lg-4">
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataManager">
                        <tilt-protection-officer id="tild-protection-officer" />
                   </div>
-                  <div class="col-12 col-md-6 col-lg-4">
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showAutomatedDecision">
                        <tilt-dutomated-decision-making id="tilt-dutomated-decision-making" />
                   </div>
-                  <div class="col-12 col-md-6 col-lg-4">
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showPurpose">
                        <tilt-changes-of-purpose id="tilt-changes-of-purpose" />
-                  </div>
-                  <div class="col-12 col-md-6 col-lg-4">
-                       <tilt-meta id="tildMetaForm" />
                   </div>
               </div>    
           </div>    
@@ -26,7 +23,6 @@
 </template>
 
 <script>
-import TiltMetaFormular from './TiltFormMeta.vue'
 import MetaForm from './tiltforms/MetaForm.vue'
 import ChangesOfPurposeForm from './tiltforms/ChangesOfPurposeForm.vue'
 import ControllerForm from './tiltforms/ControllerForm.vue'
@@ -38,9 +34,8 @@ import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm
 export default {
   name: 'TiltFormular',
   components: {
-    'tilt-meta-2':MetaForm,
+    'tilt-meta':MetaForm,
     'tilt-changes-of-purpose':ChangesOfPurposeForm,
-    'tilt-meta': TiltMetaFormular,
     'tilt-controller': ControllerForm,
     'tilt-protection-officer':ProtectionOfficerForm,
     'tilt-dutomated-decision-making': AutomatedDecisionMakingForm
@@ -49,7 +44,10 @@ export default {
     msg: String,
     forms : {
         showMeta:Boolean,
-        showController:Boolean
+        showController:Boolean,
+        showDataManager: Boolean,
+        showAutomatedDecision: Boolean,
+        showPurpose: Boolean
     }
   },
   data() {

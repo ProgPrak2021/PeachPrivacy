@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <nav-bar v-bind:forms="forms" @toggle-entry="toggleShowForms" />
-    <tilt-formular id="tildForm" v-bind:forms="forms" />
+    <nav-bar v-bind:forms="forms" @toggle-entry="toggleShowForms"/>
+    <tilt-formular id="tildForm" v-bind:forms="forms"/>
   </div>
 </template>
 
@@ -18,34 +18,45 @@ export default {
   },
   methods: {
     toggleShowForms(showForm) {
-     if (showForm.equals("toggleMeta")){
-       this.forms.showMeta = !this.forms.showMeta;
-     } else if (showForm.equals("toggleController")){
-       this.forms.showController = !this.forms.showController;
-     } 
+      if (showForm.toLowerCase() === "toggleMeta".toLowerCase()) {
+        this.forms.showMeta = !this.forms.showMeta;
+      } else if (showForm.toLowerCase() === "toggleController".toLowerCase()) {
+        this.forms.showController = !this.forms.showController;
+      }
+      else if (showForm.toLowerCase() === "toggleDataManager".toLowerCase()) {
+        this.forms.showDataManager = !this.forms.showDataManager;
+      }
+      else if (showForm.toLowerCase() === "toggleAutomatedDecision".toLowerCase()) {
+        this.forms.showAutomatedDecision = !this.forms.showAutomatedDecision;
+      }
+       else if (showForm.toLowerCase() === "toggleChangesOfPurpose".toLowerCase()) {
+        this.forms.showPurpose = !this.forms.showPurpose;
+      }
     },
   },
   data() {
     return {
-      forms : {
-        showMeta:true,
-        showController:false,
+      forms: {
+        showMeta: false,
+        showController: false,
+        showDataManager: false,
+        showAutomatedDecision: false,
+        showPurpose: false,
       },
       filterString: "",
-      entrys: [
-      ] 
+      entrys: []
     }
   }
 }
 </script>
 
 <style>
-  #app {
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
-    background-color:#FF876C;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  background-color: #FF876C;
 }
 </style>
