@@ -12,6 +12,9 @@
                        <tilt-protection-officer id="tild-protection-officer" />
                   </div>
                   <div class="col-12 col-md-6 col-lg-4">
+                       <tilt-dutomated-decision-making id="tilt-dutomated-decision-making" />
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4">
                        <tilt-changes-of-purpose id="tilt-changes-of-purpose" />
                   </div>
                   <div class="col-12 col-md-6 col-lg-4">
@@ -28,6 +31,8 @@ import MetaForm from './tiltforms/MetaForm.vue'
 import ChangesOfPurposeForm from './tiltforms/ChangesOfPurposeForm.vue'
 import ControllerForm from './tiltforms/ControllerForm.vue'
 import ProtectionOfficerForm from './tiltforms/ProtectionOfficerForm'
+import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm'
+
 
 
 export default {
@@ -37,7 +42,8 @@ export default {
     'tilt-changes-of-purpose':ChangesOfPurposeForm,
     'tilt-meta': TiltMetaFormular,
     'tilt-controller': ControllerForm,
-     'tilt-protection-officer':ProtectionOfficerForm
+    'tilt-protection-officer':ProtectionOfficerForm,
+    'tilt-dutomated-decision-making': AutomatedDecisionMakingForm
   },
   props: {
     msg: String
