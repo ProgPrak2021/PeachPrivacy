@@ -21,8 +21,8 @@
                   <b-dropdown-item href="#">Template schließen</b-dropdown-item>
                 </b-nav-item-dropdown>
                 <b-nav-item-dropdown text="Building blocks" right>
-                  <b-dropdown-item href="#">Meta</b-dropdown-item>
-                  <b-dropdown-item href="#">Controller</b-dropdown-item>
+                  <b-dropdown-item href="#" disabled:forms.showMeta  @click="toggleForm('toggleMeta')" >Meta</b-dropdown-item>
+                  <b-dropdown-item href="#" disabled:forms.showController @click="toggleForm('toggleController')" >Controller</b-dropdown-item>
                   <b-dropdown-item href="#">Data Protection Officer</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
@@ -89,7 +89,12 @@
                 loginV:   false
             };
         },
-
+        props: {
+            forms : {
+                showMeta:Boolean,
+                showController:Boolean
+            }
+        },
         methods: {
             login: function(usr){
                 //ToDo
@@ -101,6 +106,14 @@
                 //ToDo
                 this.loginV=false;
                 console.log("call Logout" + " loginV = " + this.loginV )
+            },
+            toggleForm: function(toggle){
+                if (toggle.equals("toggleMeta")){
+                    this.props.forms.showMeta = !this.props.forms.showMeta;
+                } else if (toggle.equals("toggleController")){
+                    this.props.forms.showController = !this.props.forms.showController;
+                } 
+                this.$emit('toggle-entry', toggle);
             }
         }
     }

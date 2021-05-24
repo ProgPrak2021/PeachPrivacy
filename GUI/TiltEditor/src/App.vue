@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <nav-bar @filter-entry="updateFilterString" />
-    <tilt-formular id="tildForm" />
+    <nav-bar v-bind:forms="forms" @toggle-entry="toggleShowForms" />
+    <tilt-formular id="tildForm" v-bind:forms="forms" />
   </div>
 </template>
 
@@ -17,13 +17,20 @@ export default {
     'tilt-formular': TiltFormular
   },
   methods: {
-    updateFilterString(filter) {
-      this.filterString = filter;
+    toggleShowForms(showForm) {
+     if (showForm.equals("toggleMeta")){
+       this.forms.showMeta = !this.forms.showMeta;
+     } else if (showForm.equals("toggleController")){
+       this.forms.showController = !this.forms.showController;
+     } 
     },
   },
   data() {
     return {
-      idCounter: 8,
+      forms : {
+        showMeta:true,
+        showController:false,
+      },
       filterString: "",
       entrys: [
       ] 

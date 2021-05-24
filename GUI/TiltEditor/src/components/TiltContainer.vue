@@ -2,10 +2,10 @@
   <form method="GET">
           <div class="container-fluid">
               <div class="row">
-                  <div class="col-12 col-md-6 col-lg-4">
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showMeta">
                        <tilt-meta-2 id="tildMetaForm2" />
                   </div>
-                  <div class="col-12 col-md-6 col-lg-4">
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showController" >
                        <tilt-controller id="tildController" />
                   </div>
                   <div class="col-12 col-md-6 col-lg-4">
@@ -46,7 +46,11 @@ export default {
     'tilt-dutomated-decision-making': AutomatedDecisionMakingForm
   },
   props: {
-    msg: String
+    msg: String,
+    forms : {
+        showMeta:Boolean,
+        showController:Boolean
+    }
   }
 }
 </script>
