@@ -3,26 +3,41 @@
           <div class="container-fluid">
               <div class="row">
                   <div class="col-12 col-md-6 col-lg-4">
-                       <tilt-meta id="tildMetaForm" />
+                       <tilt-meta-2 id="tildMetaForm2" />
                   </div>
                   <div class="col-12 col-md-6 col-lg-4">
-                       <tilt-controller id="tildMetaController" />
+                       <tilt-controller id="tildController" />
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4">
+                       <tilt-protection-officer id="tild-protection-officer" />
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4">
+                       <tilt-changes-of-purpose id="tilt-changes-of-purpose" />
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4">
+                       <tilt-meta id="tildMetaForm" />
                   </div>
               </div>    
-          <!-- <input type="submit" value="Speichern"> -->
           </div>    
   </form>    
 </template>
 
 <script>
 import TiltMetaFormular from './TiltFormMeta.vue'
-import TiltControllerFormular from './TiltFormController.vue'
+import MetaForm from './tiltforms/MetaForm.vue'
+import ChangesOfPurposeForm from './tiltforms/ChangesOfPurposeForm.vue'
+import ControllerForm from './tiltforms/ControllerForm.vue'
+import ProtectionOfficerForm from './tiltforms/ProtectionOfficerForm'
+
 
 export default {
   name: 'TiltFormular',
   components: {
+    'tilt-meta-2':MetaForm,
+    'tilt-changes-of-purpose':ChangesOfPurposeForm,
     'tilt-meta': TiltMetaFormular,
-    'tilt-controller': TiltControllerFormular
+    'tilt-controller': ControllerForm,
+     'tilt-protection-officer':ProtectionOfficerForm
   },
   props: {
     msg: String
@@ -76,6 +91,14 @@ h3{
 td{
     padding: 5px;  
 }
+
+.b-form-input{
+    border-color:#D9304F;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 100%;
+    color: #D9304F;
+}
+
 
 input{
     border-color:#D9304F;
