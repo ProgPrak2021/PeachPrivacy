@@ -14,7 +14,7 @@ class TemplateController @Autowired constructor(
     private val templateService: TemplateService
 ) {
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: UUID): ResponseEntity<Template> {
+    fun get(@PathVariable id: UUID): ResponseEntity<Template> {
         return templateService.get(id)?.let { template ->
             ResponseEntity.ok(template)
         } ?: ResponseEntity.notFound().build()
@@ -26,6 +26,15 @@ class TemplateController @Autowired constructor(
             val handlerUri = httpRequest.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString()
             val uri = URI("$handlerUri/$id")
             ResponseEntity.created(uri).build()
+        }
+    }
+
+    // TODO Redundant ID in path, but proper REST would have it there instead of in RequestBody
+    //  Path ID currently not used
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: UUID, @RequestBody template: Template): ResponseEntity<Template> {
+        return templateService.update(template).let {
+            ResponseEntity.ok(it)
         }
     }
 

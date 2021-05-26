@@ -29,6 +29,15 @@ class ProjectController @Autowired constructor(
         }
     }
 
+    // TODO Redundant ID in path, but proper REST would have it there instead of in RequestBody
+    //  Path ID currently not used
+    @PutMapping("/{id}")
+    fun update(@PathVariable id: UUID, @RequestBody project: Project): ResponseEntity<Project> {
+        return projectService.update(project).let {
+            ResponseEntity.ok(it)
+        }
+    }
+
     @DeleteMapping("/{id}")
     fun deleteById(@PathVariable id: UUID): ResponseEntity<Project> {
         projectService.delete(id)

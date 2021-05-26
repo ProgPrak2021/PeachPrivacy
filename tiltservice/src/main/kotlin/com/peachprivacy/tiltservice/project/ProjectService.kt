@@ -13,6 +13,10 @@ class ProjectService @Autowired constructor(
         return projectRepository.findByIdOrNull(id)
     }
 
+    fun update(project: Project): Project {
+        return projectRepository.save(project)
+    }
+
     fun create(project: Project): UUID {
         return projectRepository.save(project).id!!
     }

@@ -13,6 +13,10 @@ class TemplateService @Autowired constructor(
         return templateRepository.findByIdOrNull(id)
     }
 
+    fun update(template: Template): Template {
+        return templateRepository.save(template)
+    }
+
     fun create(template: Template): UUID {
         return templateRepository.save(template).id!!
     }
