@@ -26,6 +26,48 @@ class ValidationService(
         it.isAccessible = true
     }
 
+    fun getResolvedObject(schema: String): Map<String, Any?>? {
+        val resolvedPointers = getResolvedJsonPointers(schema)
+
+        val result = mutableMapOf<String, Any?>()
+
+        val fullyResolved = resolvedPointers.none { (pointer, conflict) ->
+            if (conflict !is ResolvedConflict) return@none true
+
+            // https://github.com/json-patch/json-patch-tests/blob/master/spec_tests.json#L200
+            // tl;dr: ~0 => ~, ~1 = / - Escape character
+            val path = pointer.text.split("/").drop(1).map {
+                it.replace("~1", "/").replace("~0", "~")
+            }
+
+            // TODO Can a constant be defined for an object on the lowest level? Theoretically, maybe, yes. Currently invalid
+            if (path.isEmpty()) return@none true
+
+            val selectionPath = path.dropLast(1)
+            val valueSelect = path.last()
+
+            val resultSubSelection = selectionPath.fold(result) { currentSelection, pathElement ->
+                val subSelection = currentSelection.computeIfAbsent(pathElement) { mutableMapOf<String, Any?>() }
+
+                // Cannot check erased generic argument types
+                if (subSelection !is MutableMap<*, *>) return@none true
+
+                subSelection as MutableMap<String, Any?>
+            }
+
+            // TODO: Not safe - null value might be actual value!
+            // Maps might be the actual final constant. TODO Maybe not a bug, think through it
+            if (resultSubSelection.containsKey(valueSelect)) return@none true
+
+            resultSubSelection[valueSelect] = conflict.value
+            return@none false
+        }
+
+        if (!fullyResolved) return null
+
+        return result
+    }
+
     fun getResolvedJsonPointers(schema: String): Map<JsonPointer, HandledConflict<Any?>> {
         val jsonSchema = jsonSchemaGetMethod.invoke(jsonSchemaApi,
             StringSchemaSource(schema),
