@@ -33,6 +33,12 @@ dependencies {
     testImplementation("com.h2database:h2")
 }
 
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
+}
+
 tasks.getByName<BootBuildImage>("bootBuildImage") {
     imageName = "europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/tiltservice:${project.version}"
 }
