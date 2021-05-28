@@ -9,6 +9,10 @@ import java.util.*
 class ProjectService @Autowired constructor(
     private val projectRepository: ProjectRepository
 ) {
+    fun getAny(amount: Int): List<Project> {
+        return projectRepository.findAll().take(amount)
+    }
+
     fun get(id: UUID): Project? {
         return projectRepository.findByIdOrNull(id)
     }

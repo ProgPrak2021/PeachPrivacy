@@ -13,6 +13,11 @@ import javax.servlet.http.HttpServletRequest
 class ProjectController @Autowired constructor(
     private val projectService: ProjectService
 ) {
+    @GetMapping()
+    fun get5RandomProjects(): ResponseEntity<List<Project>> {
+        return ResponseEntity.ok(projectService.getAny(5))
+    }
+
     @GetMapping("/{id}")
     fun getById(@PathVariable id: UUID): ResponseEntity<Project> {
         return projectService.get(id)?.let { template ->
