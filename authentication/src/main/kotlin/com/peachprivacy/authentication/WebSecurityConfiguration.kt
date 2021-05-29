@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-class WebSecurityConfiguration @Autowired constructor(val authenticationProvider: AccountAuthenticationProvider) :
+open class WebSecurityConfiguration @Autowired constructor(val authenticationProvider: AccountAuthenticationProvider) :
     WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
