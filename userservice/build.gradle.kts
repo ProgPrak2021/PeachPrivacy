@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.peachprivacy"
-version = "1.0.3"
+version = "1.0.4"
 
 repositories {
     mavenCentral()
