@@ -1,33 +1,21 @@
 <template>
     <div class="tilt-block">
-      <tr>
-        <td>
-            <h3>Protection Officer:</h3>
-        </td>
-      </tr>  
-      <b-form id="modal-controller" title="ProtectionOfficer" >
-        <b-form-group id="ctrlname" label="Name">
-            <b-form-input v-model="dataProtectionOfficer.name" aria-required=""></b-form-input>
-        </b-form-group>
-        <b-form-group id="ctrladdress" label="Address">
-            <b-form-input v-model="dataProtectionOfficer.address" type= datetime aria-required=""></b-form-input>
-        </b-form-group>
-        <b-form-group id="ctrlcountry" label="Country">
-            <b-form-input v-model="dataProtectionOfficer.country" aria-required=""></b-form-input>
-        </b-form-group>
-        <b-form-group id="ctrlrepresentativeemail" label="E-Mail">
-            <b-form-input v-model="dataProtectionOfficer.email" aria-required=""></b-form-input>
-        </b-form-group>
-         <b-form-group id="ctrlrepresentativephone" label="Phone">
-            <b-form-input v-model="dataProtectionOfficer.phone" aria-required=""></b-form-input>
-        </b-form-group>
-    </b-form>
+        <tr>
+            <td>
+                <h3>Protection Officer:</h3>
+            </td>
+        </tr>  
+        <tilt-address v-bind:paddress="dataProtectionOfficer" />
     </div>
 </template>
 
 <script>
+import AddressForm from './AddressForm.vue'
 export default {
   name: "protectionOfficer",
+  components: {
+    'tilt-address':AddressForm,
+  },
   data() {
     return {
         dataProtectionOfficer: {

@@ -27,7 +27,7 @@
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showPurpose" @click="toggleForm('toggleChangesOfPurpose')">Changes of purpose</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
-                  <b-dropdown-item href="#">Right to complain</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showRights" @click="toggleForm('toggleRights')">Rights</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showAutomatedDecision" @click="toggleForm('toggleAutomatedDecision')" >Automated decision making</b-dropdown-item>
                   <b-dropdown-item href="#">Notification on change</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
@@ -96,7 +96,8 @@
                 showController:Boolean,
                 showDataManager: Boolean,
                 showAutomatedDecision: Boolean,
-                showPurpose: Boolean
+                showPurpose: Boolean,
+                showRights:Boolean,
             }
         },
         methods: {

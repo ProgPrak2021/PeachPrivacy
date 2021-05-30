@@ -16,6 +16,14 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showPurpose">
                        <tilt-changes-of-purpose id="tilt-changes-of-purpose" />
                   </div>
+                  <div v-if="forms.showRights">
+                       <tilt-rights id="tildRightsForm" 
+                            v-bind:pRightToInformation="rightToInformation" 
+                            v-bind:pRightToRectificationOrDeletion="rightToRectificationOrDeletion" 
+                            v-bind:pRightToDataPortability="rightToDataPortability" 
+                            v-bind:pRightToWithdrawConsent="rightToWithdrawConsent" 
+                            v-bind:pRightToComplain="rightToComplain" />
+                  </div>
               </div>    
           </div>    
 </template>
@@ -26,8 +34,7 @@ import ChangesOfPurposeForm from './tiltforms/ChangesOfPurposeForm.vue'
 import ControllerForm from './tiltforms/ControllerForm.vue'
 import ProtectionOfficerForm from './tiltforms/ProtectionOfficerForm'
 import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm'
-
-
+import RightForm from './tiltforms/RightForm'
 
 export default {
   name: 'TiltFormular',
@@ -36,7 +43,8 @@ export default {
     'tilt-changes-of-purpose':ChangesOfPurposeForm,
     'tilt-controller': ControllerForm,
     'tilt-protection-officer':ProtectionOfficerForm,
-    'tilt-dutomated-decision-making': AutomatedDecisionMakingForm
+    'tilt-dutomated-decision-making': AutomatedDecisionMakingForm,
+    'tilt-rights': RightForm
   },
   props: {
     msg: String,
@@ -45,7 +53,8 @@ export default {
         showController:Boolean,
         showDataManager: Boolean,
         showAutomatedDecision: Boolean,
-        showPurpose: Boolean
+        showPurpose: Boolean,
+        showRights: Boolean
     }
   },
   data() {
