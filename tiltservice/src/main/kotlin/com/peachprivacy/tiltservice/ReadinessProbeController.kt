@@ -5,8 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 // TODO: Readiness probes for ingress aren't relevant once gateway is configured properly
-@RestController
+@RestController("/")
 class ReadinessProbeController {
-    @GetMapping
+    @GetMapping("/")
     fun onReadinessProbeRequest() = ResponseEntity.ok()
 }
