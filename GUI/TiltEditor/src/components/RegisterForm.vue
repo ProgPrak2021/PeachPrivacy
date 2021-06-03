@@ -107,7 +107,7 @@ export default {
       }
       if(this.confirm_password.length <10){
         bvModalEvt.preventDefault();
-        this.$alert('Passwort muss min. 10 zeichen enthalten',' Passwort ist zu kurz',"info");
+        this.$alert('Passwort muss min. 10 Zeichen enthalten',' Passwort ist zu kurz',"info");
         return;
       }
 

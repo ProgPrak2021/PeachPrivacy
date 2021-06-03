@@ -68,7 +68,7 @@ export default {
       }
       if(!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.user.email))){
         bvModalEvt.preventDefault();
-        this.$alert('geben sie eine richtige Email','Fehler','error');
+        this.$alert('Die Email ist nicht valide','Fehler','error');
         return;
 
       }

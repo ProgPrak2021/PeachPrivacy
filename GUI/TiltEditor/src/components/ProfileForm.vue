@@ -18,7 +18,8 @@
           <b-btn class="profile_action_btn" href="#" v-b-modal.modal-change-avatar >Profilbild ändern</b-btn>
         </div>
         <div class="col-4">
-          <b-btn class="profile_action_btn" href="#" v-b-modal.modal-change-avatar>Passwort ändern</b-btn>
+          <b-btn class="profile_action_btn" href="#" v-b-modal.modal-change-pw>Passwort ändern</b-btn>
+          <passwordchange></passwordchange>
         </div>
       </b-row>
     </b-modal>
@@ -27,10 +28,12 @@
 
 <script>
 import RegisterModal from "./RegisterForm.vue";
+import Passwordchange from "@/components/passwordchange";
 
 export default {
   name: "ProfileModal",
   components: {
+    Passwordchange,
     'register-modal':RegisterModal
   },
   props:["user"]
