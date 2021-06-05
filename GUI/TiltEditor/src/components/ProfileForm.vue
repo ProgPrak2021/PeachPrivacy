@@ -23,14 +23,14 @@
 </template>
 
 <script>
-import RegisterModal from "./RegisterForm.vue";
+//import RegisterModal from "./RegisterForm.vue";
 import Passwordchange from "./passwordchange.vue";
 
 export default {
   name: "ProfileModal",
   components: {
     'passwordchange':Passwordchange,
-    'register-modal':RegisterModal
+    //'register-modal':RegisterModal
   },
   props:["user"]
 
