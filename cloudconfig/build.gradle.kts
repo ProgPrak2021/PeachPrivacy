@@ -34,6 +34,10 @@ dependencyManagement {
     }
 }
 
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootBuildImage>("bootBuildImage") {
+    imageName = "europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/cloudconfig:${project.version}"
+}
+
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
