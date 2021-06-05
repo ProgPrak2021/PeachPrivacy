@@ -20,10 +20,11 @@ extra["springCloudVersion"] = "2020.0.2"
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.springframework.cloud:spring-cloud-config-server")
-    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
-    implementation("org.springframework.cloud:spring-cloud-starter-open-service-broker:3.3.0")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-server")
+//    implementation("org.springframework.cloud:spring-cloud-config-server")
+//    implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
+//    implementation("org.springframework.cloud:spring-cloud-starter-open-service-broker:3.3.0")
+//    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
