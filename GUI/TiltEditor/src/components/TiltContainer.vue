@@ -16,6 +16,9 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showPurpose">
                        <tilt-changes-of-purpose id="tilt-changes-of-purpose" />
                   </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showSources">
+                       <tilt-sources id="tilt-sources"  v-bind:psourceItem="sources" />
+                  </div>
                   <div v-if="forms.showRights">
                        <tilt-rights id="tildRightsForm" 
                             v-bind:pRightToInformation="rightToInformation" 
@@ -35,6 +38,7 @@ import ControllerForm from './tiltforms/ControllerForm.vue'
 import ProtectionOfficerForm from './tiltforms/ProtectionOfficerForm'
 import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm'
 import RightForm from './tiltforms/RightForm'
+import SourcesItemForm from './tiltforms/SourcesItemForm'
 
 export default {
   name: 'TiltFormular',
@@ -44,7 +48,8 @@ export default {
     'tilt-controller': ControllerForm,
     'tilt-protection-officer':ProtectionOfficerForm,
     'tilt-dutomated-decision-making': AutomatedDecisionMakingForm,
-    'tilt-rights': RightForm
+    'tilt-rights': RightForm,
+    'tilt-sources': SourcesItemForm
   },
   props: {
     msg: String,
@@ -54,7 +59,8 @@ export default {
         showDataManager: Boolean,
         showAutomatedDecision: Boolean,
         showPurpose: Boolean,
-        showRights: Boolean
+        showRights: Boolean,
+        showSources: Boolean
     }
   },
   data() {
@@ -199,19 +205,24 @@ export default {
         "xml"
         ]
     },
-    sources: [
+    sources: /*[*/
         {
         _id: "f1423cc00509931",
         dataCategory: "Creditworthiness",
         sources: [
             {
-            description: "This information could be retrieved from...",
-            url: "https://blueCompany.org",
+            description: "This information could be retrieved from...1",
+            url: "https://blue1Company.org",
+            publiclyAvailable: false
+            },
+            {
+            description: "This information could be retrieved from...2",
+            url: "https://blue2Company.org",
             publiclyAvailable: false
             }
         ]
         }
-    ],
+    /*]*/,
     rightToInformation: {
         available: true,
         description: "For the right to information please use this contact form and...",

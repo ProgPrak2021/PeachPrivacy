@@ -32,6 +32,7 @@
                   <b-dropdown-item href="#">Notification on change</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showSources" @click="toggleForm('toggleSources')" >Sources</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
 
@@ -103,6 +104,7 @@
                 showAutomatedDecision: Boolean,
                 showPurpose: Boolean,
                 showRights:Boolean,
+                showSources: Boolean,
             }
         },
         methods: {

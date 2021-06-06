@@ -35,6 +35,9 @@ export default {
       else if (showForm.toLowerCase() === "toggleRights".toLowerCase()) {
         this.forms.showRights = !this.forms.showRights;
       }
+      else if (showForm.toLowerCase() === "toggleSources".toLowerCase()) {
+        this.forms.showSources = !this.forms.showSources;
+      }
 
     },
   },
@@ -47,6 +50,7 @@ export default {
         showAutomatedDecision: false,
         showPurpose: false,
         showRights: false,
+        showSources: true,
       },
       filterString: "",
       entrys: []
