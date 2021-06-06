@@ -17,7 +17,7 @@ class Project {
 
     var detailedDescription: String? = null
 
-    @OneToMany(mappedBy = "template")
+    @OneToMany(mappedBy = "project")
     var versions: List<Template> = mutableListOf()
 
     lateinit var authority: String
