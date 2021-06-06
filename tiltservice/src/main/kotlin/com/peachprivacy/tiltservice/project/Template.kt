@@ -16,6 +16,7 @@ class Template {
 
     var version: Int? = null
 
+    @Column(columnDefinition="TEXT")
     var changelog: String? = null
 
     @ManyToMany
