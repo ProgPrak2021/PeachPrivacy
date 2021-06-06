@@ -19,7 +19,7 @@ open class WebSecurityConfiguration @Autowired constructor(val authenticationPro
             .sessionManagement().disable()
             .exceptionHandling().disable()
             .csrf().disable()
-            .addFilter(AccountAuthenticationFilter(authenticationManager()))
+            //.addFilter(AccountAuthenticationFilter(authenticationManager()))
     }
 
     override fun configure(auth: AuthenticationManagerBuilder) {
