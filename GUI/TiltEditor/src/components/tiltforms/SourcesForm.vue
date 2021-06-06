@@ -1,13 +1,13 @@
 <template>
     <div>
-        <b-form >
+        <b-form class="bform">
             <b-form-group label="Beschreibung">
                 <b-form-input v-model="source.description" aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group label="Url">
                 <b-form-input v-model="source.url" aria-required=""></b-form-input>
             </b-form-group>
-            <b-form-group label="Öffentliche Verfügabrkeit">
+            <b-form-group label="Öffentliche Verfügbarkeit">
                 <b-form-input v-model="source.publiclyAvailable" aria-required=""></b-form-input>
             </b-form-group>
         </b-form>
@@ -37,5 +37,10 @@ export default {
 </script>
 
 <style scoped>
-
+    .bform{
+        border-top-color: #D9304F;
+        border-top-style: solid;
+        border-top-width: 2px;
+        margin-top: 20px;
+    }
 </style>

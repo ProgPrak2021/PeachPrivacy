@@ -210,16 +210,6 @@ export default {
         _id: "f1423cc00509931",
         dataCategory: "Creditworthiness",
         sources: [
-            {
-            description: "This information could be retrieved from...1",
-            url: "https://blue1Company.org",
-            publiclyAvailable: false
-            },
-            {
-            description: "This information could be retrieved from...2",
-            url: "https://blue2Company.org",
-            publiclyAvailable: false
-            }
         ]
         }
     /*]*/,

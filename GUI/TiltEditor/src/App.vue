@@ -50,7 +50,7 @@ export default {
         showAutomatedDecision: false,
         showPurpose: false,
         showRights: false,
-        showSources: true,
+        showSources: false,
       },
       filterString: "",
       entrys: []
