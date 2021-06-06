@@ -22,7 +22,7 @@ class Project {
     @Column(columnDefinition="TEXT")
     var detailedDescription: String? = null
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = [CascadeType.REMOVE])
     var versions: List<Template> = mutableListOf()
 
     @Size(message = "Authority ID can't exceed 255 characters", max = 255)
