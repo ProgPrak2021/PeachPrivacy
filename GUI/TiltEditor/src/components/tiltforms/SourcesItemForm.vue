@@ -1,15 +1,16 @@
 <template>
     <div  class="tilt-block" >
-        <b-form >
+        <b-form v-on:submit.prevent="addNewSource" >
             <b-form-group label="Datenkategorie">
                 <b-form-input v-model="sourceItem.dataCategory" aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group v-for="entry in sourceItem.sources" v-bind:key="entry.url">
                <tilt-sources v-bind:entry="psource"></tilt-sources> 
             </b-form-group> 
-            <b-form-group>
+            <button>Add</button>
+<!--            <b-form-group>
                 <button class="btn" @click="addNewSource">Add new Source</button>
-            </b-form-group>
+            </b-form-group> -->
         </b-form>
     </div>
 </template>
@@ -39,8 +40,12 @@ export default {
             }   
   },
   methods: {
-      addNewSource(){
-         this.$emit("added-source", this.sourceItem.sources)
+     addNewSource: function () {
+          this.sourceItem.sources.push( {
+            description: "This information could be retrieved from...3",
+            url: "https://blue3Company.org",
+            publiclyAvailable: false
+        });
       }
   }
 }
