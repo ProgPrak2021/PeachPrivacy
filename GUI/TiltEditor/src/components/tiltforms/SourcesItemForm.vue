@@ -1,17 +1,13 @@
 <template>
     <div  class="tilt-block" >
-        <b-form v-on:submit.prevent="addNewSource" >
             <b-form-group label="Datenkategorie">
                 <b-form-input v-model="sourceItem.dataCategory" aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group v-for="entry in sourceItem.sources" v-bind:key="entry.url">
                <tilt-sources v-bind:entry="psource"></tilt-sources> 
             </b-form-group> 
-            <button>Add</button>
-<!--            <b-form-group>
-                <button class="btn" @click="addNewSource">Add new Source</button>
-            </b-form-group> -->
-        </b-form>
+            <button class="btn" v-on:click='addNewSource' >Add</button>
+            <button class="btn" v-on:click='removeSource'>Remove</button>
     </div>
 </template>
 
@@ -46,6 +42,9 @@ export default {
             url: "https://blue3Company.org",
             publiclyAvailable: false
         });
+      },
+       removeSource: function () {
+                this.sourceItem.sources.pop();
       }
   }
 }
