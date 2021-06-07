@@ -4,7 +4,7 @@ import com.worldturner.medeia.api.JsonSchemaVersion
 import com.worldturner.medeia.api.StringSchemaSource
 import com.worldturner.medeia.api.jackson.MedeiaJacksonApi
 
-data class Template(
+data class TemplateSchema(
     private val jsonSchemaApi: MedeiaJacksonApi,
     val schema: String
 ) {

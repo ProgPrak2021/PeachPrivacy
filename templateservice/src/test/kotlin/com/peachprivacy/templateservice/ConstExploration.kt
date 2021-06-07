@@ -30,7 +30,7 @@ class ConstExploration {
         }
         val testParser = objectMapper.createParser(testResource.inputStream)
 
-        val template = Template(api, tiltSchema)
+        val template = TemplateSchema(api, tiltSchema)
 
         val validatedParser = api.decorateJsonParser(template.validator, testParser)
 

@@ -1,18 +1,18 @@
 package com.peachprivacy.templateservice.template
 
-import com.peachprivacy.templateservice.Template
+import com.peachprivacy.templateservice.TemplateSchema
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class TemplateService {
+class TemplateSchemaService {
     /**
      * Fetches template from document db
      */
-    fun getTemplate(id: UUID): Template = TODO()
+    fun getTemplate(id: UUID): TemplateSchema = TODO()
 
     /**
      * Resolves const values in schema, returning the resulting object (or an exception if required fields are missing)
      */
-    fun resolveTemplate(template: Template): Map<String, Any?> = TODO()
+    fun resolveTemplate(schema: TemplateSchema): Map<String, Any?> = TODO()
 }

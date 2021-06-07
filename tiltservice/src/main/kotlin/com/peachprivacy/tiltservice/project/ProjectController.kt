@@ -15,7 +15,7 @@ class ProjectController @Autowired constructor(
 ) {
     @GetMapping()
     fun get5RandomProjects(): ResponseEntity<List<Project>> {
-        return ResponseEntity.ok(projectService.getAny(5))
+        return ResponseEntity.ok(projectService.getRandom(5))
     }
 
     @GetMapping("/{id}")
@@ -27,6 +27,9 @@ class ProjectController @Autowired constructor(
 
     @PostMapping()
     fun create(@RequestBody project: Project, httpRequest: HttpServletRequest): ResponseEntity<Project> {
+        if (project.id != null) return ResponseEntity.badRequest().build()
+
+        // Don't allow insertion of templates during project creation? (Currently allowed)
         return projectService.create(project).let { id ->
             val handlerUri = httpRequest.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString()
             val uri = URI("$handlerUri/$id")
@@ -34,18 +37,22 @@ class ProjectController @Autowired constructor(
         }
     }
 
-    // TODO Redundant ID in path, but proper REST would have it there instead of in RequestBody
-    //  Path ID currently not used
     @PutMapping("/{id}")
     fun update(@PathVariable id: UUID, @RequestBody project: Project): ResponseEntity<Project> {
-        return projectService.update(project).let {
+        if (project.id != null && id != project.id) return ResponseEntity.badRequest().build()
+
+        return projectService.update(project.apply { this.id = id }).let {
             ResponseEntity.ok(it)
         }
     }
 
     @DeleteMapping("/{id}")
     fun deleteById(@PathVariable id: UUID): ResponseEntity<Project> {
-        projectService.delete(id)
-        return ResponseEntity.noContent().build()
+        return if (projectService.get(id) == null) {
+            ResponseEntity.notFound().build()
+        } else {
+            projectService.delete(id)
+            ResponseEntity.noContent().build()
+        }
     }
 }

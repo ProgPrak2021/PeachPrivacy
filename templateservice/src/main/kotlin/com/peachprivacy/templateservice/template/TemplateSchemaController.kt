@@ -1,6 +1,6 @@
 package com.peachprivacy.templateservice.template
 
-import com.peachprivacy.templateservice.Template
+import com.peachprivacy.templateservice.TemplateSchema
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController("/api/template/templates")
-class TemplateController(
-    @Autowired private val templateService: TemplateService
+class TemplateSchemaController(
+    @Autowired private val schemaService: TemplateSchemaService
 ) {
     @GetMapping("/raw/{id}")
-    fun getRawTemplate(@PathVariable id: UUID): Template {
-        return templateService.getTemplate(id)
+    fun getRawTemplate(@PathVariable id: UUID): TemplateSchema {
+        return schemaService.getTemplate(id)
     }
 
     /*

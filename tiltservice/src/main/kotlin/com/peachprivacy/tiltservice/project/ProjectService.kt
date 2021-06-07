@@ -9,8 +9,8 @@ import java.util.*
 class ProjectService @Autowired constructor(
     private val projectRepository: ProjectRepository
 ) {
-    fun getAny(amount: Int): List<Project> {
-        return projectRepository.findAll().take(amount)
+    fun getRandom(amount: Int): List<Project> {
+        return projectRepository.findAll().shuffled().take(amount)
     }
 
     fun get(id: UUID): Project? {
