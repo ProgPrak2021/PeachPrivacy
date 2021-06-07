@@ -27,11 +27,12 @@
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showPurpose" @click="toggleForm('toggleChangesOfPurpose')">Changes of purpose</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
-                  <b-dropdown-item href="#">Right to complain</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showRights" @click="toggleForm('toggleRights')">Rights</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showAutomatedDecision" @click="toggleForm('toggleAutomatedDecision')" >Automated decision making</b-dropdown-item>
                   <b-dropdown-item href="#">Notification on change</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showSources" @click="toggleForm('toggleSources')" >Sources</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
 
@@ -52,13 +53,16 @@
                     <template #button-content>
                         <em>Benutzer</em>
                     </template>
-                    <div>
+                    <div v-if="loginV">
                         <b-dropdown-item href="#" v-b-modal.modal-profile size="sm">Profile</b-dropdown-item>
                         <profile-modal v-bind:user="user"></profile-modal>
                     </div>
                     <div  v-if="!loginV">
                       <b-dropdown-item href="#" v-b-modal.modal-login size="sm" >Anmelden </b-dropdown-item>
                       <login-modal @login-success="login"></login-modal>
+                      <b-dropdown-item href="#" v-b-modal.modal-register size="sm" >Registrieren </b-dropdown-item>
+                      <register-modal></register-modal>
+
                     </div>
                     <div v-else>
                       <b-dropdown-item href="#" @click="logout"  >Abmelden</b-dropdown-item>
@@ -74,9 +78,11 @@
     import LoginpModal from "./LoginForm.vue";
     import ProfileModal from "./ProfileForm.vue";
     import OpenTemplateModal from "./OpenTemplateForm.vue";
+    import RegisterModal from "@/components/RegisterForm";
     export default {
         name: "NavigationBar",
         components: {
+          RegisterModal,
         'login-modal':LoginpModal,
         'profile-modal':ProfileModal,
         'openTemplate-modal':OpenTemplateModal
@@ -96,7 +102,9 @@
                 showController:Boolean,
                 showDataManager: Boolean,
                 showAutomatedDecision: Boolean,
-                showPurpose: Boolean
+                showPurpose: Boolean,
+                showRights:Boolean,
+                showSources: Boolean,
             }
         },
         methods: {

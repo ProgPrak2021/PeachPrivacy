@@ -29,9 +29,16 @@ export default {
       else if (showForm.toLowerCase() === "toggleAutomatedDecision".toLowerCase()) {
         this.forms.showAutomatedDecision = !this.forms.showAutomatedDecision;
       }
-       else if (showForm.toLowerCase() === "toggleChangesOfPurpose".toLowerCase()) {
+      else if (showForm.toLowerCase() === "toggleChangesOfPurpose".toLowerCase()) {
         this.forms.showPurpose = !this.forms.showPurpose;
+      }       
+      else if (showForm.toLowerCase() === "toggleRights".toLowerCase()) {
+        this.forms.showRights = !this.forms.showRights;
       }
+      else if (showForm.toLowerCase() === "toggleSources".toLowerCase()) {
+        this.forms.showSources = !this.forms.showSources;
+      }
+
     },
   },
   data() {
@@ -42,6 +49,8 @@ export default {
         showDataManager: false,
         showAutomatedDecision: false,
         showPurpose: false,
+        showRights: false,
+        showSources: false,
       },
       filterString: "",
       entrys: []

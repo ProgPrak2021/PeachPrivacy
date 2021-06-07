@@ -22,10 +22,10 @@
 
 <script>
 import axios from 'axios';
-
 export default {
   name: "RegisterModal",
   data() {
+    
     return {
       user: {
         email: "",
@@ -57,7 +57,11 @@ export default {
         return null;
       }
       return this.user.password.length>9;
-    }
+    },
+    statuus() {
+      return this.validEmail(this.email);
+    },
+
 
 
   },
@@ -65,6 +69,7 @@ export default {
     register() {
       //Login Aufruf für an den Server
       console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
+
 
       axios.post('/api/auth/register', null, {
         params: {
@@ -74,28 +79,51 @@ export default {
       }).then(response => {
         this.register_response = response.data
       }).catch(function (error) {
-        console.log(error);
-
+        console.log(error)
 
       })
       this.$emit('register-success', this.user);
       console.log(this.register_response);
-      alert('Sie erhlaten eine Bestätigungsemail');
+      this.$alert('Sie erhlaten eine Bestätigungsemail','Registrierung erfolgreich',"success");
       console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
     },
     handleOk(bvModalEvt) {
       // Prevent modal from closing
+
       if(this.user.email.length===0||this.user.password.l===0) {
         bvModalEvt.preventDefault();
-        alert('Geben Sie was ein');
+        this.$alert('Geben Sie etwas ein','Fehler',"info");
+        return;
+      }
+      if(this.user.password.length ===0){
+        bvModalEvt.preventDefault();
+        this.$alert('Geben Sie ein Passwort an','Es gibt kein Passwort',"info");
+          return;
+      }
+      if(this.confirm_password.length ===0){
+        bvModalEvt.preventDefault();
+        this.$alert('Wiederholen Sie das Passwort',' Passwort wurde nicht wiederholt',"info");
+         return;
+      }
+      if(this.confirm_password.length <10){
+        bvModalEvt.preventDefault();
+        this.$alert('Passwort muss min. 10 Zeichen enthalten',' Passwort ist zu kurz',"info");
         return;
       }
 
       if(!this.state||!this.status) {
         bvModalEvt.preventDefault();
-        alert('Fehler');
+        this.$alert('Beide Passwörter stimmen nicht überein','Beide Passwörter stimmen nicht überein', "info")
         return;
       }
+
+      if(!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.user.email))){
+        bvModalEvt.preventDefault();
+        this.$alert(' Geben Sie eine valide Email an','Email existiert nicht',"error");
+        return;
+
+      }
+
       // Trigger submit handler
       this.register();
     },

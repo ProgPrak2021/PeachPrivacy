@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <b-modal id="modal-login" title="Anmelden" hide-header-close @ok="HandleOk">
       <b-form-group id="ctrtEmail" label="E-Mail *">
         <b-form-input type="email" v-model="user.email" placeholder="Bitte Email als Benutzername eingeben." trim
@@ -49,18 +50,27 @@ export default {
         console.log(response.data);
       }).catch(function (error) {
         console.log(error);
-        alert('Password oder Email ist falsch');
+        this.$alert('Passwort oder Email ist falsch ','Fehler',"error");
+
       })
       this.$emit('login-success', this.user);
-      alert('login-success');
+      this.$alert('Wilkommen zurück','login-sucess',"success");
+
       console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
+      return;
     },
     HandleOk(bvModalEvt) {
       // Prevent modal from closing
       if(this.user.password.length===0 ||this.user.email.length===0) {
         bvModalEvt.preventDefault()
-        alert('Gib deine Email oder dein Passwort ein')
+        this.$alert('Gib deine Email oder dein Passwort an',"Kein Passwort oder Keine Email", "info")
         return;
+      }
+      if(!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.user.email))){
+        bvModalEvt.preventDefault();
+        this.$alert('Die Email ist nicht valide','Fehler','error');
+        return;
+
       }
       // Trigger submit handler
       this.login();
