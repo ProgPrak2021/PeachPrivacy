@@ -5,10 +5,30 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 spring:
+  application:
+    name: gateway
   cloud:
     gateway:
       routes:
+        - id: userServicePublic
+          uri: lb://userservice
+          predicates:
+            - Path=/api/auth/**
+        - id: userServicePrivate
+          uri: lb://userservice
+          predicates:
+            - Path=/api/account/**
+          filters:
+            - name: AuthenticationFilterFactory
+        - id: tiltServicePublic
+          uri: lb://tiltservice
+          predicates:
+            - Path=/api/tilt/**
         - id: frontendPublic
           uri: "http://localhost:8081"
           predicates:
             - Path=/**
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.client: DEBUG
