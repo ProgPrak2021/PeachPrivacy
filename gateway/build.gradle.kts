@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.peachprivacy"
-version = "1.0.0"
+version = "1.0.5"
 
 repositories {
     mavenCentral()
@@ -20,7 +20,9 @@ extra["springCloudVersion"] = "2020.0.2"
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     implementation("io.jsonwebtoken:jjwt-api:0.11.1")
     implementation("io.jsonwebtoken:jjwt-impl:0.11.1")
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.1")
@@ -31,6 +33,10 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
     }
+}
+
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootBuildImage>("bootBuildImage") {
+    imageName = "europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/gateway:${project.version}"
 }
 
 tasks.withType<KotlinCompile> {

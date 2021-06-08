@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.peachprivacy"
-version = "1.0.0"
+version = "1.0.12"
 
 repositories {
     mavenCentral()
@@ -19,6 +19,8 @@ repositories {
 extra["springCloudVersion"] = "2020.0.2"
 
 dependencies {
+    compileOnly("javax.validation:validation-api:2.0.1.Final")
+
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.postgresql:postgresql")
@@ -26,11 +28,16 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    // implementation("org.springframework.cloud:spring-cloud-starter-config")
-    // implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.h2database:h2")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+    }
 }
 
 tasks.getByName<BootBuildImage>("bootBuildImage") {

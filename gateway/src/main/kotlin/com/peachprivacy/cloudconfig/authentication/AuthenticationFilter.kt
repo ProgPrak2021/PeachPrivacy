@@ -30,9 +30,10 @@ class AuthenticationFilter @Autowired constructor(
             token.claims()
         }
 
-        // TODO: parse all needed fields
         exchange.request.mutate()
             .header("id", claims["id"]?.toString())
+            .header("email", claims.subject)
+            .header("authorities", claims["authorities"]?.toString())
             .build()
         return chain.filter(exchange)
     }

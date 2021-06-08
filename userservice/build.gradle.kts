@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.peachprivacy"
-version = "1.0.1"
+version = "1.0.8"
 
 repositories {
     mavenCentral()
@@ -19,6 +19,7 @@ repositories {
 extra["springCloudVersion"] = "2020.0.2"
 
 dependencies {
+    implementation(project(":authentication"))
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
@@ -28,8 +29,7 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.springframework.cloud:spring-cloud-starter-config")
-    implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
+    implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
