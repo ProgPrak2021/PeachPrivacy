@@ -6,8 +6,8 @@
             <b-form-group v-for="entry in sourceItem.sources" v-bind:key="entry.url">
                <tilt-sources v-bind:entry="psource"></tilt-sources> 
             </b-form-group> 
-            <button class="btn" v-on:click='addNewSource' >Add</button>
-            <button class="btn" v-on:click='removeSource'>Remove</button>
+            <button class="btn" v-on:click='addNewSource' >Hinzufügen</button>
+            <button class="btn" v-on:click='removeSource'>Entfernen</button>
     </div>
 </template>
 

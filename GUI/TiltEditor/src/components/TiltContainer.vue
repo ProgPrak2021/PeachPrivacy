@@ -17,7 +17,7 @@
                        <tilt-changes-of-purpose id="tilt-changes-of-purpose" />
                   </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showSources">
-                       <tilt-sources id="tilt-sources"  v-bind:psourceItem="sources" />
+                       <tilt-sources-items id="tilt-sources-items"  v-bind:psourceItem="sources" />
                   </div>
                   <div v-if="forms.showRights">
                        <tilt-rights id="tildRightsForm" 
@@ -38,7 +38,7 @@ import ControllerForm from './tiltforms/ControllerForm.vue'
 import ProtectionOfficerForm from './tiltforms/ProtectionOfficerForm'
 import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm'
 import RightForm from './tiltforms/RightForm'
-import SourcesItemForm from './tiltforms/SourcesItemForm'
+import SourcesItemsForm from './tiltforms/SourcesItemsForm'
 
 export default {
   name: 'TiltFormular',
@@ -49,7 +49,7 @@ export default {
     'tilt-protection-officer':ProtectionOfficerForm,
     'tilt-dutomated-decision-making': AutomatedDecisionMakingForm,
     'tilt-rights': RightForm,
-    'tilt-sources': SourcesItemForm
+    'tilt-sources-items': SourcesItemsForm
   },
   props: {
     msg: String,
@@ -205,14 +205,19 @@ export default {
         "xml"
         ]
     },
-    sources: /*[*/
+    sources: [
         {
         _id: "f1423cc00509931",
         dataCategory: "Creditworthiness",
         sources: [
         ]
-        }
-    /*]*/,
+        },
+        {
+        _id: "f1423cc00509932",
+        dataCategory: "Creditworthiness 2",
+        sources: [
+        ]
+        }    ],
     rightToInformation: {
         available: true,
         description: "For the right to information please use this contact form and...",

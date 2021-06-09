@@ -6,8 +6,7 @@
         </td>
       </tr>  
       <b-form-group v-for="entry in sources" v-bind:key="entry._id">
-               <h4>Item:</h4>
-               <tilt-sources v-bind:entry="psourceItem"></tilt-sources> 
+               <tilt-sources v-bind:psourceItem="entry"></tilt-sources> 
       </b-form-group> 
       <button class="btn" v-on:click='addNewItem'>Hinzufügen</button>
       <button class="btn" v-on:click='removeItem'>Entfernen</button>
@@ -48,9 +47,16 @@ export default {
   methods: {
      addNewItem: function () {
          console.log("addNewItem"); 
+         this.sources.push(
+         {
+          _id: "f1423cc00509932",
+          dataCategory: "Creditworthiness 2",
+          sources: [
+          ]
+        });
       },
       removeItem: function () {
-         console.log("removeItem"); 
+         this.sources.pop();
       }
   }
 }
