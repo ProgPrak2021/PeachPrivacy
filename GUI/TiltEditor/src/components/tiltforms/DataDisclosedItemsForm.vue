@@ -5,22 +5,29 @@
             <h3>Data Disclosed:</h3>
         </td>
       </tr> 
-      <b-form-group v-for="entry in sources" v-bind:key="entry._id">
-           <h4>Item</h4>
-           <!--    <tilt-sources v-bind:psourceItem="entry"></tilt-sources> --> 
-      </b-form-group>  
+      <b-form-group v-for="entry in dataDisclosed" v-bind:key="entry._id">
+        <b-form-group id="ctrl_id" label-align='right' label-for="input-_id" label="Id" >
+          <b-form-input id="input-_id" v-model="entry._id"></b-form-input>
+        </b-form-group>
+        <b-form-group id="ctrlname" label="Kategorie">
+          <b-form-input :placeholder="[[entry.category]]" aria-required=""></b-form-input>
+        </b-form-group>
+        <b-form-group label="Zwecke">
+          <tilt-purposes  v-bind:ppurposes="entry.purposes"></tilt-purposes> 
+        </b-form-group>
+      </b-form-group>
       <button class="btn" v-on:click='addNewItem'>Hinzufügen</button>
       <button class="btn" v-on:click='removeItem'>Entfernen</button>
 </div>
 </template>
 
 <script>
-//import SourcesItemForm from './SourcesItemForm.vue' 
+import PurposesForm from './PurposesForm.vue' 
 
 export default {
   name: "DataDisclosedItems",
   components: {
-  //  'tilt-sources':SourcesItemForm,
+     'tilt-purposes':PurposesForm,
   },
   data() {
     return {
