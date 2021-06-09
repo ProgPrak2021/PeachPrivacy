@@ -1,7 +1,7 @@
 <template>
     <div >
         <b-form class="bform">
-            <b-form-group >
+            <b-form-group label="Zweck"  >
                 <b-form-input v-b-tooltip.hover :title="purposeInf.purpose" :placeholder="[[purpose]]"></b-form-input>
             </b-form-group> 
             <b-form-group label="Beschreibung">
