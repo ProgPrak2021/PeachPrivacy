@@ -18,6 +18,9 @@
         <b-form-group label="Legale Basen">
           <tilt-legalbase  v-bind:plegalBasis="entry.legalBases"></tilt-legalbase> 
         </b-form-group>
+        <b-form-group label="Berechtigte Interessen">
+          <tilt-interest  v-bind:pinterests="entry.legitimateInterests"></tilt-interest> 
+        </b-form-group>
       </b-form-group>
       <button class="btn" v-on:click='addNewItem'>Hinzufügen</button>
       <button class="btn" v-on:click='removeItem'>Entfernen</button>
@@ -26,12 +29,14 @@
 
 <script>
 import PurposesForm from './PurposesForm.vue' 
-import LegalBasesForm from './LegalBasesForm.vue' 
+import LegalBasesForm from './LegalBasesForm.vue'
+import LegitimateInterestsForm from './LegitimateInterestsForm.vue' 
 export default {
   name: "DataDisclosedItems",
   components: {
      'tilt-purposes':PurposesForm,
      'tilt-legalbase':LegalBasesForm,
+     'tilt-interest':LegitimateInterestsForm,
   },
   data() {
     return {
