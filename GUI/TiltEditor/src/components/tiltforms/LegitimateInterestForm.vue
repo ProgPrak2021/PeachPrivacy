@@ -1,7 +1,7 @@
 <template>
     <div >
         <b-form class="bform">
-            <b-form-group label="Existiert?"  >
+            <b-form-group label="Vorhanden?"  >
                 <b-form-input v-b-tooltip.hover :title="legitimateInterestInf.exists" :placeholder="[[exists]]"></b-form-input>
             </b-form-group> 
             <b-form-group label="Grund">

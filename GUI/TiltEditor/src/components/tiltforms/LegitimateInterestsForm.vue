@@ -14,7 +14,7 @@ import LegitimateInterestForm from './LegitimateInterestForm.vue'
 export default {
   name: "LegitimateInterests",
   components: {
-    'tilt-interest ':LegitimateInterestForm,
+    'tilt-interest':LegitimateInterestForm,
   },
   data() {
     return {
