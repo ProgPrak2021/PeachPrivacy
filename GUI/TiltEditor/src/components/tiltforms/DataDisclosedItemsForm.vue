@@ -15,6 +15,9 @@
         <b-form-group label="Zwecke">
           <tilt-purposes  v-bind:ppurposes="entry.purposes"></tilt-purposes> 
         </b-form-group>
+        <b-form-group label="Legale Basen">
+          <tilt-legalbase  v-bind:plegalBasis="entry.legalBases"></tilt-legalbase> 
+        </b-form-group>
       </b-form-group>
       <button class="btn" v-on:click='addNewItem'>Hinzufügen</button>
       <button class="btn" v-on:click='removeItem'>Entfernen</button>
@@ -23,11 +26,12 @@
 
 <script>
 import PurposesForm from './PurposesForm.vue' 
-
+import LegalBasesForm from './LegalBasesForm.vue' 
 export default {
   name: "DataDisclosedItems",
   components: {
      'tilt-purposes':PurposesForm,
+     'tilt-legalbase':LegalBasesForm,
   },
   data() {
     return {
