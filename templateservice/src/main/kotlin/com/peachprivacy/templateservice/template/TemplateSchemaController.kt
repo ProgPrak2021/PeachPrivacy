@@ -2,18 +2,35 @@ package com.peachprivacy.templateservice.template
 
 import com.peachprivacy.templateservice.TemplateSchema
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 import java.util.*
 
-@RestController("/api/template/templates")
+@RestController
+@RequestMapping("/api/template/templates")
 class TemplateSchemaController(
     @Autowired private val schemaService: TemplateSchemaService
 ) {
-    @GetMapping("/raw/{id}")
-    fun getRawTemplate(@PathVariable id: UUID): TemplateSchema {
-        return schemaService.getTemplate(id)
+    @GetMapping("/data/{id}")
+    fun justGetTemplate(@PathVariable id: UUID): ResponseEntity<String> {
+        return schemaService.getSchema(id)?.let {
+            ResponseEntity.ok(it.schema)
+        } ?: ResponseEntity.notFound().build()
+    }
+
+    @PutMapping("/data/{id}")
+    fun justSetTemplate(@PathVariable id: UUID, @RequestBody schema: String): ResponseEntity<String> {
+        schemaService.setSchema(TemplateSchema(id, schema))
+
+        // Guaranteed 200 at this point imo - Though, usually one would return the old saved schema at this ID I think (TODO?)
+        return ResponseEntity.ok(schema)
+    }
+
+    @DeleteMapping("/data/{id}")
+    fun justDeleteTemplate(@PathVariable id: UUID): ResponseEntity<String> {
+        return schemaService.deleteSchema(id)?.let { deleted ->
+            ResponseEntity.ok(deleted.schema)
+        } ?: ResponseEntity.notFound().build()
     }
 
     /*

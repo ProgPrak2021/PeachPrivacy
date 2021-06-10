@@ -23,6 +23,7 @@ class TemplateController @Autowired constructor(
     @PostMapping
     fun create(@RequestBody template: Template, httpRequest: HttpServletRequest): ResponseEntity<Template> {
         if (template.id != null) return ResponseEntity.badRequest().build()
+        if (template.children.isNotEmpty()) return ResponseEntity.badRequest().build()
 
         return templateService.create(template).let { id ->
             val handlerUri = httpRequest.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString()
@@ -34,6 +35,7 @@ class TemplateController @Autowired constructor(
     @PutMapping("/{id}")
     fun update(@PathVariable id: UUID, @RequestBody template: Template): ResponseEntity<Template> {
         if (template.id != null && id != template.id) return ResponseEntity.badRequest().build()
+        if (template.children.isNotEmpty()) return ResponseEntity.badRequest().build()
 
         return templateService.update(template).let {
             ResponseEntity.ok(it)

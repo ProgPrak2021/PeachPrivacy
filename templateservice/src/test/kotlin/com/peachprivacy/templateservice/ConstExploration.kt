@@ -3,6 +3,8 @@ package com.peachprivacy.templateservice
 import Tilt
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.worldturner.medeia.api.JsonSchemaVersion
+import com.worldturner.medeia.api.StringSchemaSource
 import com.worldturner.medeia.api.jackson.MedeiaJacksonApi
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -30,9 +32,8 @@ class ConstExploration {
         }
         val testParser = objectMapper.createParser(testResource.inputStream)
 
-        val template = TemplateSchema(api, tiltSchema)
-
-        val validatedParser = api.decorateJsonParser(template.validator, testParser)
+        val validator = api.loadSchema(StringSchemaSource(tiltSchema, JsonSchemaVersion.DRAFT07))
+        val validatedParser = api.decorateJsonParser(validator, testParser)
 
         val tilt = objectMapper.readValue<Tilt>(validatedParser)
     }

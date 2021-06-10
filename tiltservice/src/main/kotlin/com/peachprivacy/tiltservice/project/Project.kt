@@ -8,7 +8,7 @@ import javax.persistence.*
 import javax.validation.constraints.Size
 
 @Entity
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator::class, property = "id")
+@JsonIdentityInfo(scope = Project::class, generator = ObjectIdGenerators.PropertyGenerator::class, property = "id")
 class Project {
     @Id
     @GeneratedValue
@@ -27,7 +27,7 @@ class Project {
     var detailedDescription: String? = null
 
     @OneToMany(mappedBy = "project", cascade = [CascadeType.REMOVE])
-    // @JsonIdentityReference(alwaysAsId = true)
+    @JsonIdentityReference(alwaysAsId = true)
     var versions: List<Template> = mutableListOf()
 
     @Size(message = "Authority ID can't exceed 255 characters", max = 255)

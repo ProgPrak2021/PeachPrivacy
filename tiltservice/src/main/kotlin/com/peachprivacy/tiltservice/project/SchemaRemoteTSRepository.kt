@@ -3,7 +3,9 @@ package com.peachprivacy.tiltservice.project
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.reactive.function.client.body
 import org.springframework.web.reactive.function.client.bodyToMono
+import reactor.core.publisher.Mono
 import java.util.*
 
 @Component
@@ -22,10 +24,10 @@ open class SchemaRemoteTSRepository @Autowired constructor(
 
 
     override fun set(id: UUID, schema: String) {
-        schemaMicroserviceWebClient.put().uri("/api/template/templates/data/$id")
+        schemaMicroserviceWebClient.put().uri("/api/template/templates/data/$id").body(Mono.just(schema)).retrieveString()
     }
 
     override fun delete(id: UUID) {
-        schemaMicroserviceWebClient.delete().uri("/api/template/templates/data/$id")
+        schemaMicroserviceWebClient.delete().uri("/api/template/templates/data/$id").retrieveString()
     }
 }
