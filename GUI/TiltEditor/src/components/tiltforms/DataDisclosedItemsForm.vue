@@ -12,7 +12,12 @@
         <b-form-group id="ctrlname" label="Kategorie">
           <b-form-input :placeholder="[[entry.category]]" aria-required=""></b-form-input>
         </b-form-group>
-        <b-form-group label="Zwecke">
+        <b-form-group>
+          <b-row>
+            <b-col cols="10">Zwecke</b-col>
+            <b-col cols="1"><img src="../../assets/plus.png" alt="" height="25"></b-col>
+            <b-col cols="1"><img src="../../assets/minus.png" alt="" height="25"></b-col>
+          </b-row>
           <tilt-purposes  v-bind:ppurposes="entry.purposes"></tilt-purposes> 
         </b-form-group>
         <b-form-group label="Legale Basen">
