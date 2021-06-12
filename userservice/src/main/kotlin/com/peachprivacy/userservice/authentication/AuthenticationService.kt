@@ -1,4 +1,4 @@
-package com.peachprivacy.authentication.authentication
+package com.peachprivacy.userservice.authentication
 
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys

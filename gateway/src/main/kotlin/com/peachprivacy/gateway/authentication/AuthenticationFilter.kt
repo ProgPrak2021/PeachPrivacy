@@ -1,4 +1,4 @@
-package com.peachprivacy.cloudconfig.authentication
+package com.peachprivacy.gateway.authentication
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cloud.context.config.annotation.RefreshScope
@@ -16,7 +16,7 @@ class AuthenticationFilter @Autowired constructor(
 ) : GatewayFilter {
 
     override fun filter(exchange: ServerWebExchange, chain: GatewayFilterChain): Mono<Void> {
-        val token = exchange.request.headers["Authorization"]?.firstOrNull() ?: run {
+        val token = exchange.request.headers["Authorization"]?.firstOrNull()?.replace("Bearer ", "") ?: run {
             return exchange.response.also { it.statusCode = HttpStatus.UNAUTHORIZED }
                 .setComplete()
         }

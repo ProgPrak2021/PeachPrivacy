@@ -4,7 +4,7 @@ import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 
-class AccountAuthentication(
+data class AccountAuthentication(
     val id: Int,
     val email: String,
     private val authorities: Iterable<String>,

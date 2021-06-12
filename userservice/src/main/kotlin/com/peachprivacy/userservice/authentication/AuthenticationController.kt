@@ -1,4 +1,4 @@
-package com.peachprivacy.authentication.authentication
+package com.peachprivacy.userservice.authentication
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -28,10 +28,5 @@ class AuthenticationController @Autowired constructor(val authenticationService:
     fun register(@Valid registerForm: RegisterForm): ResponseEntity<Any> {
         val register = authenticationService.register(registerForm.email, registerForm.password)
         return ResponseEntity(if (register) HttpStatus.OK else HttpStatus.BAD_REQUEST)
-    }
-
-    @GetMapping("/valid")
-    @PreAuthorize("isAuthenticated()")
-    fun valid() {
     }
 }

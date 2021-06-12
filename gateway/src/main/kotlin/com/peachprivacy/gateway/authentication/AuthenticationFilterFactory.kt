@@ -1,4 +1,4 @@
-package com.peachprivacy.cloudconfig.authentication
+package com.peachprivacy.gateway.authentication
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cloud.gateway.filter.GatewayFilter

@@ -1,4 +1,4 @@
-package com.peachprivacy.cloudconfig
+package com.peachprivacy.gateway
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

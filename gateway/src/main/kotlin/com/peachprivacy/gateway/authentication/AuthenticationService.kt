@@ -1,4 +1,4 @@
-package com.peachprivacy.cloudconfig.authentication
+package com.peachprivacy.gateway.authentication
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
