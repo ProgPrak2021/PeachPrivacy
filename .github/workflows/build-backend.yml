@@ -27,6 +27,13 @@ jobs:
           wrapper-cache-enabled: true
           dependencies-cache-enabled: true
           configuration-cache-enabled: true
+      - name: Build Template-Service
+        uses: eskatos/gradle-command-action@v1
+        with:
+          arguments: templateservice:bootBuildImage
+          wrapper-cache-enabled: true
+          dependencies-cache-enabled: true
+          configuration-cache-enabled: true
       - name: Build Gateway
         uses: eskatos/gradle-command-action@v1
         with:
@@ -51,6 +58,8 @@ jobs:
         run: docker push europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/tiltservice --all-tags
       - name: Push User-Serivce
         run: docker push europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/userservice --all-tags
+      - name: Push Template-Serivce
+        run: docker push europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/templateservice --all-tags
       - name: Push Gateway
         run: docker push europe-west3-docker.pkg.dev/peachprivacy/peachprivacy/gateway --all-tags
       - name: Push CloudConfig
