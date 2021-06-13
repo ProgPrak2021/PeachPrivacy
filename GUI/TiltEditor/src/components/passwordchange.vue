@@ -1,6 +1,6 @@
 <template>
   <div>
-  <b-modal id="modal-change-pw" title="Passwort ändern " hide-header-close @ok="handleOk">
+  <b-modal id="modal-change-pw" title="Passwort ändern " hide-header-close @ok="HandleOk">
     <b-form-group id="oldPasswort" label="Passwort *"  aria-required>
       <b-form-input type="password" v-model="old_password" placeholder="Bitte altes Passwort eingeben ." trim
                     aria-required=""></b-form-input>
@@ -23,12 +23,13 @@
 import axios from "axios";
 
 export default {
+  name:"passwordchange",
   data() {
          return {
            new_password:'',
            confirm_password:'',
            old_password:''
-         }
+         };
 
   },
   computed: {
@@ -54,12 +55,41 @@ export default {
       }
       return this.new_password.length > 5;
     },
+  },
+
     methods: {
       HandleOk(bvModalEvt) {
-        bvModalEvt.preventDefault();
+        if(this.old_password.length ===0){
+          bvModalEvt.preventDefault();
+          this.$alert('Geben Sie ein Passwort an','Es gibt kein Passwort',"info");
+          return;
+        }
+        if(this.new_password.length ===0){
+          bvModalEvt.preventDefault();
+          this.$alert('Wiederholen Sie das Passwort',' Passwort wurde nicht wiederholt',"info");
+          return;
+        }
+        if(this.confirm_password.length ===0){
+          bvModalEvt.preventDefault();
+          this.$alert('Wiederholen Sie das Passwort',' Passwort wurde nicht wiederholt',"info");
+          return;
+        }
+        if(this.new_password.length <6){
+          bvModalEvt.preventDefault();
+          this.$alert('Passwort muss min. 6 Zeichen enthalten',' Passwort ist zu kurz',"info");
+          return;
+        }
+        if(!this.state||!this.status) {
+          bvModalEvt.preventDefault();
+          this.$alert('Beide Passwörter stimmen nicht überein','Beide Passwörter stimmen nicht überein', "info")
+          return;
+        }
+        this.send_new_passwort();
+
+
       },
       send_new_passwort(){
-        axios.post('/api/auth/login', null, {
+        axios.post('/api/auth/', null, {
           params: {
             old_password: this.old_password,
             new_password: this.new_password
@@ -71,11 +101,13 @@ export default {
           this.$alert('altes Passwort ist falsch ','Fehler',"error");
         })
 
+        this.$alert('Sie haben ihr Passwort geändert','Passwort Änderung','success')
+
 
       }
 
     }
-  }
+
 }
 </script>
 
