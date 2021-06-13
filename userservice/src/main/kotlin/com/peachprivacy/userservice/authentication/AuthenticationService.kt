@@ -61,6 +61,7 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
     fun confirmEmail(token: String): Boolean {
         val account = accountRepository.findByEmailToken(token) ?: return false
         account.emailToken = null
+        accountRepository.save(account)
         return true
     }
 
