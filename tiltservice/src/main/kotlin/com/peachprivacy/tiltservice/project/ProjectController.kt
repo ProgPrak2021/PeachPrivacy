@@ -1,6 +1,7 @@
 package com.peachprivacy.tiltservice.project
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.HandlerMapping
@@ -28,8 +29,8 @@ class ProjectController @Autowired constructor(
     @PostMapping()
     fun create(@RequestBody project: Project, httpRequest: HttpServletRequest): ResponseEntity<Project> {
         if (project.id != null) return ResponseEntity.badRequest().build()
+        if (project.versions.size > 1) return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build()
 
-        // Don't allow insertion of templates during project creation? (Currently allowed)
         return projectService.create(project).let { id ->
             val handlerUri = httpRequest.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString()
             val uri = URI("$handlerUri/$id")

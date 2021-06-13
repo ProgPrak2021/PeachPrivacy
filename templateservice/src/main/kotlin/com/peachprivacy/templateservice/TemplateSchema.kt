@@ -1,13 +1,12 @@
 package com.peachprivacy.templateservice
 
-import com.worldturner.medeia.api.JsonSchemaVersion
-import com.worldturner.medeia.api.StringSchemaSource
-import com.worldturner.medeia.api.jackson.MedeiaJacksonApi
+import org.springframework.data.annotation.Id
+import java.util.*
 
-data class TemplateSchema(
-    private val jsonSchemaApi: MedeiaJacksonApi,
-    val schema: String
+open class TemplateSchema(
+    @Id
+    var id: UUID? = null,
+    var schema: String = ""
 ) {
-    val validator = jsonSchemaApi.loadSchema(StringSchemaSource(schema, JsonSchemaVersion.DRAFT07))
-
+    constructor() : this(null, "")
 }

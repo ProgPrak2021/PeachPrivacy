@@ -20,8 +20,11 @@ class TemplateController @Autowired constructor(
         } ?: ResponseEntity.notFound().build()
     }
 
-    @PostMapping()
+    @PostMapping
     fun create(@RequestBody template: Template, httpRequest: HttpServletRequest): ResponseEntity<Template> {
+        if (template.id != null) return ResponseEntity.badRequest().build()
+        if (template.children.isNotEmpty()) return ResponseEntity.badRequest().build()
+
         return templateService.create(template).let { id ->
             val handlerUri = httpRequest.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString()
             val uri = URI("$handlerUri/$id")
@@ -29,10 +32,11 @@ class TemplateController @Autowired constructor(
         }
     }
 
-    // TODO Redundant ID in path, but proper REST would have it there instead of in RequestBody
-    //  Path ID currently not used
     @PutMapping("/{id}")
     fun update(@PathVariable id: UUID, @RequestBody template: Template): ResponseEntity<Template> {
+        if (template.id != null && id != template.id) return ResponseEntity.badRequest().build()
+        if (template.children.isNotEmpty()) return ResponseEntity.badRequest().build()
+
         return templateService.update(template).let {
             ResponseEntity.ok(it)
         }
@@ -40,7 +44,11 @@ class TemplateController @Autowired constructor(
 
     @DeleteMapping("/{id}")
     fun deleteById(@PathVariable id: UUID): ResponseEntity<Template> {
-        templateService.delete(id)
-        return ResponseEntity.noContent().build()
+        return if (templateService.get(id) == null) {
+            ResponseEntity.notFound().build()
+        } else {
+            templateService.delete(id)
+            ResponseEntity.noContent().build()
+        }
     }
 }
