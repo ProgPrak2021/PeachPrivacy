@@ -10,9 +10,6 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataManager">
                        <tilt-protection-officer id="tild-protection-officer" />
                   </div>
-                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataDisclosed">
-                       <tilt-data-disclosed id="tilt-data-disclosed" />
-                  </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showAutomatedDecision">
                        <tilt-dutomated-decision-making id="tilt-dutomated-decision-making" />
                   </div>
@@ -42,7 +39,6 @@ import ProtectionOfficerForm from './tiltforms/ProtectionOfficerForm'
 import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm'
 import RightForm from './tiltforms/RightForm'
 import SourcesItemsForm from './tiltforms/SourcesItemsForm'
-import DataDisclosedItemsForm from './tiltforms/DataDisclosedItemsForm'
 
 export default {
   name: 'TiltFormular',
@@ -53,9 +49,7 @@ export default {
     'tilt-protection-officer':ProtectionOfficerForm,
     'tilt-dutomated-decision-making': AutomatedDecisionMakingForm,
     'tilt-rights': RightForm,
-    'tilt-sources-items': SourcesItemsForm,
-    'tilt-data-disclosed': DataDisclosedItemsForm,
-
+    'tilt-sources-items': SourcesItemsForm
   },
   props: {
     msg: String,
@@ -63,7 +57,6 @@ export default {
         showMeta:Boolean,
         showController:Boolean,
         showDataManager: Boolean,
-        showDataDisclosed: Boolean,
         showAutomatedDecision: Boolean,
         showPurpose: Boolean,
         showRights: Boolean,

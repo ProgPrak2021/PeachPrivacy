@@ -24,6 +24,7 @@
                   <b-dropdown-item href="#" :active="forms.showMeta" @click="toggleForm('toggleMeta')">Meta</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showController" @click="toggleForm('toggleController')" >Controller</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showDataManager" @click="toggleForm('toggleDataManager')">Data Protection Officer</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showDataDisclosed" @click="toggleForm('toggleDataDisclosed')">Data Disclosed</b-dropdown-item>
                   <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showPurpose" @click="toggleForm('toggleChangesOfPurpose')">Changes of purpose</b-dropdown-item>
                   <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
@@ -105,6 +106,7 @@
                 showPurpose: Boolean,
                 showRights:Boolean,
                 showSources: Boolean,
+                showDataDisclosed:Boolean,
             }
         },
         methods: {
@@ -117,7 +119,8 @@
             logout: function(){
                 //ToDo
                 this.loginV=false;
-                console.log("call Logout" + " loginV = " + this.loginV )
+                console.log("call Logout" + " loginV = " + this.loginV );
+                this.$alert("Sie haben sich abgemeldet","Abmeldung",'success');
             },
             toggleForm: function(toggle){
                  console.log("call toggleForm" + toggle )

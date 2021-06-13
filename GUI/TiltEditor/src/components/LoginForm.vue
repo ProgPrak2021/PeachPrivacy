@@ -3,11 +3,11 @@
 
     <b-modal id="modal-login" title="Anmelden" hide-header-close @ok="HandleOk">
       <b-form-group id="ctrtEmail" label="E-Mail *">
-        <b-form-input type="email" v-model="user.email" placeholder="Bitte Email als Benutzername eingeben." trim
+        <b-form-input type="email" v-model="user.email" placeholder="Bitte Email eingeben." trim
                       aria-required=""></b-form-input>
       </b-form-group>
-      <b-form-group id="ctrlPasswort" label="Passwort *" v-bind:description="descriptionPasswort" aria-required>
-        <b-form-input type="password" v-model="user.password" placeholder="Bitte Passwort eingeben (Min. 10 Zeichen)."
+      <b-form-group id="ctrlPasswort" label="Passwort *" aria-required>
+        <b-form-input type="password" v-model="user.password" placeholder="Bitte Passwort eingeben."
                       trim aria-required></b-form-input>
       </b-form-group>
     </b-modal>
@@ -28,14 +28,7 @@ export default {
       }
     };
   },
-  computed: {
-    descriptionPasswort() {
-      var len = 0;
-      len = 10 - this.user.password.length
-      return 'Noch ' + len.toString() + ' Zeichen übrig';
-    }
 
-  },
   methods: {
     login() {
       //Login Aufruf für an den Server
@@ -61,6 +54,12 @@ export default {
     },
     HandleOk(bvModalEvt) {
       // Prevent modal from closing
+      if(this.user.email.length>=255||this.user.password.l>=255) {
+        bvModalEvt.preventDefault();
+        this.$alert('Passwort oder Email ist zu lang ','Fehler',"info");
+        return;
+      }
+
       if(this.user.password.length===0 ||this.user.email.length===0) {
         bvModalEvt.preventDefault()
         this.$alert('Gib deine Email oder dein Passwort an',"Kein Passwort oder Keine Email", "info")

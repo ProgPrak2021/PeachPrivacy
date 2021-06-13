@@ -8,7 +8,7 @@
 
       <b-form-group id="Passwort" label="Passwort *"  valid-feedback="Richtig" :invalid-feedback="write"
                     :state="status" aria-required>
-        <b-form-input type="password" v-model="user.password" placeholder="Bitte Passwort eingeben (10 Zeichen)." trim
+        <b-form-input type="password" v-model="user.password" placeholder="Bitte Passwort eingeben (6 Zeichen)." trim
                       aria-required></b-form-input>
       </b-form-group>
       <b-form-group id="repeatPasswort" label="Passwort wiederholen*"  valid-feedback="Richtig" :invalid-feedback="confirmiswrong"
@@ -48,7 +48,7 @@ export default {
       return this.user.password === this.confirm_password
     },
     write(){
-      var len =10-this.user.password.length;
+      var len =6-this.user.password.length;
       return 'Passwort braucht noch ' +len.toString() +' Zeichen';
 
     },
@@ -56,7 +56,7 @@ export default {
       if(this.user.password.length === 0){
         return null;
       }
-      return this.user.password.length>9;
+      return this.user.password.length>5;
     },
     statuus() {
       return this.validEmail(this.email);
@@ -89,6 +89,11 @@ export default {
     },
     handleOk(bvModalEvt) {
       // Prevent modal from closing
+      if(this.user.email.length>=255||this.user.password.l>=255) {
+        bvModalEvt.preventDefault();
+        this.$alert('Passwort oder Email ist zu lang ','Fehler',"info");
+        return;
+      }
 
       if(this.user.email.length===0||this.user.password.l===0) {
         bvModalEvt.preventDefault();
@@ -105,9 +110,9 @@ export default {
         this.$alert('Wiederholen Sie das Passwort',' Passwort wurde nicht wiederholt',"info");
          return;
       }
-      if(this.confirm_password.length <10){
+      if(this.confirm_password.length <6){
         bvModalEvt.preventDefault();
-        this.$alert('Passwort muss min. 10 Zeichen enthalten',' Passwort ist zu kurz',"info");
+        this.$alert('Passwort muss min. 6 Zeichen enthalten',' Passwort ist zu kurz',"info");
         return;
       }
 

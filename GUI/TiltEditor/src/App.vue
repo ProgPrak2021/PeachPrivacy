@@ -38,6 +38,9 @@ export default {
       else if (showForm.toLowerCase() === "toggleSources".toLowerCase()) {
         this.forms.showSources = !this.forms.showSources;
       }
+      else if (showForm.toLowerCase() === "toggleDataDisclosed".toLowerCase()) {
+        this.forms.showDataDisclosed = !this.forms.showDataDisclosed;
+      }
 
     },
   },
@@ -51,6 +54,7 @@ export default {
         showPurpose: false,
         showRights: false,
         showSources: false,
+        showDataDisclosed: false,
       },
       filterString: "",
       entrys: []
