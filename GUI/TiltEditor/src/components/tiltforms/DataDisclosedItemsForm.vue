@@ -26,6 +26,9 @@
         <b-form-group label="Berechtigte Interessen">
           <tilt-interest  v-bind:pinterests="entry.legitimateInterests"></tilt-interest> 
         </b-form-group>
+        <b-form-group label="Empfänger">
+          <tilt-recipients  v-bind:pinterests="entry.recipients"></tilt-recipients> 
+        </b-form-group>
       </b-form-group>
       <button class="btn" v-on:click='addNewItem'>Hinzufügen</button>
       <button class="btn" v-on:click='removeItem'>Entfernen</button>
@@ -36,12 +39,15 @@
 import PurposesForm from './PurposesForm.vue' 
 import LegalBasesForm from './LegalBasesForm.vue'
 import LegitimateInterestsForm from './LegitimateInterestsForm.vue' 
+import RecipientsForm from './RecipientsForm.vue' 
+
 export default {
   name: "DataDisclosedItems",
   components: {
      'tilt-purposes':PurposesForm,
      'tilt-legalbase':LegalBasesForm,
      'tilt-interest':LegitimateInterestsForm,
+     'tilt-recipients':RecipientsForm,
   },
   data() {
     return {
@@ -84,9 +90,6 @@ export default {
             },
             category: "Marketing content provider"
             },
-            {
-            category: "Responsible Statistical Institutes"
-            }
         ],
         storage: [
             {
