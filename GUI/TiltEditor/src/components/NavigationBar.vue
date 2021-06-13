@@ -119,7 +119,8 @@
             logout: function(){
                 //ToDo
                 this.loginV=false;
-                console.log("call Logout" + " loginV = " + this.loginV )
+                console.log("call Logout" + " loginV = " + this.loginV );
+                this.$alert("Sie haben sich abgemeldet","Abmeldung",'success');
             },
             toggleForm: function(toggle){
                  console.log("call toggleForm" + toggle )
