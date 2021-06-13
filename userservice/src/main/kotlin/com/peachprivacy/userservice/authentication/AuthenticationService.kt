@@ -4,6 +4,9 @@ import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
+import org.springframework.core.io.ClassPathResource
+import org.springframework.mail.javamail.JavaMailSender
+import org.springframework.mail.javamail.MimeMessageHelper
 import org.springframework.security.crypto.bcrypt.BCrypt
 import org.springframework.stereotype.Service
 import java.security.Key
@@ -13,7 +16,7 @@ import java.util.*
 import javax.annotation.PostConstruct
 
 @Service
-class AuthenticationService @Autowired constructor(val accountRepository: AccountRepository) {
+class AuthenticationService @Autowired constructor(val accountRepository: AccountRepository, val mailSender: JavaMailSender) {
     val salt: String = BCrypt.gensalt()
 
     @Value("\${jwt.secret}")
@@ -27,14 +30,32 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
 
     fun register(email: String, password: String): Boolean {
         if (accountRepository.existsByEmail(email)) return false
-        accountRepository.save(Account().apply {
+        val account = accountRepository.save(Account().apply {
             this.email = email
             this.password = BCrypt.hashpw(password, salt)
             this.role = "default"
             this.emailToken = UUID.randomUUID().toString().replace("-", "")
         })
-        // TODO: send email
+        sendRegisterMail(account)
         return true
+    }
+
+    private fun sendRegisterMail(account: Account) {
+        val message = mailSender.createMimeMessage()
+        val messageHelper = MimeMessageHelper(message)
+        messageHelper.setFrom("no-reply@peachprivacy.com")
+        messageHelper.setTo(account.email)
+        messageHelper.setSubject("PeachPrivacy - Account bestätigen")
+
+        val html = ClassPathResource("account-confirmation.html")
+            .inputStream
+            .readAllBytes()
+            .decodeToString()
+            .replace("%LINK%", "https://peachprivacy.dev/email/confirm/${account.emailToken}")
+
+        messageHelper.setText(html, true)
+
+        mailSender.send(message)
     }
 
     fun confirmEmail(token: String): Boolean {

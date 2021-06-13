@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.peachprivacy"
-version = "1.0.8"
+version = "1.0.9"
 
 repositories {
     mavenCentral()
@@ -20,6 +20,7 @@ extra["springCloudVersion"] = "2020.0.2"
 
 dependencies {
     implementation(project(":authentication"))
+    implementation("org.springframework.boot:spring-boot-starter-mail")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
