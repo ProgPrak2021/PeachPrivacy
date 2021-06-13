@@ -9,6 +9,10 @@
         <b-form-input type="password" v-model="user.password" placeholder="Bitte Passwort eingeben."
                       trim aria-required></b-form-input>
       </b-form-group>
+      <p>
+        <a href="#" v-b-modal="'modal-forgot-pw'">Passwort vergessen</a>
+        <forgotpassword></forgotpassword>
+      </p>
     </b-modal>
   </div>
 </template>
@@ -16,9 +20,13 @@
 
 
 import axios from 'axios';
+import Forgotpassword from "./forgotpassword.vue"
 
 export default {
   name: "LoginModal",
+  components: {
+    'forgotpassword':Forgotpassword,
+  },
   data() {
     return {
       user: {
@@ -42,7 +50,6 @@ export default {
         console.log(response.data);
         this.$emit('login-success', this.user);
         this.$alert('Wilkommen zurück','login-sucess',"success");
-
 
       }).catch(function (error) {
         console.log(error);
