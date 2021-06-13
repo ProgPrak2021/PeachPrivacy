@@ -51,7 +51,7 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
             .inputStream
             .readAllBytes()
             .decodeToString()
-            .replace("%LINK%", "https://peachprivacy.dev/email/confirm/${account.emailToken}")
+            .replace("%LINK%", "https://peachprivacy.dev/api/auth/verify/${account.emailToken}")
 
         messageHelper.setText(html, true)
 
