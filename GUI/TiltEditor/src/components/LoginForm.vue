@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <b-modal id="modal-login" title="Anmelden" hide-header-close @ok="HandleOk">
       <b-form-group id="ctrtEmail" label="E-Mail *">
         <b-form-input type="email" v-model="user.email" placeholder="Bitte Email eingeben." trim
@@ -41,13 +40,15 @@ export default {
         }
       }).then(response => {
         console.log(response.data);
+        this.$emit('login-success', this.user);
+        this.$alert('Wilkommen zurück','login-sucess',"success");
+
+
       }).catch(function (error) {
         console.log(error);
         this.$alert('Passwort oder Email ist falsch ','Fehler',"error");
 
       })
-      this.$emit('login-success', this.user);
-      this.$alert('Wilkommen zurück','login-sucess',"success");
 
       console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
       return;
