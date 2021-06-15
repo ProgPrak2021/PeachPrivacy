@@ -33,6 +33,9 @@
                   <b-dropdown-item href="#">Notification on change</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showSources" @click="toggleForm('toggleSources')" >Sources</b-dropdown-item>
                 </b-nav-item-dropdown>
+                 <b-nav-item-dropdown text="Hilfe" right>
+                  <b-dropdown-item href="#" :active="forms.showUserStory" @click="toggleForm('toggleShowUserStory')">Brauchst du Hilfe?</b-dropdown-item>
+                </b-nav-item-dropdown>
             </b-navbar-nav>
 
             <!-- Right aligned nav items -->

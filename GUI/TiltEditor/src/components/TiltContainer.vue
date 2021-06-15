@@ -22,6 +22,15 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showSources">
                        <tilt-sources-items id="tilt-sources-items"  v-bind:psourceItem="sources" />
                   </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                       <tilt-new-user id="tilt-new-user"/>
+                  </div>
+                   <div class="col-12 col-md-6 col-lg-4">
+                       <tilt-new-here id="tilt-new-here"/>
+                  </div>
+                   <div class="col-12 col-md-6 col-lg-4">
+                       <tilt-old-user id="tilt-old-user"/>
+                  </div>
                   <div v-if="forms.showRights">
                        <tilt-rights id="tildRightsForm" 
                             v-bind:pRightToInformation="rightToInformation" 
@@ -43,6 +52,9 @@ import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm
 import RightForm from './tiltforms/RightForm'
 import SourcesItemsForm from './tiltforms/SourcesItemsForm'
 import DataDisclosedItemsForm from './tiltforms/DataDisclosedItemsForm'
+import NewUserForm from './tiltforms/NewUserForm'
+import NewHereForm from './tiltforms/NewHereForm'
+import OldUserForm from './tiltforms/OldUserForm'
 
 export default {
   name: 'TiltFormular',
@@ -55,6 +67,9 @@ export default {
     'tilt-rights': RightForm,
     'tilt-sources-items': SourcesItemsForm,
     'tilt-data-disclosed': DataDisclosedItemsForm,
+    'tilt-new-user': NewUserForm,
+    'tilt-new-here': NewHereForm,
+    'tilt-old-user': OldUserForm
 
   },
   props: {
@@ -67,7 +82,7 @@ export default {
         showAutomatedDecision: Boolean,
         showPurpose: Boolean,
         showRights: Boolean,
-        showSources: Boolean
+        showSources: Boolean,
     }
   },
   data() {
