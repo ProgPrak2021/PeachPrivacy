@@ -69,6 +69,9 @@ export default {
      
 
     },
+    setUserData(userData) {
+      this.userData= userData;
+    }
   },
   data() {
     return {
@@ -84,8 +87,10 @@ export default {
         showIntro: true,
         showHelp: true,
       },
-      filterString: "",
-      entrys: []
+      userData: {
+        loggedOn:false,
+        userName:"",
+      },
     }
   }
 }

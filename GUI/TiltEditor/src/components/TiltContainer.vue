@@ -104,6 +104,12 @@ export default {
             data_1 : "Melde dich unter Benutzer->Anmelden an, um an deinen Projekten weiterarbeiten zu können.",
             countLines : 1,
         },
+        help_after_login:{
+            title : "Super, du hast dich erfolgreich angemeldet!",
+            data_1 : "Du kannst jetzt an deinen laufenden Projekten unter Template verwalten -> Template öffnen weiterarbeiten.",
+            data_2 : "Oder starte ein neues Projekt und wähle unter Bestandteile ein Formular aus, mit dem du starten willst.",
+            countLines : 1,
+        },
         help_meta:{
             title : "Hilfe zu den Meta Daten",
             data_1 : "Hier pflegen sie den Namen ihres Unternehmens und weitere allgemeingültige Daten wie das Datum der Erstellung und letzten Änderung. Die Version ihres Dokumentes. Zusätzlich definieren sie hier die Sprache ihres Dokumentes und den aktuellen Bearbeitungstatus. Der gepflegte Url hilft ihrem Kunden ihr Unternehmen zu finden.",
