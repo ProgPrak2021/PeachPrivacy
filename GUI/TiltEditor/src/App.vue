@@ -20,26 +20,34 @@ export default {
     toggleShowForms(showForm) {
       if (showForm.toLowerCase() === "toggleMeta".toLowerCase()) {
         this.forms.showMeta = !this.forms.showMeta;
+        this.forms.showIntro = !this.forms.showIntro;
       } else if (showForm.toLowerCase() === "toggleController".toLowerCase()) {
         this.forms.showController = !this.forms.showController;
+         this.forms.showIntro = !this.forms.showIntro;
       }
       else if (showForm.toLowerCase() === "toggleDataManager".toLowerCase()) {
         this.forms.showDataManager = !this.forms.showDataManager;
+        this.forms.showIntro = !this.forms.showIntro;
       }
       else if (showForm.toLowerCase() === "toggleAutomatedDecision".toLowerCase()) {
         this.forms.showAutomatedDecision = !this.forms.showAutomatedDecision;
+         this.forms.showIntro = !this.forms.showIntro;
       }
       else if (showForm.toLowerCase() === "toggleChangesOfPurpose".toLowerCase()) {
         this.forms.showPurpose = !this.forms.showPurpose;
+        this.forms.showIntro = !this.forms.showIntro;
       }       
       else if (showForm.toLowerCase() === "toggleRights".toLowerCase()) {
         this.forms.showRights = !this.forms.showRights;
+        this.forms.showIntro = !this.forms.showIntro;
       }
       else if (showForm.toLowerCase() === "toggleSources".toLowerCase()) {
         this.forms.showSources = !this.forms.showSources;
+        this.forms.showIntro = !this.forms.showIntro;
       }
       else if (showForm.toLowerCase() === "toggleDataDisclosed".toLowerCase()) {
         this.forms.showDataDisclosed = !this.forms.showDataDisclosed;
+        this.forms.showIntro = !this.forms.showIntro;
       }
 
     },
@@ -55,6 +63,7 @@ export default {
         showRights: false,
         showSources: false,
         showDataDisclosed: false,
+        showIntro: true,
       },
       filterString: "",
       entrys: []

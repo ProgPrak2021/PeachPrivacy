@@ -108,6 +108,7 @@
                 showRights:Boolean,
                 showSources: Boolean,
                 showDataDisclosed:Boolean,
+                showIntro: Boolean
             }
         },
         methods: {

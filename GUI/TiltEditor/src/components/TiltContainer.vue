@@ -22,13 +22,13 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showSources">
                        <tilt-sources-items id="tilt-sources-items"  v-bind:psourceItem="sources" />
                   </div>
-                    <div class="col-12 col-md-6 col-lg-4">
+                    <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
                        <tilt-new-user id="tilt-new-user"/>
                   </div>
-                   <div class="col-12 col-md-6 col-lg-4">
+                   <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
                        <tilt-new-here id="tilt-new-here"/>
                   </div>
-                   <div class="col-12 col-md-6 col-lg-4">
+                   <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
                        <tilt-old-user id="tilt-old-user"/>
                   </div>
                   <div v-if="forms.showRights">
@@ -83,6 +83,7 @@ export default {
         showPurpose: Boolean,
         showRights: Boolean,
         showSources: Boolean,
+        showIntro: Boolean
     }
   },
   data() {
