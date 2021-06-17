@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <nav-bar v-bind:forms="forms" @toggle-entry="toggleShowForms"/>
+    <nav-bar v-bind:forms="forms" @toggle-entry="toggleShowForms" @set-user-data="setUserData" />
     <tilt-formular id="tildForm" v-bind:forms="forms"/>
   </div>
 </template>
@@ -69,8 +69,10 @@ export default {
      
 
     },
-    setUserData(userData) {
-      this.userData= userData;
+    setUserData(user, bLogin) {
+      this.userData.user= user;
+      this.userData.bLogin= bLogin;
+       console.log("AppVue: Email = " + this.userData.user.email + " Passwort = " + this.userData.user.password);
     }
   },
   data() {
@@ -88,8 +90,11 @@ export default {
         showHelp: true,
       },
       userData: {
-        loggedOn:false,
-        userName:"",
+                user:{
+                  email: "",
+                  password: ""
+                },
+                bLogin:   false
       },
     }
   }

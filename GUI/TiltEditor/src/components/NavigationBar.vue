@@ -118,12 +118,14 @@
                 this.user = usr;
                 this.loginV=true;
                 console.log("login called: Username = " + this.user.email+ " loginV = " + this.loginV)
+                this.$emit('set-user-data', this.user,this.loginV);
             },
             logout: function(){
                 //ToDo
                 this.loginV=false;
                 console.log("call Logout" + " loginV = " + this.loginV );
                 this.$alert("Sie haben sich abgemeldet","Abmeldung",'success');
+                this.$emit('set-user-data', this.user,this.loginV);
             },
             toggleForm: function(toggle){
                  //console.log("call toggleForm" + toggle )
