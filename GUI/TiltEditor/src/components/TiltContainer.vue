@@ -4,6 +4,9 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showMeta">
                        <tilt-meta id="tildMetaForm" v-bind:pmeta="meta" />
                   </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showHelp && forms.showMeta">
+                       <tilt-help  v-bind:help="helps.help_meta"/>
+                  </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showController" >
                        <tilt-controller id="tildController" />
                   </div>
@@ -78,7 +81,8 @@ export default {
         showPurpose: Boolean,
         showRights: Boolean,
         showSources: Boolean,
-        showIntro: Boolean
+        showIntro: Boolean,
+        showHelp: Boolean,
     }
   },
   data() {
@@ -98,6 +102,11 @@ export default {
         help_exist_user_here:{
             title : "Hast du bereits ein Konto?",
             data_1 : "Melde dich unter Benutzer->Anmelden an, um an deinen Projekten weiterarbeiten zu können.",
+            countLines : 1,
+        },
+        help_meta:{
+            title : "Hilfe zu den Meta Daten",
+            data_1 : "Hier pflegen sie den Namen ihres Unternehmens und weitere allgemeingültige Daten wie das Datum der Erstellung und letzten Änderung. Die Version ihres Dokumentes. Zusätzlich definieren sie hier die Sprache ihres Dokumentes und den aktuellen Bearbeitungstatus. Der gepflegte Url hilft ihrem Kunden ihr Unternehmen zu finden.",
             countLines : 1,
         },
     },
@@ -325,6 +334,11 @@ export default {
         urlOfNewVersion: "https://greencomp.de/privacypolicy/2"
         }
     ]
+    }
+  },
+  computed: {
+    showMetaAndHelp() {
+      return this.showMeta;
     }
   }
 }

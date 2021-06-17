@@ -20,7 +20,11 @@ export default {
     toggleShowForms(showForm) {
       if (showForm.toLowerCase() === "toggleMeta".toLowerCase()) {
         this.forms.showMeta = !this.forms.showMeta;
-        this.forms.showIntro = !this.forms.showIntro;
+        if (this.forms.showMeta) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       } else if (showForm.toLowerCase() === "toggleController".toLowerCase()) {
         this.forms.showController = !this.forms.showController;
          this.forms.showIntro = !this.forms.showIntro;
@@ -49,6 +53,20 @@ export default {
         this.forms.showDataDisclosed = !this.forms.showDataDisclosed;
         this.forms.showIntro = !this.forms.showIntro;
       }
+      else if (showForm.toLowerCase() === "toggleShowHelp".toLowerCase()) {
+        this.forms.showHelp = !this.forms.showHelp;
+        if(!this.forms.showMeta && this.forms.showHelp){
+            this.forms.showIntro = true;
+        }else{
+            this.forms.showIntro = false;
+        }
+      }else{
+        // wenn nix zu sehen aber Hilfe aktiviert  
+        if (this.forms.showHelp){
+          this.forms.showIntro= true;
+        }
+      }
+     
 
     },
   },
@@ -64,6 +82,7 @@ export default {
         showSources: false,
         showDataDisclosed: false,
         showIntro: true,
+        showHelp: true,
       },
       filterString: "",
       entrys: []

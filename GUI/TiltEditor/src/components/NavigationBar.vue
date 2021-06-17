@@ -34,7 +34,7 @@
                   <b-dropdown-item href="#" :active="forms.showSources" @click="toggleForm('toggleSources')" >Sources</b-dropdown-item>
                 </b-nav-item-dropdown>
                  <b-nav-item-dropdown text="Hilfe" right>
-                  <b-dropdown-item href="#" :active="forms.showUserStory" @click="toggleForm('toggleShowUserStory')">Brauchst du Hilfe?</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showHelp" @click="toggleForm('toggleShowHelp')">Brauchst du Hilfe?</b-dropdown-item>
                 </b-nav-item-dropdown>
             </b-navbar-nav>
 
@@ -108,7 +108,8 @@
                 showRights:Boolean,
                 showSources: Boolean,
                 showDataDisclosed:Boolean,
-                showIntro: Boolean
+                showIntro: Boolean,
+                showHelp: Boolean,
             }
         },
         methods: {
@@ -125,7 +126,7 @@
                 this.$alert("Sie haben sich abgemeldet","Abmeldung",'success');
             },
             toggleForm: function(toggle){
-                 console.log("call toggleForm" + toggle )
+                 //console.log("call toggleForm" + toggle )
                 /*
                 if (toggle.equals("toggleMeta")){
                     this.props.forms.showMeta = !this.props.forms.showMeta;
