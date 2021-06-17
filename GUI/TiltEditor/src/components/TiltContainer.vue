@@ -22,14 +22,14 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showSources">
                        <tilt-sources-items id="tilt-sources-items"  v-bind:psourceItem="sources" />
                   </div>
-                    <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
-                       <tilt-new-user id="tilt-new-user"/>
+                  <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
+                       <tilt-help  v-bind:help="helps.help_new_user"/>
                   </div>
-                   <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
-                       <tilt-new-here id="tilt-new-here"/>
+                  <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
+                       <tilt-help  v-bind:help="helps.help_new_here"/>
                   </div>
-                   <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
-                       <tilt-old-user id="tilt-old-user"/>
+                  <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
+                       <tilt-help  v-bind:help="helps.help_exist_user_here"/>
                   </div>
                   <div v-if="forms.showRights">
                        <tilt-rights id="tildRightsForm" 
@@ -52,9 +52,7 @@ import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm
 import RightForm from './tiltforms/RightForm'
 import SourcesItemsForm from './tiltforms/SourcesItemsForm'
 import DataDisclosedItemsForm from './tiltforms/DataDisclosedItemsForm'
-import NewUserForm from './tiltforms/NewUserForm'
-import NewHereForm from './tiltforms/NewHereForm'
-import OldUserForm from './tiltforms/OldUserForm'
+import HelpForm from './tiltforms/HelpForm'
 
 export default {
   name: 'TiltFormular',
@@ -67,10 +65,7 @@ export default {
     'tilt-rights': RightForm,
     'tilt-sources-items': SourcesItemsForm,
     'tilt-data-disclosed': DataDisclosedItemsForm,
-    'tilt-new-user': NewUserForm,
-    'tilt-new-here': NewHereForm,
-    'tilt-old-user': OldUserForm
-
+    'tilt-help': HelpForm,
   },
   props: {
     msg: String,
@@ -88,6 +83,24 @@ export default {
   },
   data() {
     return {
+    helps:{
+        help_new_user:{
+            title : "Noch nicht registriert?",
+            data_1 : "Registriere dich unter Benutzer->Registrieren, um die Funktionalitäten unseres Services nutzen zu können.",
+            countLines : 1,
+        },
+        help_new_here:{
+            title : "Brauchst du Hilfe?",
+            data_1 : "Zum ersten Mal hier?",
+            data_2 : "Peach Privacy bietet dir die Möglichkeiten, die du brauchst, um deinen Kunden mitzuteilen, welche Daten du über sie speicherst. Und das alles DSGVO-konform!",
+            countLines : 2,
+        },
+        help_exist_user_here:{
+            title : "Hast du bereits ein Konto?",
+            data_1 : "Melde dich unter Benutzer->Anmelden an, um an deinen Projekten weiterarbeiten zu können.",
+            countLines : 1,
+        },
+    },
     meta: {
         _id: "f1424f86-ca0f-4f0c-9438-43cc00509931",
         name: "Green Company",
