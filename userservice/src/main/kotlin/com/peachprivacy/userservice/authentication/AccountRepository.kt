@@ -8,4 +8,8 @@ interface AccountRepository : JpaRepository<Account, Int> {
     fun findByEmail(email: String): Account?
 
     fun findByEmailToken(token: String): Account?
+
+    fun existsByResetToken(token: String): Boolean
+
+    fun findByResetToken(token: String): Account?
 }

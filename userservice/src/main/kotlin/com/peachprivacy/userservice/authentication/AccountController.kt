@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/account")
 class AccountController {
     @GetMapping("/valid")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated() && hasAuthority('sdf')")
     fun valid() {
     }
 }
