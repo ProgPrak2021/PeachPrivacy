@@ -29,11 +29,19 @@ export default {
         }
       } else if (showForm.toLowerCase() === "toggleController".toLowerCase()) {
         this.forms.showController = !this.forms.showController;
-         this.forms.showIntro = !this.forms.showIntro;
+        if (this.forms.showController) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       }
       else if (showForm.toLowerCase() === "toggleDataManager".toLowerCase()) {
         this.forms.showDataManager = !this.forms.showDataManager;
-        this.forms.showIntro = !this.forms.showIntro;
+        if (this.forms.showDataManager) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       }
       else if (showForm.toLowerCase() === "toggleAutomatedDecision".toLowerCase()) {
         this.forms.showAutomatedDecision = !this.forms.showAutomatedDecision;
@@ -41,7 +49,11 @@ export default {
       }
       else if (showForm.toLowerCase() === "toggleChangesOfPurpose".toLowerCase()) {
         this.forms.showPurpose = !this.forms.showPurpose;
-        this.forms.showIntro = !this.forms.showIntro;
+         if (this.forms.showPurpose) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       }       
       else if (showForm.toLowerCase() === "toggleRights".toLowerCase()) {
         this.forms.showRights = !this.forms.showRights;
@@ -53,13 +65,18 @@ export default {
       }
       else if (showForm.toLowerCase() === "toggleDataDisclosed".toLowerCase()) {
         this.forms.showDataDisclosed = !this.forms.showDataDisclosed;
-        this.forms.showIntro = !this.forms.showIntro;
+        if (this.forms.showDataDisclosed) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       }
       else if (showForm.toLowerCase() === "toggleShowHelp".toLowerCase()) {
         this.forms.showHelp = !this.forms.showHelp;
-        if(!this.forms.showMeta && this.forms.showHelp){
+        if(!this.forms.showMeta && !this.forms.showDataManager && !this.showDataDisclosed && !this.showPurpose && this.forms.showHelp){
             this.forms.showIntro = true;
-        }else{
+        }
+        else{
             this.forms.showIntro = false;
         }
       }else{

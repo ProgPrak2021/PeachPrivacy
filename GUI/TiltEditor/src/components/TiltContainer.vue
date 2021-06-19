@@ -13,14 +13,23 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataManager">
                        <tilt-protection-officer id="tild-protection-officer" />
                   </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showHelp && forms.showDataManager">
+                       <tilt-help  v-bind:help="helps.help_manager"/>
+                  </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataDisclosed">
                        <tilt-data-disclosed id="tilt-data-disclosed" />
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataDisclosed && forms.showHelp">
+                       <tilt-help  v-bind:help="helps.help_datadisclosed"/>
                   </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showAutomatedDecision">
                        <tilt-dutomated-decision-making id="tilt-dutomated-decision-making" />
                   </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showPurpose">
                        <tilt-changes-of-purpose id="tilt-changes-of-purpose" />
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showPurpose &&forms.showHelp">
+                       <tilt-help  v-bind:help="helps.help_purpose"/>
                   </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showSources">
                        <tilt-sources-items id="tilt-sources-items"  v-bind:psourceItem="sources" />
@@ -112,9 +121,26 @@ export default {
         },
         help_meta:{
             title : "Hilfe zu den Meta Daten",
-            data_1 : "Hier pflegen sie den Namen ihres Unternehmens und weitere allgemeingültige Daten wie das Datum der Erstellung und letzten Änderung. Die Version ihres Dokumentes. Zusätzlich definieren sie hier die Sprache ihres Dokumentes und den aktuellen Bearbeitungstatus. Der gepflegte Url hilft ihrem Kunden ihr Unternehmen zu finden.",
+            data_1 : "Hier pflegst du den Namen deines Unternehmens und weitere allgemeingültige Daten wie das Datum der Erstellung und letzten Änderung ein. Die Version ihres Dokumentes. Zusätzlich definierst du hier die Sprache deines Dokumentes und den aktuellen Bearbeitungstatus. Der gepflegte Url hilft deinen Kunden das Unternehmen zu finden.",
+            data_2 : "Für genaue Infos zu entsprechenden Feldern bewege die Maus über das entsprechende Feld.",
             countLines : 1,
         },
+        help_manager:{
+            title: "Hilfe zum Datenschutzbeauftragten",
+            data_1: "Hier pflegst du alle Daten bezüglich des Datenschutzbeauftragten ein. Das betrifft besonders Kontaktinformationen wie Telefonnummer und Emailadresse.",
+            data_2: "Für genaue Infos zu entsprechenden Feldern bewege die Maus über das entsprechende Feld."
+        },
+        help_datadisclosed:{
+            title: "Hilfe zum Data Disclosed",
+            data_1: "Hier pflegst du alle Daten bezüglich der über deinen Kunden gespeicherten Daten ein. Gebe auch die Zwecke der Verarbeitung sowie ob es sich über ein berechtigtes Interesse handelt an.",
+            data_2: "Füge mit + und - weitere Abschnitte hinzu.",
+            data_3: "Für genaue Infos zu entsprechenden Feldern bewege die Maus über das entsprechende Feld."
+        },
+        help_purpose:{
+            title: "Hilfe zu Zwecksänderungen",
+            data_1: "Hier pflegst du geplante Zwecksänderungen ein.",
+            data_2: "Für genaue Infos zu entsprechenden Feldern bewege die Maus über das entsprechende Feld."
+        }
     },
     meta: {
         _id: "f1424f86-ca0f-4f0c-9438-43cc00509931",
