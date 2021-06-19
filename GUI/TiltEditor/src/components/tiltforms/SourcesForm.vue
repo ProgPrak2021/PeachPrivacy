@@ -20,7 +20,7 @@ export default {
   data() {
     return {
         source: {
-            description: "This information could be retrieved from...1",
+            description: "Diese Informationen können abgerufen werden von...1",
             url: "https://blue1Company.org",
             publiclyAvailable: false
         }

@@ -21,7 +21,7 @@ export default {
            legitimateInterests: [
             {
               exists: false,
-              reasoning: "There is an legitimate interest based on ... and is not overwritten because ...."
+              reasoning: "Es besteht ein berechtigtes Interesse aufgrund von ... und wird nicht überschrieben, weil ...."
             }
         ],
     }

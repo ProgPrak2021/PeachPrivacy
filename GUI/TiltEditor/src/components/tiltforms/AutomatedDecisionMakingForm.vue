@@ -2,18 +2,18 @@
     <div class="tilt-block">
       <tr>
         <td>
-            <h3>Automated Decision Making:</h3>
+            <h3>Automatisierte Entscheidungsfindung:</h3>
         </td>
       </tr>  
       <b-form id="modal-controller" title="AutomatedDecisionMaking" >
-        <b-form-group id="ctrlinUse" label="In Use">
-            <b-form-checkbox v-model="automatedDecisionMaking.inUse" aria-required=""></b-form-checkbox>
+        <b-form-group id="ctrlinUse" label="In Benutzung">
+            <b-form-checkbox :placeholder="[[automatedDecisionMaking.inUse]]" aria-required=""></b-form-checkbox>
         </b-form-group>
-        <b-form-group id="ctrllogicInvolved" label="Logic Involved">
-            <b-form-input v-model="automatedDecisionMaking.logicInvolved" aria-required=""></b-form-input>
+        <b-form-group id="ctrllogicInvolved" label="Eingesetzte Logik">
+            <b-form-input :placeholder="[[automatedDecisionMaking.logicInvolved]]" aria-required=""></b-form-input>
         </b-form-group>
-        <b-form-group id="ctrlscopeAndIntendedEffects" label="Scope and Intended Effects">
-            <b-form-input v-model="automatedDecisionMaking.scopeAndIntendedEffects" aria-required=""></b-form-input>
+        <b-form-group id="ctrlscopeAndIntendedEffects" label="Umfang und beabsichtigte Wirkung">
+            <b-form-input :placeholder="[[automatedDecisionMaking.scopeAndIntendedEffects]]" aria-required=""></b-form-input>
         </b-form-group>
     </b-form>
     </div>
@@ -26,8 +26,8 @@ export default {
     return {
         automatedDecisionMaking: {
             inUse: true,
-            logicInvolved: "The personal data are processed as follows...",
-            scopeAndIntendedEffects: "From processing follows..."
+            logicInvolved: "Die personenbezogenen Daten werden wie folgt verarbeitet...",
+            scopeAndIntendedEffects: "Aus der Verarbeitung folgt..."
         }
     }
   }

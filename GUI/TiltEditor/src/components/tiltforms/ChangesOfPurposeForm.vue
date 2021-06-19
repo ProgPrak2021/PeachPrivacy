@@ -2,22 +2,22 @@
 <div class="tilt-block">
       <tr>
         <td>
-            <h3>Changes Of Purpose</h3>
+            <h3>Zwecksänderungen</h3>
         </td>
       </tr>  
       <b-form id="modal-meta" title="Meta" >
-        <b-form-group id="ctrtdescription" label="Description">
-            <b-form-input v-model="changesOfPurpose.description" aria-required=""></b-form-input>
+        <b-form-group id="ctrtdescription" label="Beschreibung">
+            <b-form-input :placeholder="[[changesOfPurpose.description]]" aria-required=""></b-form-input>
         </b-form-group>
-        <b-form-group id="ctrlaffectedDataCategories" label="AffectedDataCategories">
-            <b-form-tags input-id="tags-basic" v-model="changesOfPurpose.affectedDataCategories"></b-form-tags>
+        <b-form-group id="ctrlaffectedDataCategories" label="Betroffene Datenkategorien">
+            <b-form-tags input-id="tags-basic" :placeholder="[[changesOfPurpose.affectedDataCategories]]"></b-form-tags>
             <p class="mt-2">Data Categories: {{ changesOfPurpose.affectedDataCategories }}</p>
         </b-form-group>
-        <b-form-group id="ctrlplannedDateOfChange" label="Planned Date Of Change">
-            <b-form-input v-model="changesOfPurpose.plannedDateOfChange" aria-required=""></b-form-input>
+        <b-form-group id="ctrlplannedDateOfChange" label="Geplantes Datum der Veränderung">
+            <b-form-input :placeholder="[[changesOfPurpose.plannedDateOfChange]]" aria-required=""></b-form-input>
         </b-form-group>
-        <b-form-group id="ctrlurlOfNewVersion" label="Url of New Version">
-            <b-form-input v-model="changesOfPurpose.urlOfNewVersion" aria-required=""></b-form-input>
+        <b-form-group id="ctrlurlOfNewVersion" label="Url der neuen Version">
+            <b-form-input :placeholder="[[changesOfPurpose.urlOfNewVersion]]" aria-required=""></b-form-input>
         </b-form-group>
     </b-form>
   </div>
@@ -26,15 +26,15 @@
 <script>
 
 export default {
-  name: "changesOfPurpose",
+  name: "Zwecksänderungen",
   data() {
     return {
         changesOfPurpose: [
             {
-                description: "Due to technical requirements...",
+                description: "Aufgrund der technischen Anforderungen...",
                 affectedDataCategories: [
-                    "Email adress",
-                    "Credit score"
+                    "Emailadresse",
+                    "Kreditwürdigkeit"
                 ],
                 plannedDateOfChange: "2020-08-20",
                 urlOfNewVersion: "https://greencomp.de/privacypolicy/2"

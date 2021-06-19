@@ -21,7 +21,7 @@ export default {
            purposes: [
             {
               purpose: "Marketing",
-              description: "Newsletter will be sent out once a month."
+              description: "Der Newsletter wird einmal im Monat verschickt."
             }
         ],
     }
@@ -33,7 +33,7 @@ export default {
      addNewPurpose: function () {
           this.purposes.push( {
              purpose: "Marketing",
-            description: "Newsletter will be sent out once a month."
+            description: "Der Newsletter wird einmal im Monat verschickt."
         });
       },
        removePurpose: function () {

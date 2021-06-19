@@ -23,14 +23,14 @@
                 <b-nav-item-dropdown text="Building blocks" right>
                   <b-dropdown-item href="#" :active="forms.showMeta" @click="toggleForm('toggleMeta')">Meta</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showController" @click="toggleForm('toggleController')" >Controller</b-dropdown-item>
-                  <b-dropdown-item href="#" :active="forms.showDataManager" @click="toggleForm('toggleDataManager')">Data Protection Officer</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showDataManager" @click="toggleForm('toggleDataManager')">Datenschutzbeauftragter</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showDataDisclosed" @click="toggleForm('toggleDataDisclosed')">Data Disclosed</b-dropdown-item>
-                  <b-dropdown-item href="#">Adequacy decisions</b-dropdown-item>
-                  <b-dropdown-item href="#" :active="forms.showPurpose" @click="toggleForm('toggleChangesOfPurpose')">Changes of purpose</b-dropdown-item>
-                  <b-dropdown-item href="#">Access/Data portability</b-dropdown-item>
-                  <b-dropdown-item href="#" :active="forms.showRights" @click="toggleForm('toggleRights')">Rights</b-dropdown-item>
-                  <b-dropdown-item href="#" :active="forms.showAutomatedDecision" @click="toggleForm('toggleAutomatedDecision')" >Automated decision making</b-dropdown-item>
-                  <b-dropdown-item href="#">Notification on change</b-dropdown-item>
+                  <b-dropdown-item href="#">Angemessenheitsentscheidungen</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showPurpose" @click="toggleForm('toggleChangesOfPurpose')">Zwecksänderungen</b-dropdown-item>
+                  <b-dropdown-item href="#">Zugriffsmöglichkeit/Datenübertragbarkeit</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showRights" @click="toggleForm('toggleRights')">Rechte</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showAutomatedDecision" @click="toggleForm('toggleAutomatedDecision')" >Automatisierte Entscheidugsfindung</b-dropdown-item>
+                  <b-dropdown-item href="#">Benachrichtigung bei Änderung</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showSources" @click="toggleForm('toggleSources')" >Sources</b-dropdown-item>
                 </b-nav-item-dropdown>
                  <b-nav-item-dropdown text="Hilfe" right>
