@@ -119,6 +119,7 @@
                 this.loginV=true;
                 console.log("login called: Username = " + this.user.email+ " loginV = " + this.loginV)
                 this.$emit('set-user-data', this.user,this.loginV);
+
             },
             logout: function(){
                 //ToDo

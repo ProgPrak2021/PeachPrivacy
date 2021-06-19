@@ -2,7 +2,9 @@
   <div id="app">
     <nav-bar v-bind:forms="forms" @toggle-entry="toggleShowForms" @set-user-data="setUserData" />
     <tilt-formular id="tildForm" v-bind:forms="forms"/>
+
   </div>
+
 </template>
 
 <script>
@@ -11,7 +13,7 @@ import TiltFormular from './components/TiltContainer.vue'
 
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
     'nav-bar': NavigationBar,
     'tilt-formular': TiltFormular

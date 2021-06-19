@@ -10,8 +10,7 @@
                       trim aria-required></b-form-input>
       </b-form-group>
       <p>
-        <a href="#" v-b-modal="'modal-forgot-pw'">Passwort vergessen</a>
-        <forgotpassword></forgotpassword>
+        <b-link href="/verify" >Passwort vergessen</b-link>
       </p>
     </b-modal>
   </div>
@@ -20,12 +19,12 @@
 
 
 import axios from 'axios';
-import Forgotpassword from "./forgotpassword.vue"
+//import Forgotpassword from "./forgotpassword.vue"
 
 export default {
   name: "LoginModal",
   components: {
-    'forgotpassword':Forgotpassword,
+    //'forgotpassword':Forgotpassword,
   },
   data() {
     return {
@@ -47,9 +46,12 @@ export default {
           password: this.user.password
         }
       }).then(response => {
-        console.log(response.data);
-        this.$emit('login-success', this.user);
-        this.$alert('Wilkommen zurück','login-sucess',"success");
+        if(response.data.accessToken) {
+          localStorage.setItem('user', JSON.stringify(response.data));
+          console.log(response.data);
+          this.$emit('login-success', this.user);
+          this.$alert('Wilkommen zurück', 'login-sucess', "success");
+        }
 
       }).catch(function (error) {
         console.log(error);
@@ -62,7 +64,7 @@ export default {
     },
     HandleOk(bvModalEvt) {
       // Prevent modal from closing
-      if(this.user.email.length>=255||this.user.password.l>=255) {
+      if(this.user.email.length>=255||this.user.password.length>=255) {
         bvModalEvt.preventDefault();
         this.$alert('Passwort oder Email ist zu lang ','Fehler',"info");
         return;
