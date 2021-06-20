@@ -1,6 +1,7 @@
 package com.peachprivacy.tiltservice.project
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.servlet.HandlerMapping
@@ -13,13 +14,19 @@ import javax.servlet.http.HttpServletRequest
 class TemplateController @Autowired constructor(
     private val templateService: TemplateService
 ) {
+    @GetMapping("/{id}/resolve")
+    fun resolveById(@PathVariable id: UUID, @RequestBody values: Map<String, String>): ResponseEntity<String> {
+
+
+        return ResponseEntity.ok("")
+    }
+
     @GetMapping("/{id}")
     fun get(@PathVariable id: UUID): ResponseEntity<Template> {
         return templateService.get(id)?.let { template ->
             ResponseEntity.ok(template)
         } ?: ResponseEntity.notFound().build()
     }
-
     @PostMapping
     fun create(@RequestBody template: Template, httpRequest: HttpServletRequest): ResponseEntity<Template> {
         if (template.id != null) return ResponseEntity.badRequest().build()
@@ -31,7 +38,6 @@ class TemplateController @Autowired constructor(
             ResponseEntity.created(uri).build()
         }
     }
-
     @PutMapping("/{id}")
     fun update(@PathVariable id: UUID, @RequestBody template: Template): ResponseEntity<Template> {
         if (template.id != null && id != template.id) return ResponseEntity.badRequest().build()
@@ -41,7 +47,6 @@ class TemplateController @Autowired constructor(
             ResponseEntity.ok(it)
         }
     }
-
     @DeleteMapping("/{id}")
     fun deleteById(@PathVariable id: UUID): ResponseEntity<Template> {
         return if (templateService.get(id) == null) {

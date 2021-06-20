@@ -1,8 +1,12 @@
 package com.peachprivacy.tiltservice.project
 
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.MediaType
 import org.springframework.stereotype.Component
+import org.springframework.web.reactive.function.BodyInserter
+import org.springframework.web.reactive.function.BodyInserters
 import org.springframework.web.reactive.function.client.WebClient
+import org.springframework.web.reactive.function.client.WebClientResponseException
 import org.springframework.web.reactive.function.client.body
 import org.springframework.web.reactive.function.client.bodyToMono
 import reactor.core.publisher.Mono
@@ -15,9 +19,29 @@ open class SchemaRemoteTSRepository @Autowired constructor(
     val schemaMicroserviceWebClient = loadBalanceAwareWebClient.baseUrl("lb://templateservice").build()
 
     private fun webClientResult(requestSpec: WebClient.RequestHeadersSpec<*>) =
-        requestSpec.retrieve().bodyToMono<String>().block()
+        requestSpec.retrieve().bodyToMono<String>().onErrorResume(WebClientResponseException::class.java) { exception ->
+            if (exception.statusCode.value() == 404) Mono.empty() else Mono.error(exception)    // Handle in Bean filter?
+        }.block()
 
     private fun WebClient.RequestHeadersSpec<*>.retrieveString() = webClientResult(this)
+
+    override fun getMergedPaths(ids: Collection<UUID>): String? {
+        val schemas = ids.map { get(it) ?: return null /* TODO specify error message instead of just null */ }
+        return schemaMicroserviceWebClient.post().uri("/api/template/validation/resolve/merge/path")
+            .accept(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromValue(schemas))
+            .retrieveString()
+    }
+
+    override fun getMerged(ids: Collection<UUID>): String? {
+        val schemas = ids.map { get(it) ?: return null /* TODO specify error message instead of just null */ }
+        return schemaMicroserviceWebClient.post().uri("/api/template/validation/resolve/merge")
+            .accept(MediaType.APPLICATION_JSON)
+            .contentType(MediaType.APPLICATION_JSON)
+            .body(BodyInserters.fromValue(schemas))
+            .retrieveString()
+    }
 
     override fun get(id: UUID) =
         schemaMicroserviceWebClient.get().uri("/api/template/templates/data/$id").retrieveString()
