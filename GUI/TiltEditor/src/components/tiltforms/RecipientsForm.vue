@@ -29,7 +29,7 @@ export default {
                     email: "contact@yellowcompany.de",
                     phone: "0049 151 1234 9876"
                 },
-                category: "Marketing content provider"
+                category: "Anbieter von Marketing-Inhalten"
             },
           ],
     }
@@ -49,7 +49,7 @@ export default {
                     email: "contact@yellowcompany.de",
                     phone: "0049 151 1234 9876"
                 },
-                category: "Marketing content provider"
+                category: "Anbieter von Marketing-Inhalten"
         });
       },
        removeRecipient: function () {

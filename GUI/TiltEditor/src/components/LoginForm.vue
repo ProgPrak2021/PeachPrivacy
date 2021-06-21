@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <b-modal id="modal-login" title="Anmelden" hide-header-close @ok="HandleOk">
       <b-form-group id="ctrtEmail" label="E-Mail *">
         <b-form-input type="email" v-model="user.email" placeholder="Bitte Email eingeben." trim
@@ -10,6 +9,9 @@
         <b-form-input type="password" v-model="user.password" placeholder="Bitte Passwort eingeben."
                       trim aria-required></b-form-input>
       </b-form-group>
+      <p>
+        <b-link href="/verify" >Passwort vergessen</b-link>
+      </p>
     </b-modal>
   </div>
 </template>
@@ -17,9 +19,13 @@
 
 
 import axios from 'axios';
+//import Forgotpassword from "./forgotpassword.vue"
 
 export default {
   name: "LoginModal",
+  components: {
+    //'forgotpassword':Forgotpassword,
+  },
   data() {
     return {
       user: {
@@ -40,21 +46,25 @@ export default {
           password: this.user.password
         }
       }).then(response => {
-        console.log(response.data);
+        if(response.data.accessToken) {
+          localStorage.setItem('user', JSON.stringify(response.data));
+          console.log(response.data);
+          this.$emit('login-success', this.user);
+          this.$alert('Wilkommen zurück', 'login-sucess', "success");
+        }
+
       }).catch(function (error) {
         console.log(error);
         this.$alert('Passwort oder Email ist falsch ','Fehler',"error");
 
       })
-      this.$emit('login-success', this.user);
-      this.$alert('Wilkommen zurück','login-sucess',"success");
 
       console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
       return;
     },
     HandleOk(bvModalEvt) {
       // Prevent modal from closing
-      if(this.user.email.length>=255||this.user.password.l>=255) {
+      if(this.user.email.length>=255||this.user.password.length>=255) {
         bvModalEvt.preventDefault();
         this.$alert('Passwort oder Email ist zu lang ','Fehler',"info");
         return;

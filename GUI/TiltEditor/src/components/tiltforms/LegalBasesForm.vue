@@ -21,7 +21,7 @@ export default {
            legalBases: [
             {
               reference: "GDPR-99-1-a",
-              description: "The data are processed on the basis of Art. 99 GDPR which states..."
+              description: "Die Verarbeitung der Daten erfolgt auf der Grundlage von Art. 99 GDPR, der besagt..."
             }
         ],
     }
@@ -33,7 +33,7 @@ export default {
      addNewBasis: function () {
           this.legalBases.push( {
              reference: "GDPR-99-1-a",
-            description: "The data are processed on the basis of Art. 99 GDPR which states..."
+            description: "Die Verarbeitung der Daten erfolgt auf der Grundlage von Art. 99 GDPR, der besagt..."
         });
       },
        removeBasis: function () {

@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/LoginForm'
+import Reset from "@/components/Reset";
+import verify from "@/components/verify";
+//import NavigationBar from "@/components/NavigationBar";
+
 
 Vue.use(Router)
 
-export default new Router({
+export const routes =  new Router({
+    mode: 'history',
     routes: [
-        {
-            path: '/',
-            name: 'Login',
-            hidden: true,
-            component: Login
-        }
-        ]
-})
+        {path:'/', name: verify,component: verify},
+        {path:'/verify/:token',name : verify, component: verify },
+        {path:'/reset/:token',name : Reset, component: Reset }
+
+        ]});

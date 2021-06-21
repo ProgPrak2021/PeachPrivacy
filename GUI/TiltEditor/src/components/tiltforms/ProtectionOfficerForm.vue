@@ -2,7 +2,7 @@
     <div class="tilt-block">
         <tr>
             <td>
-                <h3>Protection Officer:</h3>
+                <h3>Datenschutzbeauftragter:</h3>
             </td>
         </tr>  
         <tilt-address v-bind:paddress="dataProtectionOfficer" />

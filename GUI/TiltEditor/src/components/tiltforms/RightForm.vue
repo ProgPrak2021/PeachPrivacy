@@ -4,7 +4,7 @@
             <div class="tilt-block">
                 <tr>
                     <td>
-                        <h3>Rights to Information:</h3>
+                        <h3>Recht auf Information:</h3>
                     </td>
                 </tr>  
                 <tilt-right-data v-bind:pRightData="rightToInformation" />
@@ -14,7 +14,7 @@
             <div class="tilt-block">
                 <tr>
                     <td>
-                        <h3>Rights to Rectification Or Deletion:</h3>
+                        <h3>Recht auf Berichtigung oder Löschung:</h3>
                     </td>
                 </tr>  
                 <tilt-right-data v-bind:pRightData="rightToRectificationOrDeletion" />
@@ -24,7 +24,7 @@
             <div class="tilt-block">
                 <tr>
                     <td>
-                        <h3>Rights to Data Portability:</h3>
+                        <h3>Recht auf Datenübertragbarkeit:</h3>
                     </td>
                 </tr>  
                 <tilt-right-data v-bind:pRightData="rightToDataPortability" />
@@ -34,7 +34,7 @@
             <div class="tilt-block">
                 <tr>
                     <td>
-                        <h3>Rights to Withdraw Consent:</h3>
+                        <h3>Recht zum Entzug der Zustimmung:</h3>
                     </td>
                 </tr>  
                 <tilt-right-data v-bind:pRightData="rightToWithdrawConsent" />
@@ -44,7 +44,7 @@
             <div class="tilt-block">
                 <tr>
                     <td>
-                        <h3>Rights to Complain:</h3>
+                        <h3> Recht zur Beschwerde:</h3>
                     </td>
                 </tr>  
                 <tilt-right-data v-bind:pRightData="rightToComplain" />
@@ -54,7 +54,7 @@
             <div class="tilt-block">
                 <tr>
                     <td>
-                        <h3>Rights to Complain: Supervisory Authority </h3>
+                        <h3>Recht zur Beschwerde: Aufsichtsbehörde </h3>
                     </td>
                 </tr>  
                 <tilt-address v-bind:paddress="rightToComplain.supervisoryAuthority" />

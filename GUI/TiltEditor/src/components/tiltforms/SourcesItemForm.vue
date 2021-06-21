@@ -38,7 +38,7 @@ export default {
   methods: {
      addNewSource: function () {
           this.sourceItem.sources.push( {
-            description: "This information could be retrieved from...3",
+            description: "Diese Informationen können abgerufen werden von...3",
             url: "https://blue3Company.org",
             publiclyAvailable: false
         });

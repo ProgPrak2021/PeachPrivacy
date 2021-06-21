@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <nav-bar v-bind:forms="forms" @toggle-entry="toggleShowForms"/>
+    <nav-bar v-bind:forms="forms" @toggle-entry="toggleShowForms" @set-user-data="setUserData" />
     <tilt-formular id="tildForm" v-bind:forms="forms"/>
+
   </div>
+
 </template>
 
 <script>
@@ -11,7 +13,7 @@ import TiltFormular from './components/TiltContainer.vue'
 
 
 export default {
-  name: 'App',
+  name: 'app',
   components: {
     'nav-bar': NavigationBar,
     'tilt-formular': TiltFormular
@@ -20,29 +22,77 @@ export default {
     toggleShowForms(showForm) {
       if (showForm.toLowerCase() === "toggleMeta".toLowerCase()) {
         this.forms.showMeta = !this.forms.showMeta;
+        if (this.forms.showMeta) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       } else if (showForm.toLowerCase() === "toggleController".toLowerCase()) {
         this.forms.showController = !this.forms.showController;
+        if (this.forms.showController) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       }
       else if (showForm.toLowerCase() === "toggleDataManager".toLowerCase()) {
         this.forms.showDataManager = !this.forms.showDataManager;
+        if (this.forms.showDataManager) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       }
       else if (showForm.toLowerCase() === "toggleAutomatedDecision".toLowerCase()) {
         this.forms.showAutomatedDecision = !this.forms.showAutomatedDecision;
+         this.forms.showIntro = !this.forms.showIntro;
       }
       else if (showForm.toLowerCase() === "toggleChangesOfPurpose".toLowerCase()) {
         this.forms.showPurpose = !this.forms.showPurpose;
+         if (this.forms.showPurpose) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       }       
       else if (showForm.toLowerCase() === "toggleRights".toLowerCase()) {
         this.forms.showRights = !this.forms.showRights;
+        this.forms.showIntro = !this.forms.showIntro;
       }
       else if (showForm.toLowerCase() === "toggleSources".toLowerCase()) {
         this.forms.showSources = !this.forms.showSources;
+        this.forms.showIntro = !this.forms.showIntro;
       }
       else if (showForm.toLowerCase() === "toggleDataDisclosed".toLowerCase()) {
         this.forms.showDataDisclosed = !this.forms.showDataDisclosed;
+        if (this.forms.showDataDisclosed) {
+          this.forms.showIntro = false;
+        }else if (this.forms.showHelp){
+          this.forms.showIntro = true;
+        }
       }
+      else if (showForm.toLowerCase() === "toggleShowHelp".toLowerCase()) {
+        this.forms.showHelp = !this.forms.showHelp;
+        if(!this.forms.showMeta && !this.forms.showDataManager && !this.showDataDisclosed && !this.showPurpose && this.forms.showHelp){
+            this.forms.showIntro = true;
+        }
+        else{
+            this.forms.showIntro = false;
+        }
+      }else{
+        // wenn nix zu sehen aber Hilfe aktiviert  
+        if (this.forms.showHelp){
+          this.forms.showIntro= true;
+        }
+      }
+     
 
     },
+    setUserData(user, bLogin) {
+      this.userData.user= user;
+      this.userData.bLogin= bLogin;
+       console.log("AppVue: Email = " + this.userData.user.email + " Passwort = " + this.userData.user.password);
+    }
   },
   data() {
     return {
@@ -55,9 +105,16 @@ export default {
         showRights: false,
         showSources: false,
         showDataDisclosed: false,
+        showIntro: true,
+        showHelp: true,
       },
-      filterString: "",
-      entrys: []
+      userData: {
+                user:{
+                  email: "",
+                  password: ""
+                },
+                bLogin:   false
+      },
     }
   }
 }

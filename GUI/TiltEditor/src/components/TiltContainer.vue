@@ -4,14 +4,23 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showMeta">
                        <tilt-meta id="tildMetaForm" v-bind:pmeta="meta" />
                   </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showHelp && forms.showMeta">
+                       <tilt-help  v-bind:help="helps.help_meta"/>
+                  </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showController" >
                        <tilt-controller id="tildController" />
                   </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataManager">
                        <tilt-protection-officer id="tild-protection-officer" />
                   </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showHelp && forms.showDataManager">
+                       <tilt-help  v-bind:help="helps.help_manager"/>
+                  </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataDisclosed">
                        <tilt-data-disclosed id="tilt-data-disclosed" />
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showDataDisclosed && forms.showHelp">
+                       <tilt-help  v-bind:help="helps.help_datadisclosed"/>
                   </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showAutomatedDecision">
                        <tilt-dutomated-decision-making id="tilt-dutomated-decision-making" />
@@ -19,8 +28,20 @@
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showPurpose">
                        <tilt-changes-of-purpose id="tilt-changes-of-purpose" />
                   </div>
+                  <div class="col-12 col-md-6 col-lg-4" v-if="forms.showPurpose &&forms.showHelp">
+                       <tilt-help  v-bind:help="helps.help_purpose"/>
+                  </div>
                   <div class="col-12 col-md-6 col-lg-4" v-if="forms.showSources">
                        <tilt-sources-items id="tilt-sources-items"  v-bind:psourceItem="sources" />
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
+                       <tilt-help  v-bind:help="helps.help_new_user"/>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
+                       <tilt-help  v-bind:help="helps.help_new_here"/>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-4"  v-if="forms.showIntro">
+                       <tilt-help  v-bind:help="helps.help_exist_user_here"/>
                   </div>
                   <div v-if="forms.showRights">
                        <tilt-rights id="tildRightsForm" 
@@ -43,6 +64,7 @@ import AutomatedDecisionMakingForm from './tiltforms/AutomatedDecisionMakingForm
 import RightForm from './tiltforms/RightForm'
 import SourcesItemsForm from './tiltforms/SourcesItemsForm'
 import DataDisclosedItemsForm from './tiltforms/DataDisclosedItemsForm'
+import HelpForm from './tiltforms/HelpForm'
 
 export default {
   name: 'TiltFormular',
@@ -55,7 +77,7 @@ export default {
     'tilt-rights': RightForm,
     'tilt-sources-items': SourcesItemsForm,
     'tilt-data-disclosed': DataDisclosedItemsForm,
-
+    'tilt-help': HelpForm,
   },
   props: {
     msg: String,
@@ -67,11 +89,59 @@ export default {
         showAutomatedDecision: Boolean,
         showPurpose: Boolean,
         showRights: Boolean,
-        showSources: Boolean
+        showSources: Boolean,
+        showIntro: Boolean,
+        showHelp: Boolean,
     }
   },
   data() {
     return {
+    helps:{
+        help_new_user:{
+            title : "Noch nicht registriert?",
+            data_1 : "Registriere dich unter Benutzer->Registrieren, um die Funktionalitäten unseres Services nutzen zu können.",
+            countLines : 1,
+        },
+        help_new_here:{
+            title : "Brauchst du Hilfe?",
+            data_1 : "Zum ersten Mal hier?",
+            data_2 : "Peach Privacy bietet dir die Möglichkeiten, die du brauchst, um deinen Kunden mitzuteilen, welche Daten du über sie speicherst. Und das alles DSGVO-konform!",
+            countLines : 2,
+        },
+        help_exist_user_here:{
+            title : "Hast du bereits ein Konto?",
+            data_1 : "Melde dich unter Benutzer->Anmelden an, um an deinen Projekten weiterarbeiten zu können.",
+            countLines : 1,
+        },
+        help_after_login:{
+            title : "Super, du hast dich erfolgreich angemeldet!",
+            data_1 : "Du kannst jetzt an deinen laufenden Projekten unter Template verwalten -> Template öffnen weiterarbeiten.",
+            data_2 : "Oder starte ein neues Projekt und wähle unter Bestandteile ein Formular aus, mit dem du starten willst.",
+            countLines : 1,
+        },
+        help_meta:{
+            title : "Hilfe zu den Meta Daten",
+            data_1 : "Hier pflegst du den Namen deines Unternehmens und weitere allgemeingültige Daten wie das Datum der Erstellung und letzten Änderung ein. Die Version ihres Dokumentes. Zusätzlich definierst du hier die Sprache deines Dokumentes und den aktuellen Bearbeitungstatus. Der gepflegte Url hilft deinen Kunden das Unternehmen zu finden.",
+            data_2 : "Für genaue Infos zu entsprechenden Feldern bewege die Maus über das entsprechende Feld.",
+            countLines : 1,
+        },
+        help_manager:{
+            title: "Hilfe zum Datenschutzbeauftragten",
+            data_1: "Hier pflegst du alle Daten bezüglich des Datenschutzbeauftragten ein. Das betrifft besonders Kontaktinformationen wie Telefonnummer und Emailadresse.",
+            data_2: "Für genaue Infos zu entsprechenden Feldern bewege die Maus über das entsprechende Feld."
+        },
+        help_datadisclosed:{
+            title: "Hilfe zum Data Disclosed",
+            data_1: "Hier pflegst du alle Daten bezüglich der über deinen Kunden gespeicherten Daten ein. Gebe auch die Zwecke der Verarbeitung sowie ob es sich über ein berechtigtes Interesse handelt an.",
+            data_2: "Füge mit + und - weitere Abschnitte hinzu.",
+            data_3: "Für genaue Infos zu entsprechenden Feldern bewege die Maus über das entsprechende Feld."
+        },
+        help_purpose:{
+            title: "Hilfe zu Zwecksänderungen",
+            data_1: "Hier pflegst du geplante Zwecksänderungen ein.",
+            data_2: "Für genaue Infos zu entsprechenden Feldern bewege die Maus über das entsprechende Feld."
+        }
+    },
     meta: {
         _id: "f1424f86-ca0f-4f0c-9438-43cc00509931",
         name: "Green Company",
@@ -296,6 +366,11 @@ export default {
         urlOfNewVersion: "https://greencomp.de/privacypolicy/2"
         }
     ]
+    }
+  },
+  computed: {
+    showMetaAndHelp() {
+      return this.showMeta;
     }
   }
 }

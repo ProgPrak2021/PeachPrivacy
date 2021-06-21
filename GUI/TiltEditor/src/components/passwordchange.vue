@@ -58,6 +58,7 @@ export default {
   },
 
     methods: {
+
       HandleOk(bvModalEvt) {
         if(this.old_password.length ===0){
           bvModalEvt.preventDefault();
