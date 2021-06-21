@@ -29,7 +29,7 @@
                   <b-dropdown-item href="#" :active="forms.showPurpose" @click="toggleForm('toggleChangesOfPurpose')">Zwecksänderungen</b-dropdown-item>
                   <b-dropdown-item href="#">Zugriffsmöglichkeit/Datenübertragbarkeit</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showRights" @click="toggleForm('toggleRights')">Rechte</b-dropdown-item>
-                  <b-dropdown-item href="#" :active="forms.showAutomatedDecision" @click="toggleForm('toggleAutomatedDecision')" >Automatisierte Entscheidugsfindung</b-dropdown-item>
+                  <b-dropdown-item href="#" :active="forms.showAutomatedDecision" @click="toggleForm('toggleAutomatedDecision')" >Automatisierte Entscheidungsfindung</b-dropdown-item>
                   <b-dropdown-item href="#">Benachrichtigung bei Änderung</b-dropdown-item>
                   <b-dropdown-item href="#" :active="forms.showSources" @click="toggleForm('toggleSources')" >Sources</b-dropdown-item>
                 </b-nav-item-dropdown>
