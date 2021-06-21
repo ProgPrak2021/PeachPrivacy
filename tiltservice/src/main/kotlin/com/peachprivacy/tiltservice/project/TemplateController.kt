@@ -1,5 +1,6 @@
 package com.peachprivacy.tiltservice.project
 
+import io.swagger.annotations.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -13,6 +14,20 @@ import javax.servlet.http.HttpServletRequest
 class TemplateController @Autowired constructor(
     private val templateService: TemplateService
 ) {
+    @ApiOperation("Access Template information using the uuid")
+    @ApiImplicitParams(
+        ApiImplicitParam(name = "id", value = "The uuid of the template to show information for"),
+    )
+    @ApiResponses(
+        ApiResponse(
+            code = 200,
+            message = "The template object as JSON",
+        ),
+        ApiResponse(
+            code = 404,
+            message = "If no Template with this ID was found"
+        )
+    )
     @GetMapping("/{id}")
     fun get(@PathVariable id: UUID): ResponseEntity<Template> {
         return templateService.get(id)?.let { template ->

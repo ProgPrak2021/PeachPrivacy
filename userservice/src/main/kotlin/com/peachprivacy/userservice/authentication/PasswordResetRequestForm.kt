@@ -5,5 +5,5 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
 
 data class PasswordResetRequestForm(
-    @Email @NotBlank @Size(max = 255) var email: String
+    @field:Email @field:NotBlank @field:Size(max = 255) var email: String
 )

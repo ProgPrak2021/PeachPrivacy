@@ -9,7 +9,7 @@ plugins {
 }
 
 group = "com.peachprivacy"
-version = "1.0.6"
+version = "1.0.7"
 
 repositories {
     mavenCentral()
@@ -34,6 +34,10 @@ dependencies {
 
     // implementation("cloud.implementation.tilt:tilt:0.0.1")
     implementation("com.github.Transparency-Information-Language:java-tilt:3ce9d30")
+
+    implementation("io.springfox:springfox-boot-starter:3.0.0")
+    implementation("io.springfox:springfox-swagger2:3.0.0")
+    implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

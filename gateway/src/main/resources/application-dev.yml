@@ -10,24 +10,18 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: userServicePublic
-          uri: lb://userservice
-          predicates:
-            - Path=/api/auth/**
-        - id: userServicePrivate
-          uri: lb://userservice
-          predicates:
-            - Path=/api/account/**
-          filters:
-            - name: AuthenticationFilterFactory
-        - id: tiltServicePublic
-          uri: lb://tiltservice
-          predicates:
-            - Path=/api/tilt/**
-        - id: frontendPublic
-          uri: "http://localhost:8081"
-          predicates:
-            - Path=/**
+      - id: userService
+        uri: lb://userservice
+        predicates:
+        - Path=/api/auth/**,/api/account/**
+      - id: tiltService
+        uri: lb://tiltservice
+        predicates:
+        - Path=/api/tilt/**
+      - id: frontendPublic
+        uri: "http://localhost:8081"
+        predicates:
+        - Path=/**
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
