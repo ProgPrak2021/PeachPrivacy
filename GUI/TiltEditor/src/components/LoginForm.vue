@@ -10,7 +10,8 @@
                       trim aria-required></b-form-input>
       </b-form-group>
       <p>
-        <b-link href="/verify" >Passwort vergessen</b-link>
+        <a href="#"  v-b-modal="'modal-forgot-pw'">Passwort vergessen</a>
+        <forgotpassword></forgotpassword>
       </p>
     </b-modal>
   </div>
@@ -19,12 +20,12 @@
 
 
 import axios from 'axios';
-//import Forgotpassword from "./forgotpassword.vue"
+import Forgotpassword from "./forgotpassword.vue"
 
 export default {
   name: "LoginModal",
   components: {
-    //'forgotpassword':Forgotpassword,
+    'forgotpassword':Forgotpassword,
   },
   data() {
     return {
