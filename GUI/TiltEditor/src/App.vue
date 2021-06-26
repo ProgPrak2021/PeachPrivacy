@@ -73,7 +73,7 @@ export default {
       }
       else if (showForm.toLowerCase() === "toggleShowHelp".toLowerCase()) {
         this.forms.showHelp = !this.forms.showHelp;
-        if(!this.forms.showMeta && !this.forms.showDataManager && !this.showDataDisclosed && !this.showPurpose && this.forms.showHelp){
+        if((!this.forms.showMeta || !this.forms.showDataManager || !this.showDataDisclosed || !this.showPurpose) && this.forms.showHelp){
             this.forms.showIntro = true;
         }
         else{
