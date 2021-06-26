@@ -2,8 +2,13 @@
     <div >
         <b-form class="bform">
             <b-form-group label="Vorhanden?"  >
-                <b-form-input v-b-tooltip.hover :title="legitimateInterestInf.exists" :placeholder="[[exists]]"></b-form-input>
-            </b-form-group> 
+              <b-form-select  v-model="pexists" :options="options"
+                              class="mb-3" v-b-tooltip.hover :title="legitimateInterestInf.exists" size="lg">
+                <template #first>
+                  <b-form-select-option value="" disabled>-- Please select an option --</b-form-select-option>
+                </template>
+              </b-form-select>
+            </b-form-group>
             <b-form-group label="Grund">
                 <b-form-input v-b-tooltip.hover :title="legitimateInterestInf.reasoning" :placeholder="[[reasoning]]" aria-required=""></b-form-input>
             </b-form-group>
@@ -16,6 +21,10 @@ export default {
     name: "LegitimateInterest",
     data() {
     return {
+      options: [
+        { value: 'true',text: 'true',},
+        {value: 'false',text: 'false' },
+      ],
         exists: this.pexists,
         reasoning: this.preasoning,
         legitimateInterestInf: {
