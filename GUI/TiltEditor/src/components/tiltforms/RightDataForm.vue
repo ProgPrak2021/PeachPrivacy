@@ -2,7 +2,12 @@
     <div>
         <b-form >
             <b-form-group label="Verfügbarkeit" >
-                <b-form-input v-b-tooltip.hover :title="rightDataInf.available" :placeholder="[[rightData.available]]"></b-form-input>
+              <b-form-select  v-model="pRightData.available" :options="options"
+                              class="mb-3" v-b-tooltip.hover :title="rightDataInf.available" size="lg">
+                <template #first>
+                  <b-form-select-option value="" disabled>-- Please select an option --</b-form-select-option>
+                </template>
+              </b-form-select>
             </b-form-group> 
             <b-form-group label="Beschreibung">
                 <b-form-input v-b-tooltip.hover :title="rightDataInf.description" :placeholder="[[rightData.description]]" aria-required=""></b-form-input>
@@ -26,6 +31,10 @@ export default {
   name: "RightData",
   data() {
     return {
+      options: [
+        { value: 'true',text: 'true',},
+        {value: 'false',text: 'false' },
+      ],
         rightData: {
             available: this.pRightData.available,
             description: this.pRightData.description,

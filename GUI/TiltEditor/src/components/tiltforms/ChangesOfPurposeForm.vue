@@ -4,7 +4,7 @@
         <td>
             <h3>Zwecksänderungen</h3>
         </td>
-      </tr>  
+      </tr>
       <b-form id="modal-meta" title="Meta" >
         <b-form-group id="ctrtdescription" label="Beschreibung">
             <b-form-input :placeholder="[[changesOfPurpose.description]]" aria-required=""></b-form-input>
@@ -14,7 +14,8 @@
             <p class="mt-2">Data Categories: {{ changesOfPurpose.affectedDataCategories }}</p>
         </b-form-group>
         <b-form-group id="ctrlplannedDateOfChange" label="Geplantes Datum der Veränderung">
-            <b-form-input :placeholder="[[changesOfPurpose.plannedDateOfChange]]" aria-required=""></b-form-input>
+          <b-form-datepicker id="example-datepicker" v-model="changesOfPurpose.plannedDateOfChange" class="mb-2"></b-form-datepicker>
+          <p>Value: "{{changesOfPurpose.plannedDateOfChange  }}"</p>
         </b-form-group>
         <b-form-group id="ctrlurlOfNewVersion" label="Url der neuen Version">
             <b-form-input :placeholder="[[changesOfPurpose.urlOfNewVersion]]" aria-required=""></b-form-input>

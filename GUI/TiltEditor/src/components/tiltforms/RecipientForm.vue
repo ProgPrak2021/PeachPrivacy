@@ -14,13 +14,13 @@
                 <b-form-input v-b-tooltip.hover :title="recipientInf.country" :placeholder="[[recipient.country]]" aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group label="Repräsentant Name">
-                <b-form-input v-b-tooltip.hover :title="recipientInf.representativeName" :placeholder="[[precipient.representative.name]]" aria-required=""></b-form-input>
+                <b-form-input v-b-tooltip.hover :title="recipientInf.representative.name" :placeholder="[[precipient.representative.name]]" aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group label="Repräsentant EMail">
-                <b-form-input v-b-tooltip.hover :title="recipientInf.representativeEmail" :placeholder="[[precipient.representative.email]]" aria-required=""></b-form-input>
+                <b-form-input v-b-tooltip.hover :title="recipientInf.representative.email" :placeholder="[[precipient.representative.email]]" aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group label="Repräsentant Telefon">
-                <b-form-input v-b-tooltip.hover :title="recipientInf.representativePhone" :placeholder="[[precipient.representative.phone]]" aria-required=""></b-form-input>
+                <b-form-input v-b-tooltip.hover :title="recipientInf.representative.phone" :placeholder="[[precipient.representative.phone]]" aria-required=""></b-form-input>
             </b-form-group>
         </b-form>
     </div>
