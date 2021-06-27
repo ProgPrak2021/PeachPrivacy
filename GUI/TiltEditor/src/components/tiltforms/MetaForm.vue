@@ -25,12 +25,17 @@
             <b-form-input v-b-tooltip.hover :title="metaInf.language" :placeholder="[[meta.language]]" aria-required=""></b-form-input>
         </b-form-group>
         <b-form-group id="ctrlstatus" label="Status">
-            <b-form-input v-b-tooltip.hover :title="metaInf.status" v-model="meta.status" aria-required=""></b-form-input>
+          <b-form-select  v-model="meta.status" :options="options"
+           class="mb-3" v-b-tooltip.hover :title="metaInf.status" size="lg">
+            <template #first>
+              <b-form-select-option value="" disabled>-- Please select an option --</b-form-select-option>
+            </template>
+          </b-form-select>
         </b-form-group>
         <b-form-group id="ctrlurl" label="Url">
             <b-form-input v-b-tooltip.hover :title="metaInf.url" v-model="meta.url"  aria-required=""></b-form-input>
         </b-form-group>
-         <b-form-group id="ctrl_hash" label="Hash">
+         <b-form-group id="ctrl_hash" label="Hash">b-form-input v-b-tooltip.hover :title="metaInf._hash"
             <b-form-input v-b-tooltip.hover :title="metaInf._hash" v-model="meta._hash"  aria-required=""></b-form-input>
         </b-form-group>
     </b-form>
@@ -42,6 +47,10 @@ export default {
   name: "tilt_meta",
   data() {
     return {
+      options: [
+        { value: 'active',text: 'active',},
+        {value: 'inactive',text: 'inactive' },
+      ],
          meta: {
                 _id: this.pmeta._id,
                 name: this.pmeta.name,

@@ -1,7 +1,7 @@
 <template>
     <div  class="tilt-block" >
             <b-form-group label="Datenkategorie">
-                <b-form-input v-model="sourceItem.dataCategory" aria-required=""></b-form-input>
+                <b-form-input v-b-tooltip.hover :title="kateg" v-model="sourceItem.dataCategory" aria-required=""></b-form-input>
             </b-form-group>
             <b-form-group v-for="entry in sourceItem.sources" v-bind:key="entry.url">
                <tilt-sources v-bind:entry="psource"></tilt-sources> 
@@ -21,6 +21,7 @@ export default {
   },
   data() {
     return {
+      kateg :"Die Kategorie, auf die sich die Daten beziehen",
          sourceItem: {
              _id: this.psourceItem._id,
             dataCategory: this.psourceItem.dataCategory,
