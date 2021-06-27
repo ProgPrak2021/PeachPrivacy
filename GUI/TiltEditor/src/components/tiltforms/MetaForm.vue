@@ -35,7 +35,7 @@
         <b-form-group id="ctrlurl" label="Url">
             <b-form-input v-b-tooltip.hover :title="metaInf.url" v-model="meta.url"  aria-required=""></b-form-input>
         </b-form-group>
-         <b-form-group id="ctrl_hash" label="Hash">
+         <b-form-group id="ctrl_hash" label="Hash">b-form-input v-b-tooltip.hover :title="metaInf._hash"
             <b-form-input v-b-tooltip.hover :title="metaInf._hash" v-model="meta._hash"  aria-required=""></b-form-input>
         </b-form-group>
     </b-form>
