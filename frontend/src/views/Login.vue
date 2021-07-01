@@ -6,7 +6,7 @@
           <div
             class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto"
           >
-            <login-card header-color="green">
+            <login-card header-color="red">
               <h4 slot="title" class="card-title">Login</h4>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
@@ -16,12 +16,19 @@
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
                 <label>Password...</label>
-                <md-input v-model="password"></md-input>
+                <md-input v-model="password" type="password"></md-input>
               </md-field>
-              <md-button slot="footer" class="md-simple md-success md-lg">
-                Get Started
+              <md-button v-on:click="HandleOk" slot="footer" class="md-danger"  >
+                Login
               </md-button>
+              <a v-on:click="forgotpassword"  slot="inputs">
+                Password vergessen
+              </a>
+
+
+
             </login-card>
+
           </div>
         </div>
       </div>
@@ -31,6 +38,7 @@
 
 <script>
 import { LoginCard } from "@/components";
+import axios from 'axios';
 
 export default {
   components: {
@@ -39,9 +47,8 @@ export default {
   bodyClass: "login-page",
   data() {
     return {
-      firstname: null,
-      email: null,
-      password: null
+      email: "",
+      password: ""
     };
   },
   props: {
@@ -56,7 +63,50 @@ export default {
         backgroundImage: `url(${this.header})`
       };
     }
-  }
+  },
+  methods: {
+    forgotpassword(){
+      this.$router.push('profile');
+    },
+    login() {
+      //Login Aufruf für an den Server
+      console.log("Email = " + this.user.email + " Passwort = " + this.user.password);
+      axios.post('/api/auth/login', null, {
+        params: {
+          email: this.email,
+          password: this.password
+        }
+      }).then(response => {
+        if(response.data.accessToken) {
+          localStorage.setItem('user', JSON.stringify(response.data));
+          console.log(response.data);
+          this.$router.push('profile');
+          this.$alert('Wilkommen zurück', 'login-sucess', "success");
+        }
+      }).catch(function (error) {
+        console.log(error);
+        this.$alert('Passwort oder Email ist falsch ','Fehler',"error");
+      })
+      return;
+    },
+    HandleOk() {
+      // Prevent modal from closing
+      if(this.email.length>=255||this.password.length>=255) {
+        this.$alert('Passwort oder Email ist zu lang ','Fehler',"info");
+        return;
+      }
+      if(this.password.length===0 ||this.email.length===0) {
+        this.$alert('Gib deine Email oder dein Passwort an',"Kein Passwort oder Keine Email", "info");
+        return;
+      }
+      if(!(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(this.email))){
+        this.$alert('Die Email ist nicht valide','Fehler','error');
+        return;
+      }
+      // Trigger submit handler
+       this.login();
+    },
+  },
 };
 </script>
 

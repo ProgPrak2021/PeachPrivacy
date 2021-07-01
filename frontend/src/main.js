@@ -15,11 +15,11 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-
+import VueSimpleAlert from "vue-simple-alert";
 import MaterialKit from "./plugins/material-kit";
 
 Vue.config.productionTip = false;
-
+Vue.use(VueSimpleAlert);
 Vue.use(MaterialKit);
 
 const NavbarStore = {
