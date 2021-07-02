@@ -4,10 +4,10 @@
       <div class="container">
         <div class="md-layout">
           <div
-            class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto"
+              class="md-layout-item md-size-50 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto"
           >
             <login-card header-color="red">
-              <h4 slot="title" class="card-title">Login</h4>
+              <h2 slot="title" class="card-title">Sie haben sich erfolreich registriert</h2>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>Email...</label>
@@ -21,11 +21,6 @@
               <md-button v-on:click="HandleOk" slot="footer" class="md-danger"  >
                 Login
               </md-button>
-              <a v-on:click="forgotpassword"  slot="inputs">
-                Password vergessen
-              </a>
-
-
 
             </login-card>
 
@@ -104,7 +99,7 @@ export default {
         return;
       }
       // Trigger submit handler
-       this.login();
+      this.login();
     },
   },
 };

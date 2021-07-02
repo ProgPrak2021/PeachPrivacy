@@ -7,6 +7,9 @@ import Profile from "./views/Profile.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
 import register from "./views/Register.vue"
+import reset from "@/views/reset";
+import forgot from "@/views/forgotpassword";
+import verify from "@/views/verify";
 Vue.use(Router);
 
 export default new Router({
@@ -54,6 +57,22 @@ export default new Router({
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
       }
+    },
+    {
+      path: "/forgot",
+      name: "forgot",
+      components: { default: forgot},
+
+    },
+    {
+      path: "/reset/:token",
+      name: "reset",
+      components: { default: reset},
+
+    },{
+      path:"/verify/:token",
+      name:"verify",
+      components: { default: verify},
     }
   ],
   scrollBehavior: to => {
