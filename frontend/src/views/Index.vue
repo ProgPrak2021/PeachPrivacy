@@ -12,31 +12,41 @@
         </div>
       </div>
     </parallax>
+     <div class="section section-tabs">
+        <div class="container">
+          <tabs></tabs>
+        </div>
+      </div>
   </div>
 </template>
 
 <script>
-import BasicElements from "./components/BasicElementsSection";
+/*import BasicElements from "./components/BasicElementsSection";
 import Navigation from "./components/NavigationSection";
 import SmallNavigation from "./components/SmallNavigationSection";
+*/
 import Tabs from "./components/TabsSection";
-import NavPills from "./components/NavPillsSection";
-import Notifications from "./components/NotificationsSection";
-import TypographyImages from "./components/TypographyImagesSection";
-import JavascriptComponents from "./components/JavascriptComponentsSection";
-import { LoginCard } from "@/components";
+
+//import NavPills from "./components/NavPillsSection";
+//import Notifications from "./components/NotificationsSection";
+//import TypographyImages from "./components/TypographyImagesSection";
+//import JavascriptComponents from "./components/JavascriptComponentsSection";
+//import { LoginCard } from "@/components";
 
 export default {
   components: {
-    BasicElements,
+    /*BasicElements,
     Navigation,
     SmallNavigation,
-    Tabs,
+  */
+    Tabs
+    /*
     NavPills,
     Notifications,
     TypographyImages,
     JavascriptComponents,
     LoginCard
+    */
   },
   name: "index",
   bodyClass: "index-page",

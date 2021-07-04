@@ -1,90 +1,35 @@
 <template>
   <div class="wrapper">
     <div id="nav-tabs">
-      <h3>Navigation Tabs</h3>
-      <div class="md-layout">
-        <div class="md-layout-item md-size-50 md-small-size-100">
-          <h3><small>Tabs with Icons on Card</small></h3>
-          <nav-tabs-card no-label>
-            <template slot="content">
-              <md-tabs class="md-primary" md-alignment="left">
-                <md-tab id="tab-home" md-label="Profile" md-icon="face">
-                  <p>
-                    I will be the leader of a company that ends up being worth
-                    billions of dollars, because I got the answers. I understand
-                    culture. I am the nucleus. I think that’s a responsibility
-                    that I have, to push possibilities, to show people, this is
-                    the level that things could be at. I think that’s a
-                    responsibility that I have, to push possibilities, to show
-                    people, this is the level that things could be at.
-                  </p>
-                </md-tab>
-
-                <md-tab id="tab-pages" md-label="Messages" md-icon="chat">
-                  <p>
-                    I think that’s a responsibility that I have, to push
-                    possibilities, to show people, this is the level that things
-                    could be at. I will be the leader of a company that ends up
-                    being worth billions of dollars, because I got the answers.
-                    I understand culture. I am the nucleus. I think that’s a
-                    responsibility that I have, to push possibilities, to show
-                    people, this is the level that things could be at.
-                  </p>
-                </md-tab>
-
-                <md-tab id="tab-posts" md-label="Settings" md-icon="build">
-                  <p>
-                    I think that’s a responsibility that I have, to push
-                    possibilities, to show people, this is the level that things
-                    could be at. So when you get something that has the name
-                    Kanye West on it, it’s supposed to be pushing the furthest
-                    possibilities. I will be the leader of a company that ends
-                    up being worth billions of dollars, because I got the
-                    answers. I understand culture. I am the nucleus.
-                  </p>
-                </md-tab>
-              </md-tabs>
-            </template>
-          </nav-tabs-card>
-        </div>
-        <div class="md-layout-item md-size-50 md-small-size-100">
-          <h3><small>Tabs on Plain Card</small></h3>
+        <div class="md-layout-item md-size-100 md-small-size-100">
+          <h3><small>Das Produkt Peach Privacy</small></h3>
           <nav-tabs-card no-label tabs-plain>
             <template slot="content">
-              <md-tabs class="md-danger" md-alignment="left">
-                <md-tab id="tab-home" md-label="Home">
+              <md-tabs class="md-primary" md-alignment="left">
+                <md-tab id="tab-home" md-label="Was ist Peach Privacy?">
                   <p>
-                    I think that’s a responsibility that I have, to push
-                    possibilities, to show people, this is the level that things
-                    could be at. So when you get something that has the name
-                    Kanye West on it, it’s supposed to be pushing the furthest
-                    possibilities. I will be the leader of a company that ends
-                    up being worth billions of dollars, because I got the
-                    answers. I understand culture. I am the nucleus.
+                   Peach Privacy bietet dir die Möglichkeiten, die du brauchst, um deinen Kunden mitzuteilen, welche Daten du über sie speicherst. Und das alles DSGVO-konform!
                   </p>
                 </md-tab>
 
-                <md-tab id="tab-pages" md-label="Updates">
+                <md-tab id="tab-pages" md-label="Mehr zum Produkt">
                   <p>
-                    I will be the leader of a company that ends up being worth
-                    billions of dollars, because I got the answers. I understand
-                    culture. I am the nucleus. I think that’s a responsibility
-                    that I have, to push possibilities, to show people, this is
-                    the level that things could be at. I think that’s a
-                    responsibility that I have, to push possibilities, to show
-                    people, this is the level that things could be at.
+                    Auf unserer Seite kannst du step by step Projekte erstellen, um mit Vorlagen deine eigene Datenschutzseite zu modellieren. 
+                    Diese Vorlagen können in einem objektorientierten Stil von (vordefinierten) Vorlagen erben und von dir selbst erstellt werden. 
+                    Jede Vorlage kann abstrakte Felder/Werte definieren, die in der Konfiguration befüllt werden sollen. 
+                    Mit diesen Vorlagen kannst du Tiltdokumente erzeugen, die über eine öffentliche URL verfügbar sind.
                   </p>
                 </md-tab>
 
-                <md-tab id="tab-posts" md-label="History">
+                <md-tab id="tab-posts" md-label="Unsere Services">
                   <p>
-                    I think that’s a responsibility that I have, to push
-                    possibilities, to show people, this is the level that things
-                    could be at. I will be the leader of a company that ends up
-                    being worth billions of dollars, because I got the answers.
-                    I understand culture. I am the nucleus. I think that’s a
-                    responsibility that I have, to push possibilities, to show
-                    people, this is the level that things could be at.
+                      Template-Service zum Speichern/Lesen der Templates aus der MongoDB und zum Rendern der entsprechenden Anfragen.
+                  </p>
+                  <p>
+                      User-Service, um benutzerbezogene Aktionen auszuführen
+                  </p>
+                  <p>
+                      Tilt-Service zum Speichern der Metadaten der Templates in PostgreSQL und zum Bereitstellen der öffentlichen Endpoints für die generierten Tilt-Dokumente
                   </p>
                 </md-tab>
               </md-tabs>
@@ -93,7 +38,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
