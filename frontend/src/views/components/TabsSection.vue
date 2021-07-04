@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div id="nav-tabs">
         <div class="md-layout-item md-size-100 md-small-size-100">
-          <h3><small>Das Produkt Peach Privacy</small></h3>
+          <h3><small class="text-primary">Das Produkt Peach Privacy</small></h3>
           <nav-tabs-card no-label tabs-plain>
             <template slot="content">
               <md-tabs class="md-primary" md-alignment="left">
@@ -11,7 +11,6 @@
                    Peach Privacy bietet dir die Möglichkeiten, die du brauchst, um deinen Kunden mitzuteilen, welche Daten du über sie speicherst. Und das alles DSGVO-konform!
                   </p>
                 </md-tab>
-
                 <md-tab id="tab-pages" md-label="Mehr zum Produkt">
                   <p>
                     Auf unserer Seite kannst du step by step Projekte erstellen, um mit Vorlagen deine eigene Datenschutzseite zu modellieren. 
@@ -20,7 +19,6 @@
                     Mit diesen Vorlagen kannst du Tiltdokumente erzeugen, die über eine öffentliche URL verfügbar sind.
                   </p>
                 </md-tab>
-
                 <md-tab id="tab-posts" md-label="Unsere Services">
                   <p>
                       Template-Service zum Speichern/Lesen der Templates aus der MongoDB und zum Rendern der entsprechenden Anfragen.
@@ -39,7 +37,6 @@
       </div>
     </div>
 </template>
-
 <script>
 import { NavTabsCard } from "@/components";
 
@@ -50,4 +47,6 @@ export default {
 };
 </script>
 
-<style lang="css"></style>
+<style lang="css">
+
+</style>
