@@ -12,89 +12,46 @@
               <div class="profile">
                 <div class="avatar">
                   <img
-                    :src="img"
+                    :src="
+                      `https://eu.ui-avatars.com/api/?name=${user.email.substr(
+                        0,
+                        1
+                      )}`
+                    "
                     alt="Circle Image"
                     class="img-raised rounded-circle img-fluid"
                   />
                 </div>
                 <div class="name">
-                  <h3 class="title">Carla Hortensia</h3>
-                  <h6>Designer</h6>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-dribbble"
-                    ><i class="fab fa-dribbble"></i
-                  ></md-button>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-twitter"
-                    ><i class="fab fa-twitter"></i
-                  ></md-button>
-                  <md-button
-                    href="javascript:void(0)"
-                    class="md-just-icon md-simple md-pinterest"
-                    ><i class="fab fa-pinterest"></i
-                  ></md-button>
+                  <h3 class="title">{{ user.email }}</h3>
+                  <h6>Mitglied</h6>
                 </div>
               </div>
             </div>
           </div>
           <div class="description text-center">
             <p>
-              An artist of considerable range, Chet Faker — the name taken by
-              Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs
-              and records all of his own music, giving it a warm, intimate feel
-              with a solid groove structure.
+              Hier findest du deine Projekt übersicht. Angezeigt werden alle
+              Projekte, welche du bearbeiten kannst.
             </p>
           </div>
-          <div class="profile-tabs">
-            <tabs
-              :tab-name="['Studio', 'Work', 'Favorite']"
-              :tab-icon="['camera', 'palette', 'favorite']"
-              plain
-              nav-pills-icons
-              color-button="success"
+
+          <div class="md-layout">
+            <div
+              class="md-layout-item md-size-25 ml-auto"
+              v-for="group in groupedProjects"
+              :key="group"
             >
-              <!-- here you can add your content for tab-content -->
-              <template slot="tab-pane-1">
-                <div class="md-layout">
-                  <div class="md-layout-item md-size-25 ml-auto">
-                    <img :src="tabPane1[0].image" class="rounded" />
-                    <img :src="tabPane1[1].image" class="rounded" />
-                  </div>
-                  <div class="md-layout-item md-size-25 mr-auto">
-                    <img :src="tabPane1[3].image" class="rounded" />
-                    <img :src="tabPane1[2].image" class="rounded" />
-                  </div>
-                </div>
-              </template>
-              <template slot="tab-pane-2">
-                <div class="md-layout">
-                  <div class="md-layout-item md-size-25 ml-auto">
-                    <img :src="tabPane2[0].image" class="rounded" />
-                    <img :src="tabPane2[1].image" class="rounded" />
-                    <img :src="tabPane2[2].image" class="rounded" />
-                  </div>
-                  <div class="md-layout-item md-size-25 mr-auto">
-                    <img :src="tabPane2[3].image" class="rounded" />
-                    <img :src="tabPane2[4].image" class="rounded" />
-                  </div>
-                </div>
-              </template>
-              <template slot="tab-pane-3">
-                <div class="md-layout">
-                  <div class="md-layout-item md-size-25 ml-auto">
-                    <img :src="tabPane3[0].image" class="rounded" />
-                    <img :src="tabPane3[1].image" class="rounded" />
-                  </div>
-                  <div class="md-layout-item md-size-25 mr-auto">
-                    <img :src="tabPane3[2].image" class="rounded" />
-                    <img :src="tabPane3[3].image" class="rounded" />
-                    <img :src="tabPane3[4].image" class="rounded" />
-                  </div>
-                </div>
-              </template>
-            </tabs>
+              <div v-for="project in group" :key="project.id">
+                <ProjectElement
+                  :title="project.name"
+                  :description="project.baseDescription"
+                />
+              </div>
+            </div>
+            <div class="md-layout-item md-size-25 mr-auto">
+              <ProjectElement />
+            </div>
           </div>
         </div>
       </div>
@@ -103,35 +60,28 @@
 </template>
 
 <script>
-import { Tabs } from "@/components";
+import ProjectElement from "@/components/ProjectElement";
+import axios from "axios";
+
 export default {
-  components: {
-    Tabs
-  },
+  components: { ProjectElement },
   bodyClass: "profile-page",
   data() {
     return {
-      tabPane1: [
-        { image: require("@/assets/img/examples/studio-1.jpg") },
-        { image: require("@/assets/img/examples/studio-2.jpg") },
-        { image: require("@/assets/img/examples/studio-4.jpg") },
-        { image: require("@/assets/img/examples/studio-5.jpg") }
-      ],
-      tabPane2: [
-        { image: require("@/assets/img/examples/olu-eletu.jpg") },
-        { image: require("@/assets/img/examples/clem-onojeghuo.jpg") },
-        { image: require("@/assets/img/examples/cynthia-del-rio.jpg") },
-        { image: require("@/assets/img/examples/mariya-georgieva.jpg") },
-        { image: require("@/assets/img/examples/clem-onojegaw.jpg") }
-      ],
-      tabPane3: [
-        { image: require("@/assets/img/examples/mariya-georgieva.jpg") },
-        { image: require("@/assets/img/examples/studio-3.jpg") },
-        { image: require("@/assets/img/examples/clem-onojeghuo.jpg") },
-        { image: require("@/assets/img/examples/olu-eletu.jpg") },
-        { image: require("@/assets/img/examples/studio-1.jpg") }
-      ]
+      projects: [],
+      itemsPerRow: 2
     };
+  },
+  created() {
+    axios
+      .get("/api/tilt/projects", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("token")
+        }
+      })
+      .then(response => {
+        this.projects = response.data;
+      });
   },
   props: {
     header: {
@@ -140,14 +90,28 @@ export default {
     },
     img: {
       type: String,
-      default: require("@/assets/img/faces/christian.jpg")
+      default: require("@/assets/img/profile-icon.png")
     }
   },
   computed: {
+    groupedProjects: function() {
+      return this.projects.reduce((accumulator, project, index) => {
+        if (index % this.itemsPerRow === 0) {
+          accumulator.push([project]);
+        } else {
+          accumulator[accumulator.length - 1].push(project);
+        }
+
+        return accumulator;
+      }, []);
+    },
     headerStyle() {
       return {
         backgroundImage: `url(${this.header})`
       };
+    },
+    user() {
+      return JSON.parse(localStorage.getItem("user"));
     }
   }
 };

@@ -7,7 +7,9 @@
             class="md-layout-item md-size-33 md-small-size-66 md-xsmall-size-100 md-medium-size-40 mx-auto md-alignment-center-center"
           >
             <login-card header-color="red">
-              <h4 slot="title" class="card-title">Login</h4>
+              <h2 slot="title" class="card-title">
+                Sie haben sich erfolreich registriert
+              </h2>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>email</md-icon>
                 <label>Email...</label>
@@ -21,9 +23,6 @@
               <md-button v-on:click="HandleOk" slot="footer" class="md-danger">
                 Login
               </md-button>
-              <a v-on:click="forgotpassword" slot="inputs">
-                Password vergessen
-              </a>
             </login-card>
           </div>
         </div>
@@ -70,7 +69,9 @@ export default {
     },
     login() {
       //Login Aufruf für an den Server
-      console.log("Email = " + this.email + " Passwort = " + this.password);
+      console.log(
+        "Email = " + this.user.email + " Passwort = " + this.user.password
+      );
       axios
         .post("/api/auth/login", null, {
           params: {
@@ -79,10 +80,12 @@ export default {
           }
         })
         .then(response => {
-          localStorage.setItem("token", response.data);
-          console.log(response.data);
-          this.$router.push("profile");
-          this.$alert("Wilkommen zurück", "login-sucess", "success");
+          if (response.data.accessToken) {
+            localStorage.setItem("user", JSON.stringify(response.data));
+            console.log(response.data);
+            this.$router.push("profile");
+            this.$alert("Wilkommen zurück", "login-sucess", "success");
+          }
         })
         .catch(function(error) {
           console.log(error);
@@ -119,4 +122,4 @@ export default {
 };
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css"></style>

@@ -23,8 +23,7 @@ class AuthenticationFilter @Autowired constructor(
         }
 
         val token = exchange.request.headers["Authorization"]?.firstOrNull()?.replace("Bearer ", "") ?: run {
-            return exchange.response.also { it.statusCode = HttpStatus.UNAUTHORIZED }
-                .setComplete()
+            return chain.filter(exchange)
         }
 
         val claims = authenticationService.run {

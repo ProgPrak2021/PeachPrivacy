@@ -6,13 +6,14 @@ import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
 import MainFooter from "./layout/MainFooter.vue";
-import register from "./views/Register.vue"
-import reset from "@/views/reset";
-import forgot from "@/views/forgotpassword";
-import verify from "@/views/verify";
+import register from "./views/Register.vue";
+import Reset from "@/views/Reset";
+import ForgotPassword from "@/views/ForgotPassword";
+import Verify from "@/views/Verify";
+import axios from "axios";
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: "/",
@@ -21,6 +22,9 @@ export default new Router({
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
+      },
+      meta: {
+        auth: false
       }
     },
     {
@@ -30,6 +34,9 @@ export default new Router({
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
+      },
+      meta: {
+        auth: false
       }
     },
     {
@@ -38,6 +45,9 @@ export default new Router({
       components: { default: Login, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 }
+      },
+      meta: {
+        auth: false
       }
     },
     {
@@ -47,6 +57,9 @@ export default new Router({
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
+      },
+      meta: {
+        auth: true
       }
     },
     {
@@ -56,23 +69,47 @@ export default new Router({
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
+      },
+      meta: {
+        auth: false
       }
     },
     {
       path: "/forgot",
       name: "forgot",
-      components: { default: forgot},
-
+      components: {
+        default: ForgotPassword,
+        header: MainNavbar,
+        footer: MainFooter
+      },
+      props: {
+        header: { colorOnScroll: 400 }
+      },
+      meta: {
+        auth: false
+      }
     },
     {
       path: "/reset/:token",
       name: "reset",
-      components: { default: reset},
-
-    },{
-      path:"/verify/:token",
-      name:"verify",
-      components: { default: verify},
+      components: { default: Reset, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 }
+      },
+      meta: {
+        auth: false
+      }
+    },
+    {
+      path: "/verify/:token",
+      name: "verify",
+      components: { default: Verify, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 }
+      },
+      meta: {
+        auth: false
+      }
     }
   ],
   scrollBehavior: to => {
@@ -83,3 +120,35 @@ export default new Router({
     }
   }
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.auth)) {
+    let token = localStorage.getItem("token");
+    if (token == null) {
+      next({
+        path: "/login"
+      });
+      return;
+    }
+    axios
+      .get("/api/account/info", {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
+      .then(response => {
+        localStorage.setItem("user", JSON.stringify(response.data));
+        next();
+      })
+      .catch(error => {
+        localStorage.removeItem("user");
+        next({
+          path: "/login"
+        });
+      });
+  } else {
+    next();
+  }
+});
+
+export default router;
