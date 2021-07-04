@@ -79,6 +79,7 @@ export default {
           }
         })
         .then(response => {
+          localStorage.setItem("user",this.email);
           localStorage.setItem("token", response.data);
           console.log(response.data);
           this.$router.push("profile");
@@ -88,7 +89,6 @@ export default {
           console.log(error);
           this.$alert("Passwort oder Email ist falsch ", "Fehler", "error");
         });
-      return;
     },
     HandleOk() {
       // Prevent modal from closing

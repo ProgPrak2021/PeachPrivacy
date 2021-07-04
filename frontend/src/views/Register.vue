@@ -107,7 +107,7 @@ export default {
         this.$alert('Wiederholen Sie das Passwort',' Passwort wurde nicht wiederholt',"info");
         return;
       }
-      if(this.confirm_password.length <6){
+      if(this.password.length <6){
         this.$alert('Passwort muss min. 6 Zeichen enthalten',' Passwort ist zu kurz',"info");
         return;
       }

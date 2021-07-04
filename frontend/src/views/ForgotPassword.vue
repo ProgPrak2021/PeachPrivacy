@@ -53,6 +53,7 @@ export default {
             "Email",
             "success"
           );
+          this.$router.push('/');
         })
         .catch(function(error) {
           console.log(error);
