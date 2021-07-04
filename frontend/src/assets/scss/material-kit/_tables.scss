@@ -46,7 +46,7 @@
   &[table-header-color="orange"] .md-table-head{
     color: $brand-warning !important;
   }
-  &[table-header-color="purple"] .md-table-head{
+  &[table-header-color="red"] .md-table-head{
     color: $brand-primary !important;
   }
   &[table-header-color="blue"] .md-table-head{
@@ -62,4 +62,5 @@
   .md-table-row td{
     border-top-color: rgba(0,0,0,.06) !important;
   }
+ 
 }

@@ -76,7 +76,8 @@ h2.title{
   color: $brand-warning !important;
 }
 .text-primary {
-  color: $brand-primary !important;
+  color: #D9304F !important;
+  font-weight: 700;
 }
 .text-danger {
   color: $brand-danger !important;
@@ -88,7 +89,7 @@ h2.title{
   color: $brand-info !important;
 }
 .text-gray{
-  color: $gray-color !important;
+  color: $gray-color;
 }
 .text-muted {
   color: #6c757d!important;

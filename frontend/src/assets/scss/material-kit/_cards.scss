@@ -205,16 +205,16 @@
 
     .table{
         margin-bottom: 0;
-
+  
         tr:first-child td{
             border-top: none;
         }
     }
-
-    [data-background-color="purple"],
+    
+    [data-background-color="red"],
     .md-card-header-primary,
     .md-tabs.md-primary .md-tabs-navigation{
-        background: linear-gradient(60deg, $purple-400, $purple-700);
+        background: linear-gradient(60deg, $red-400, $red-700);
         @include shadow-big-color($brand-primary);
     }
 
@@ -252,7 +252,6 @@
         background: linear-gradient(60deg, $pink-400, $pink-700);
         @include shadow-big-color($brand-rose);
     }
-
     [data-background-color]{
         color: $white-color;
 
@@ -297,7 +296,7 @@
         margin-top: -$margin-base * 2;
     }
     .nav-tabs{
-        background: transparent;
+        background-color: whitesmoke;
         padding: 0;
     }
     .nav-tabs-title{
