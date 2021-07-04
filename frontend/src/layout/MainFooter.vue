@@ -8,23 +8,38 @@
       <nav>
         <ul>
           <li>
-            <a href="https://www.creative-tim.com">
-              Creative Tim
+            <a href="https://github.com/Transparency-Information-Language/meta">
+              Tilt
             </a>
           </li>
           <li>
-            <a href="https:///presentation.creative-tim.com">
-              About Us
+            <a href="https://peachprivacy.dev">
+              Spring Cloud
             </a>
           </li>
           <li>
-            <a href="https:///blog.creative-tim.com">
-              Blog
+            <a href="https://peachprivacy.dev">
+              Template-Service
+            </a>
+          </li>
+           <li>
+            <a href="https://peachprivacy.dev">
+              User-Service
+            </a>
+          </li>
+          <li>
+            <a href="https://peachprivacy.dev">
+              Tilt-Service
             </a>
           </li>
           <li>
             <a href="https://www.creative-tim.com/license">
-              Licenses
+              License Tim
+            </a>
+          </li>
+          <li>
+            <a href="https://www.creative-tim.com/license">
+              License PP
             </a>
           </li>
         </ul>

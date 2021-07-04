@@ -1,0 +1,54 @@
+<template>
+  <div>
+    <login-card header-color="red">
+      <b-row>
+        <b-col>
+          <img src="../assets/benutzer.jpg" alt="" height="50">
+        </b-col>
+        <b-col>
+          <div>{{user.email}}</div>
+        </b-col>
+      </b-row>
+      <b-row id="profile_actions">
+        <div class="col-4">
+          <b-btn class="profile_action_btn" href="#" v-b-modal.modal-change-avatar >Profilbild ändern</b-btn>
+        </div>
+        <div class="col-4">
+          <b-btn class="profile_action_btn" href="#" v-b-modal="'modal-change-pw'">Passwort ändern</b-btn>
+          <passwordchange></passwordchange>
+        </div>
+      </b-row>
+    </login-card>
+  </div>
+</template>
+
+<script>
+//import RegisterModal from "./RegisterForm.vue";
+import Passwordchange from "./passwordchange.vue";
+
+export default {
+  name: "ProfileModal",
+  components: {
+    'passwordchange':Passwordchange,
+    //'register-modal':RegisterModal
+  },
+  props:["user"]
+
+}
+</script>
+<style scoped>
+  #modal-profile{
+    background-color: whitesmoke;
+  }
+  .profile_action_btn{
+    margin: 20px 10px 10px 10px;
+    background-color: #FF876C;
+    border-color:#D9304F;
+    border-style: solid;
+    border-radius: 5px 5px 5px 5px;
+    border-width: 90%;
+    /*color: #D9304F; */
+  }
+
+
+</style>

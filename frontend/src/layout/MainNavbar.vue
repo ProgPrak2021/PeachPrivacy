@@ -40,9 +40,13 @@
                             :class="{ 'dropdown-menu-right': responsive }"
                           >
                             <li class="dropdown-header">Benutzerverwaltung</li>
-                            <li>
-                              <a href="#pablo" class="dropdown-item">Profile</a>
-                            </li>
+                           <div v-if="!loginV">
+                              <li>
+                                <a href="#pablo" class="dropdown-item">Profile</a>
+                              </li>
+                             <!-- <profile-modal v-bind:user="user"></profile-modal>
+                              <profile-card></profile-card>-->
+                            </div>
                             <li>
                               <a href="#pablo" class="dropdown-item"
                                 >Anmelden</a
@@ -90,9 +94,14 @@ function resizeThrottler(actualResizeHandler) {
 }
 
 import MobileMenu from "@/layout/MobileMenu";
+import ProfileModal from "@/components/ProfileForm.vue";
+//import ProfileCard from '../components/cards/ProfileCard.vue';
 export default {
   components: {
-    MobileMenu
+    MobileMenu,
+    'profile-modal':ProfileModal,
+    //'profile-card': ProfileCard
+
   },
   props: {
     type: {
@@ -118,7 +127,12 @@ export default {
   data() {
     return {
       extraNavClasses: "",
-      toggledClass: false
+      toggledClass: false,
+       user:{
+                  email: "",
+                  password: ""
+                },
+      loginV:   false
     };
   },
   computed: {
