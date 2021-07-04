@@ -87,10 +87,6 @@ export default {
     header: {
       type: String,
       default: require("@/assets/img/city-profile.jpg")
-    },
-    img: {
-      type: String,
-      default: require("@/assets/img/profile-icon.png")
     }
   },
   computed: {
