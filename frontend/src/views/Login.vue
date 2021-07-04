@@ -54,7 +54,7 @@ export default {
   props: {
     header: {
       type: String,
-      default: require("@/assets/img/profile_city.jpg")
+      default: require("@/assets/img/LoginPage.png")
     }
   },
   computed: {
