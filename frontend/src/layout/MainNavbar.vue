@@ -72,9 +72,8 @@
                                       <profile-card></profile-card>-->
                                     </div>
                                     <li>
-                                      <a href="#pablo" class="dropdown-item"
-                                        >Anmelden</a
-                                      >
+                                      <router-link to="/login" class="nav-link">Anmelden</router-link>
+                                      <!--<a href="#pablo" class="dropdown-item">Anmelden</a>-->
                                     </li>
                                     <li>
                                       <a href="#pablo" class="dropdown-item"
@@ -83,9 +82,8 @@
                                     </li>
                                     <li class="dropdown-divider"></li>
                                     <li>
-                                      <a href="#pablo" class="dropdown-item"
-                                        >Abmelden</a
-                                      >
+                                      <router-link to="/" class="nav-link">Abmelden</router-link>
+                                      <!--<a href="#pablo" class="dropdown-item">Abmelden</a>-->
                                     </li>
                                   </ul>
                                 </drop-down>
