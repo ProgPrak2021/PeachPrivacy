@@ -7,12 +7,12 @@
             <template slot="content">
               <md-tabs class="md-primary" md-alignment="left">
                 <md-tab id="tab-home" md-label="Was ist Peach Privacy?">
-                  <p>
+                  <p align="left">
                    Peach Privacy bietet dir die Möglichkeiten, die du brauchst, um deinen Kunden mitzuteilen, welche Daten du über sie speicherst. Und das alles DSGVO-konform!
                   </p>
                 </md-tab>
                 <md-tab id="tab-pages" md-label="Mehr zum Produkt">
-                  <p>
+                  <p align="left">
                     Auf unserer Seite kannst du step by step Projekte erstellen, um mit Vorlagen deine eigene Datenschutzseite zu modellieren. 
                     Diese Vorlagen können in einem objektorientierten Stil von (vordefinierten) Vorlagen erben und von dir selbst erstellt werden. 
                     Jede Vorlage kann abstrakte Felder/Werte definieren, die in der Konfiguration befüllt werden sollen. 
@@ -20,13 +20,13 @@
                   </p>
                 </md-tab>
                 <md-tab id="tab-posts" md-label="Unsere Services">
-                  <p>
+                  <p align="left">
                       Template-Service zum Speichern/Lesen der Templates aus der MongoDB und zum Rendern der entsprechenden Anfragen.
                   </p>
-                  <p>
+                  <p align="left">
                       User-Service, um benutzerbezogene Aktionen auszuführen
                   </p>
-                  <p>
+                  <p align="left" >
                       Tilt-Service zum Speichern der Metadaten der Templates in PostgreSQL und zum Bereitstellen der öffentlichen Endpoints für die generierten Tilt-Dokumente
                   </p>
                 </md-tab>
