@@ -88,6 +88,7 @@ export default {
           console.log(error);
           this.$alert("Passwort oder Email ist falsch ", "Fehler", "error");
         });
+        this.$alert("Passwort oder Email ist falsch ", "Fehler", "error");
       return;
     },
     HandleOk() {
