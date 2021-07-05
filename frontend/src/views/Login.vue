@@ -81,8 +81,8 @@ export default {
         .then(response => {
           localStorage.setItem("token", response.data);
           console.log(response.data);
-          this.$router.push("profile");
           this.$alert("Wilkommen zurück", "login-sucess", "success");
+          this.$router.push("profile");
         })
         .catch(function(error) {
           console.log(error);
