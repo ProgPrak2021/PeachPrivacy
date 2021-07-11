@@ -5,6 +5,7 @@
       <template v-for="group in groupedProjects">
         <div
           v-for="project in group"
+          v-if="project.versions.length !== 0"
           :key="project.id"
           class="md-layout-item md-size-25"
         >
@@ -12,8 +13,8 @@
             :title="project.name"
             :description="project.baseDescription"
             :hover="false"
-            :selected="value.projects.includes(project.id)"
-            @select="select(project.id, $event)"
+            :selected="value.projects.includes(project.versions.slice(-1)[0])"
+            @select="select(project, $event)"
           />
         </div>
       </template>
@@ -74,8 +75,8 @@ export default {
     }
   },
   methods: {
-    select(id, enabled) {
-      console.log(this.value);
+    select(project, enabled) {
+      const id = project.versions.slice(-1)[0];
       if (enabled) this.value.projects.push(id);
       else
         this.value.projects = this.value.projects.filter(item => item !== id);

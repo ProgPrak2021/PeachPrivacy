@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     nameValid: function() {
-      return this.value.name !== "";
+      return this.value.name !== "" && this.value.name.length < 127;
     },
     descriptionValid: function() {
       return this.value.description !== "";

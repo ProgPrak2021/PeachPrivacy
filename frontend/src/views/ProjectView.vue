@@ -18,6 +18,10 @@
                   ><br />
                 </div>
               </template>
+              <br />
+              <md-button class="md-danger" @click="deleteProject"
+                >Löschen</md-button
+              >
             </div>
           </div>
         </div>
@@ -59,6 +63,24 @@ export default {
   methods: {
     rawTilt(id) {
       this.$router.push("/api/tilt/templates/" + id); // TODO ../schema to only display schema
+    },
+    async deleteProject() {
+      try {
+        const response = await axios.delete(
+          "/api/tilt/projects/" + this.$route.params.id,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        );
+        await this.$router.push("/profile");
+      } catch (error) {
+        await this.$alert(
+          "Projekt konnte nicht gelöscht werden! " + error,
+          "Fehler"
+        );
+      }
     }
   },
   computed: {}
