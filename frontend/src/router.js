@@ -11,9 +11,12 @@ import Reset from "@/views/Reset";
 import ForgotPassword from "@/views/ForgotPassword";
 import Verify from "@/views/Verify";
 import axios from "axios";
+import ProjectCreate from "@/views/ProjectCreate";
+import ProjectView from "@/views/ProjectView";
 Vue.use(Router);
 
 let router = new Router({
+  mode: "history",
   routes: [
     {
       path: "/",
@@ -54,6 +57,38 @@ let router = new Router({
       path: "/profile",
       name: "profile",
       components: { default: Profile, header: MainNavbar, footer: MainFooter },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" }
+      },
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: "/project/create",
+      name: "project_create",
+      components: {
+        default: ProjectCreate,
+        header: MainNavbar,
+        footer: MainFooter
+      },
+      props: {
+        header: { colorOnScroll: 400 },
+        footer: { backgroundColor: "black" }
+      },
+      meta: {
+        auth: true
+      }
+    },
+    {
+      path: "/project/:id",
+      name: "project_view",
+      components: {
+        default: ProjectView,
+        header: MainNavbar,
+        footer: MainFooter
+      },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
@@ -122,14 +157,10 @@ let router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.auth)) {
-    let token = localStorage.getItem("token");
-    if (token == null) {
-      next({
-        path: "/login"
-      });
-      return;
-    }
+  localStorage.setItem("authenticated", "false");
+  let authenticationNeeded = to.matched.some(record => record.meta.auth);
+  let token = localStorage.getItem("token");
+  if (token != null) {
     axios
       .get("/api/account/info", {
         headers: {
@@ -137,17 +168,28 @@ router.beforeEach((to, from, next) => {
         }
       })
       .then(response => {
+        localStorage.setItem("authenticated", "true");
         localStorage.setItem("user", JSON.stringify(response.data));
         next();
       })
       .catch(error => {
         localStorage.removeItem("user");
-        next({
-          path: "/login"
-        });
+        if (authenticationNeeded) {
+          next({
+            path: "/login"
+          });
+        } else {
+          next();
+        }
       });
   } else {
-    next();
+    if (authenticationNeeded) {
+      next({
+        path: "/login"
+      });
+    } else {
+      next();
+    }
   }
 });
 

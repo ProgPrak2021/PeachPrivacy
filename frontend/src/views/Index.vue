@@ -12,11 +12,11 @@
         </div>
       </div>
     </parallax>
-     <div class="section section-tabs">
-        <div class="container">
-          <tabs></tabs>
-        </div>
+    <div class="section section-tabs">
+      <div class="container">
+        <tabs></tabs>
       </div>
+    </div>
   </div>
 </template>
 

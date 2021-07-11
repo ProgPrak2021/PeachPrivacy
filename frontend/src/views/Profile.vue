@@ -1,56 +1,55 @@
 <template>
   <div class="wrapper">
-    <parallax
-      class="section page-header header-filter"
-      :style="headerStyle"
-    ></parallax>
-    <div class="main main-raised">
-      <div class="section profile-content">
-        <div class="container">
-          <div class="md-layout">
-            <div class="md-layout-item md-size-50 mx-auto">
-              <div class="profile">
-                <div class="avatar">
-                  <img
-                    :src="
-                      `https://eu.ui-avatars.com/api/?name=${user.email.substr(
-                        0,
-                        1
-                      )}`
-                    "
-                    alt="Circle Image"
-                    class="img-raised rounded-circle img-fluid"
+    <div>
+      <div class="main main-raised" style="margin-top: 200px">
+        <div class="section profile-content">
+          <div class="container">
+            <div class="md-layout">
+              <div class="md-layout-item md-size-50 mx-auto">
+                <div class="profile">
+                  <div class="avatar">
+                    <img
+                      :src="
+                        `https://eu.ui-avatars.com/api/?name=${user.email.substr(
+                          0,
+                          1
+                        )}`
+                      "
+                      alt="Circle Image"
+                      class="img-raised rounded-circle img-fluid"
+                    />
+                  </div>
+                  <div class="name">
+                    <h3 class="title">{{ user.email }}</h3>
+                    <h6>Mitglied</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="description text-center">
+              <p>
+                Hier findest du deine Projekt übersicht. Angezeigt werden alle
+                Projekte, welche du bearbeiten kannst.
+              </p>
+            </div>
+
+            <div class="md-layout md-alignment-center">
+              <template v-for="group in groupedProjects">
+                <div
+                  v-for="project in group"
+                  :key="project.id"
+                  class="md-layout-item md-size-25"
+                >
+                  <ProjectElement
+                    :title="project.name"
+                    :description="project.baseDescription"
+                    @click="viewProject(project.id)"
                   />
                 </div>
-                <div class="name">
-                  <h3 class="title">{{ user.email }}</h3>
-                  <h6>Mitglied</h6>
-                </div>
+              </template>
+              <div class="md-layout-item md-size-25">
+                <ProjectElement @click="newProject" />
               </div>
-            </div>
-          </div>
-          <div class="description text-center">
-            <p>
-              Hier findest du deine Projekt übersicht. Angezeigt werden alle
-              Projekte, welche du bearbeiten kannst.
-            </p>
-          </div>
-
-          <div class="md-layout">
-            <div
-              class="md-layout-item md-size-25 ml-auto"
-              v-for="group in groupedProjects"
-              :key="group"
-            >
-              <div v-for="project in group" :key="project.id">
-                <ProjectElement
-                  :title="project.name"
-                  :description="project.baseDescription"
-                />
-              </div>
-            </div>
-            <div class="md-layout-item md-size-25 mr-auto">
-              <ProjectElement />
             </div>
           </div>
         </div>
@@ -72,21 +71,22 @@ export default {
       itemsPerRow: 2
     };
   },
-  created() {
-    axios
-      .get("/api/tilt/projects", {
+  async created() {
+    try {
+      const response = await axios.get("/api/tilt/projects", {
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token")
         }
-      })
-      .then(response => {
-        this.projects = response.data;
       });
+      this.projects = response.data;
+    } catch (error) {
+      console.error(err);
+    }
   },
   props: {
-    header: {
+    image: {
       type: String,
-      default: require("@/assets/img/city-profile.jpg")
+      default: require("@/assets/img/LandingPage.png")
     }
   },
   computed: {
@@ -103,11 +103,20 @@ export default {
     },
     headerStyle() {
       return {
-        backgroundImage: `url(${this.header})`
+        backgroundImage: `url(${this.image})`,
+        top: "0"
       };
     },
     user() {
       return JSON.parse(localStorage.getItem("user"));
+    }
+  },
+  methods: {
+    newProject() {
+      this.$router.push("/project/create");
+    },
+    viewProject(id) {
+      this.$router.push("/project/" + id);
     }
   }
 };
