@@ -13,75 +13,20 @@
       </div>
     </parallax>
     <div class="section section-tabs">
-      <div class="container">
-        <tabs></tabs>
-      </div>
+      <div class="container"></div>
     </div>
   </div>
 </template>
 
 <script>
-/*import BasicElements from "./components/BasicElementsSection";
-import Navigation from "./components/NavigationSection";
-import SmallNavigation from "./components/SmallNavigationSection";
-*/
-import Tabs from "./components/TabsSection";
-
-//import NavPills from "./components/NavPillsSection";
-//import Notifications from "./components/NotificationsSection";
-//import TypographyImages from "./components/TypographyImagesSection";
-//import JavascriptComponents from "./components/JavascriptComponentsSection";
-//import { LoginCard } from "@/components";
-
 export default {
-  components: {
-    /*BasicElements,
-    Navigation,
-    SmallNavigation,
-  */
-    Tabs
-    /*
-    NavPills,
-    Notifications,
-    TypographyImages,
-    JavascriptComponents,
-    LoginCard
-    */
-  },
+  components: {},
   name: "index",
   bodyClass: "index-page",
   props: {
     image: {
       type: String,
-      default: require("@/assets/img/LandingPage.png")
-    },
-    leaf4: {
-      type: String,
-      default: require("@/assets/img/leaf4.png")
-    },
-    leaf3: {
-      type: String,
-      default: require("@/assets/img/leaf3.png")
-    },
-    leaf2: {
-      type: String,
-      default: require("@/assets/img/leaf2.png")
-    },
-    leaf1: {
-      type: String,
-      default: require("@/assets/img/leaf1.png")
-    },
-    signup: {
-      type: String,
-      default: require("@/assets/img/city.jpg")
-    },
-    landing: {
-      type: String,
-      default: require("@/assets/img/landing.jpg")
-    },
-    profile: {
-      type: String,
-      default: require("@/assets/img/profile.jpg")
+      default: require("@/assets/LandingPage.png")
     }
   },
   data() {

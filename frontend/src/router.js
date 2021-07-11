@@ -1,7 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Index from "./views/Index.vue";
-import Landing from "./views/Landing.vue";
 import Login from "./views/Login.vue";
 import Profile from "./views/Profile.vue";
 import MainNavbar from "./layout/MainNavbar.vue";
@@ -22,18 +21,6 @@ let router = new Router({
       path: "/",
       name: "index",
       components: { default: Index, header: MainNavbar, footer: MainFooter },
-      props: {
-        header: { colorOnScroll: 400 },
-        footer: { backgroundColor: "black" }
-      },
-      meta: {
-        auth: false
-      }
-    },
-    {
-      path: "/landing",
-      name: "landing",
-      components: { default: Landing, header: MainNavbar, footer: MainFooter },
       props: {
         header: { colorOnScroll: 400 },
         footer: { backgroundColor: "black" }
@@ -158,6 +145,7 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   localStorage.setItem("authenticated", "false");
+  localStorage.removeItem("user");
   let authenticationNeeded = to.matched.some(record => record.meta.auth);
   let token = localStorage.getItem("token");
   if (token != null) {
@@ -173,7 +161,6 @@ router.beforeEach((to, from, next) => {
         next();
       })
       .catch(error => {
-        localStorage.removeItem("user");
         if (authenticationNeeded) {
           next({
             path: "/login"

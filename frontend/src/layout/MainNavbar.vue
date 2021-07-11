@@ -1,7 +1,11 @@
 <template>
   <md-toolbar class="md-primary">
     <div class="md-toolbar-row">
-      <img src="../assets/tiltLogo.jpg" alt="" width="250" />
+      <img
+        :src="require('@/assets/peachPrivacy.png')"
+        width="250"
+        style="filter: drop-shadow(2px 2px 2px #954f18)"
+      />
       <div class="md-toolbar-section-start">
         <!--<h3 class="md-title">Primary Color</h3>-->
       </div>
@@ -43,10 +47,17 @@
                           >Registrieren</router-link
                         >
                       </li>
-                      <li class="dropdown-divider"></li>
                       <li v-if="authenticated">
                         <router-link to="/profile" class="nav-link"
                           >Profil</router-link
+                        >
+                      </li>
+                      <li v-if="authenticated">
+                        <a
+                          href="/"
+                          v-on:click.stop="logout"
+                          class="dropdown-item"
+                          >Abmelden</a
                         >
                       </li>
                     </ul>
@@ -54,10 +65,6 @@
                 </div>
               </a>
             </li>
-            <md-list-item href="javascript:void(0)">
-              <md-icon>settings</md-icon>
-              <p>Einstellungen</p>
-            </md-list-item>
           </md-list>
         </div>
       </div>
@@ -80,16 +87,8 @@ function resizeThrottler(actualResizeHandler) {
   }
 }
 
-import MobileMenu from "@/layout/MobileMenu";
-import ProfileModal from "@/components/ProfileForm.vue";
-//import ProfileCard from '../components/cards/ProfileCard.vue';
 export default {
-  components: {
-    MobileMenu,
-    // eslint-disable-next-line vue/no-unused-components
-    "profile-modal": ProfileModal
-    //'profile-card': ProfileCard
-  },
+  components: {},
   props: {
     type: {
       type: String,
@@ -171,6 +170,12 @@ export default {
       if (element_id) {
         element_id.scrollIntoView({ block: "end", behavior: "smooth" });
       }
+    },
+    logout() {
+      localStorage.setItem("authenticated", "false");
+      localStorage.removeItem("user");
+      localStorage.removeItem("token");
+      this.$router.push("/");
     }
   },
   mounted() {

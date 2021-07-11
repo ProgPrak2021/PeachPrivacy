@@ -46,12 +46,7 @@ export default {
       password: ""
     };
   },
-  props: {
-    header: {
-      type: String,
-      default: require("@/assets/img/profile_city.jpg")
-    }
-  },
+  props: {},
   computed: {
     headerStyle() {
       return {

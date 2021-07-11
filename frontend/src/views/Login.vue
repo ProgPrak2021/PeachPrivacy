@@ -47,12 +47,7 @@ export default {
       password: ""
     };
   },
-  props: {
-    header: {
-      type: String,
-      default: require("@/assets/img/LoginPage.png")
-    }
-  },
+  props: {},
   computed: {
     headerStyle() {
       return {
@@ -88,8 +83,7 @@ export default {
           console.log(error);
           this.$alert("Passwort oder Email ist falsch ", "Fehler", "error");
         });
-        this.$alert("Passwort oder Email ist falsch ", "Fehler", "error");
-      return;
+      this.$alert("Passwort oder Email ist falsch ", "Fehler", "error");
     },
     HandleOk() {
       // Prevent modal from closing

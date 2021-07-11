@@ -26,12 +26,6 @@
                 </div>
               </div>
             </div>
-            <div class="description text-center">
-              <p>
-                Hier findest du deine Projekt übersicht. Angezeigt werden alle
-                Projekte, welche du bearbeiten kannst.
-              </p>
-            </div>
 
             <div class="md-layout md-alignment-center">
               <template v-for="group in groupedProjects">
@@ -86,7 +80,7 @@ export default {
   props: {
     image: {
       type: String,
-      default: require("@/assets/img/LandingPage.png")
+      default: require("@/assets/LandingPage.png")
     }
   },
   computed: {

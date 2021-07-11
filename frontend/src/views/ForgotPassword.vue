@@ -80,12 +80,6 @@ export default {
       this.$router.push("landing");
     }
   },
-  props: {
-    header: {
-      type: String,
-      default: require("@/assets/img/profile_city.jpg")
-    }
-  },
   computed: {
     headerStyle() {
       return {

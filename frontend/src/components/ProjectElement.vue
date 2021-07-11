@@ -24,7 +24,7 @@ export default {
   props: {
     image: {
       type: String,
-      default: require("@/assets/img/examples/studio-5.jpg")
+      default: require("@/assets/leaves.jpg")
     },
     title: {
       type: String,
