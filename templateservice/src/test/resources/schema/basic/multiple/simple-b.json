@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "required": [
+    "foo",
+    "baz",
+    "foobar"
+  ],
+  "properties": {
+    "foo": {
+      "type": "string",
+      "const": "Define for declared in schema A"
+    },
+    "baz": {
+      "type": "string"
+    },
+    "foobar": {
+      "type": "object",
+      "required": [
+        "abc"
+      ],
+      "properties": {
+        "abc": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

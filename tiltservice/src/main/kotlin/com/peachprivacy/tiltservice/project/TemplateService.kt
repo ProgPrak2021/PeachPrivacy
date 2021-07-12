@@ -13,7 +13,7 @@ class TemplateService @Autowired constructor(
     private val schemaRepository: SchemaRepository,
     private val templateRepository: TemplateRepository
 ) {
-    fun getAbsoluteTemplate(id: UUID): Template? {
+    fun getValueDefinitionsOfTemplate(id: UUID): String? {
         val resolvedTemplates = mutableMapOf<List<UUID>, Template>()
         val resolvingTemplatesQueue = mutableListOf(listOf(id))
 
@@ -41,6 +41,8 @@ class TemplateService @Autowired constructor(
             val template = get(resolveId) ?: throw HttpClientErrorException(HttpStatus.NOT_FOUND,
                 "{\"description\": \"A dependency couldn't be resolved\", \"path\": \"$currentPrettyPath\"}")
 
+            resolvedTemplates[currentPath] = template
+
             template.parents.forEach { parentTemplate ->
                 // ????????? Recursive dangers by Hibernate
                 resolvingTemplatesQueue.add(currentPath + parentTemplate.id!!)
@@ -49,10 +51,19 @@ class TemplateService @Autowired constructor(
             currentQueueIndex++
         }
 
-        // TODO: Duplicate schema resolving in repository and service
-        val mergedPaths = schemaRepository.getMergedPaths(resolvedTemplates.values.map { it.id!! })
+        val dependencyMap = mutableMapOf<UUID, Any>()
+        resolvedTemplates.keys.forEach { dependencyPath ->
+            var accessMap = dependencyMap
+            dependencyPath.forEach { subId ->
+                accessMap = (accessMap.computeIfAbsent(subId) {
+                    mutableMapOf<UUID, Any>()
+                } as MutableMap<UUID, Any>)
+            }
+        }
 
-        return resolvedTemplates.values.first().also { it.schema = mergedPaths ?: "(NULL merged path)" }
+        return schemaRepository.getValueDefinitions(id, dependencyMap)
+
+        // return resolvedTemplates.values.first().also { it.schema = mergedPaths ?: "(NULL merged path)" }
     }
 
     fun get(id: UUID): Template? {
@@ -67,10 +78,10 @@ class TemplateService @Autowired constructor(
             schemaRepository.set(savedTemplate.id!!, savedTemplate.schema)
         }
     }
-    fun create(template: Template): UUID {
+    fun create(template: Template): Template {
         return templateRepository.save(template).also { savedTemplate ->
             schemaRepository.set(savedTemplate.id!!, savedTemplate.schema)
-        }.id!!
+        }
     }
     fun delete(id: UUID) {
         return templateRepository.deleteById(id).also {

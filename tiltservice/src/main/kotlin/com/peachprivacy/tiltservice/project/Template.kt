@@ -1,6 +1,8 @@
 package com.peachprivacy.tiltservice.project
 
 import com.fasterxml.jackson.annotation.*
+import org.hibernate.annotations.LazyCollection
+import org.hibernate.annotations.LazyCollectionOption
 import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
@@ -22,6 +24,7 @@ class Template {
     @Column(columnDefinition="TEXT")
     var changelog: String? = null
 
+    // TODO @LazyCollection(LazyCollectionOption.TRUE)
     @ManyToMany
     @JoinTable(
         name = "template_inheritance",
@@ -31,6 +34,7 @@ class Template {
     @JsonIdentityReference(alwaysAsId = true)
     var parents: List<Template> = mutableListOf()
 
+    // TODO @LazyCollection(LazyCollectionOption.TRUE)
     @ManyToMany(mappedBy = "parents")
     @JsonIdentityReference(alwaysAsId = true)
     var children: List<Template> = mutableListOf()

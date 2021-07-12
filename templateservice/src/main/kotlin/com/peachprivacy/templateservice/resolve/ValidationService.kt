@@ -1,17 +1,6 @@
-package com.peachprivacy.templateservice.validation
+package com.peachprivacy.templateservice.resolve
 
-import com.worldturner.medeia.api.*
-import com.worldturner.medeia.api.jackson.MedeiaJacksonApi
-import com.worldturner.medeia.parser.ArrayNode
-import com.worldturner.medeia.parser.ObjectNode
-import com.worldturner.medeia.parser.SimpleNode
-import com.worldturner.medeia.schema.model.JsonSchema
-import com.worldturner.medeia.schema.model.Schema
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.stereotype.Service
-import java.net.URI
-
-@Service
+/*@Service
 class ValidationService(
     @Autowired private val jsonSchemaApi: MedeiaJacksonApi  // TODO actually needed?
 ) {
@@ -30,47 +19,47 @@ class ValidationService(
         mergeSubjects.drop(1).forEach { newMapIt ->
             newMapIt.forEach { (newPath, newConflict) ->
                 conflictsAcc[newPath]?.let { preConflict ->
-                    if (preConflict is UnresolvedConflict && preConflict.candidates.isEmpty()) return@let null
+                    if (preConflict is UnresolvedConflict && preConflict.selfCandidates.isEmpty()) return@let null
 
                     val finalMergeStrategy = when (preConflict.merge) {
                         newConflict.merge -> preConflict.merge
-                        MergingStrategy.ALL, MergingStrategy.SINGLE -> {
-                            if (newConflict.merge != MergingStrategy.ALL && newConflict.merge != MergingStrategy.SINGLE)
-                                MergingStrategy.NONE
+                        SelfMergingStrategy.ALL, SelfMergingStrategy.SINGLE -> {
+                            if (newConflict.merge != SelfMergingStrategy.ALL && newConflict.merge != SelfMergingStrategy.SINGLE)
+                                SelfMergingStrategy.NONE
                             else
                                 // Allowing merging of multiple arrays but then specifying that only one variant is valid
-                                MergingStrategy.SINGLE
+                                SelfMergingStrategy.SINGLE
                         }
-                        else -> MergingStrategy.NONE
+                        else -> SelfMergingStrategy.NONE
                     }
                     val mergedConflict = when (finalMergeStrategy) {
-                        MergingStrategy.NONE -> {
+                        SelfMergingStrategy.NONE -> {
                             val conflictCandidates =
-                                (preConflict.candidates + newConflict.candidates).toMutableList()
+                                (preConflict.selfCandidates + newConflict.selfCandidates).toMutableList()
 
                             if (conflictCandidates.size == 1)
-                                ResolvedConflict(conflictCandidates, MergingStrategy.NONE, conflictCandidates.first())
+                                ResolvedConflict(conflictCandidates, SelfMergingStrategy.NONE, conflictCandidates.first())
                             else
                                 UnresolvedConflict(conflictCandidates)
                         }
-                        MergingStrategy.SINGLE -> {
+                        SelfMergingStrategy.SINGLE -> {
                             // type Set so that the order doesn't matter. Is that correct though?
                             val conflictCandidates =
-                                (preConflict.candidates.toSet() + newConflict.candidates.toSet()).distinct().toMutableList()
+                                (preConflict.selfCandidates.toSet() + newConflict.selfCandidates.toSet()).distinct().toMutableList()
 
                             if (conflictCandidates.size == 1)
-                                ResolvedConflict(conflictCandidates, MergingStrategy.SINGLE, conflictCandidates.first())
+                                ResolvedConflict(conflictCandidates, SelfMergingStrategy.SINGLE, conflictCandidates.first())
                             else
                                 UnresolvedConflict(conflictCandidates)
                         }
-                        MergingStrategy.ALL -> {
+                        SelfMergingStrategy.ALL -> {
                             // This condition is only fulfilled if both conflicts have the ALL merge strategy. no check required
                             // Should be distinct? Seems logical.
                             val conflictCandidates =
-                                (preConflict.candidates + newConflict.candidates).distinct().toMutableList()
+                                (preConflict.selfCandidates + newConflict.selfCandidates).distinct().toMutableList()
 
                             // TODO: Create extra ResolvedConflict type for collections. This is plain wrong (for parameter value)
-                            ResolvedConflict(conflictCandidates, MergingStrategy.ALL, conflictCandidates)
+                            ResolvedConflict(conflictCandidates, SelfMergingStrategy.ALL, conflictCandidates)
                         }
                     }
                     conflictsAcc[newPath] = mergedConflict
@@ -92,7 +81,7 @@ class ValidationService(
             // tl;dr: ~0 => ~, ~1 = / - Escape character
             val path = pointer.split("/").drop(1).map {
                 it.replace("~1", "/").replace("~0", "~")
-            }
+            }.filterIndexed { index, _ -> index % 2 == 1 }  // TODO Remove with new method
 
             // TODO Can a constant be defined for an object on the lowest level? Theoretically, maybe, yes. Currently invalid
             if (path.isEmpty()) return@none true
@@ -140,14 +129,18 @@ class ValidationService(
         val resolvedFields = mutableMapOf<String, MutableList<Any?>>()
 
         forAllSubSchemas(schema) {
+            if (type?.contains(SimpleType.OBJECT) == true) return@forAllSubSchemas
+
             val candidates = resolvedFields.computeIfAbsent(jsonPointer.text) { mutableListOf() }
 
             val resolveNode = const ?: return@forAllSubSchemas
-            val resolvedValue = when (resolveNode) {
-                is SimpleNode -> resolveNode.token.value
-                is ObjectNode -> resolveNode.nodes  // TODO: Better sub-node handling (important!)
+            val resolvedValue = resolveNode.toString().let {
+                if (type?.contains(SimpleType.STRING) == true) it.removeSurrounding("\"") else it
+            } /*when (resolveNode) {
+                is SimpleNode -> resolveNode.toString()
+                is ObjectNode -> resolveNode.nodes  // TODO: Better sub-node handling (important!) (Update: Handled above now?)
                 is ArrayNode -> resolveNode.nodes
-            }
+            }*/
 
             candidates.add(resolvedValue)
         }
@@ -161,7 +154,7 @@ class ValidationService(
             if (distinctValueCandidates.size == 1) {
                 return@mapValues ResolvedConflict(
                     distinctValueCandidates,
-                    MergingStrategy.SINGLE,
+                    SelfMergingStrategy.SINGLE,
                     distinctValueCandidates.single()
                 )
             }
@@ -172,10 +165,10 @@ class ValidationService(
 
     fun forAllSubSchemas(schema: JsonSchema, callback: JsonSchema.() -> Unit) {
         val subSchemas = mutableListOf(schema)
-        val subSchemaIt = subSchemas.iterator()
+        var subSchemaIndex = 0
 
-        while (subSchemaIt.hasNext()) {
-            val subSchema = subSchemaIt.next()
+        while (subSchemaIndex < subSchemas.size) {
+            val subSchema = subSchemas[subSchemaIndex]
             callback(subSchema)
 
             /*
@@ -187,6 +180,8 @@ class ValidationService(
             */
 
             subSchema.properties?.values?.let { subSchemas.addAll(it) }
+
+            subSchemaIndex++
         }
     }
-}
+}*/

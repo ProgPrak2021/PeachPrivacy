@@ -9,6 +9,10 @@ import java.util.*
 class ProjectService @Autowired constructor(
     private val projectRepository: ProjectRepository
 ) {
+    fun getAll(authorities: List<String>): List<Project> {
+        return projectRepository.findAll().filter { it.authority in authorities }
+    }
+
     fun getRandom(amount: Int): List<Project> {
         return projectRepository.findAll().shuffled().take(amount)
     }
@@ -21,8 +25,8 @@ class ProjectService @Autowired constructor(
         return projectRepository.save(project)
     }
 
-    fun create(project: Project): UUID {
-        return projectRepository.save(project).id!!
+    fun create(project: Project): Project {
+        return projectRepository.save(project)
     }
 
     fun delete(id: UUID) {

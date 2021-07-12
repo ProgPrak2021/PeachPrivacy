@@ -19,11 +19,11 @@ import java.io.InputStreamReader
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 // @ActiveProfiles("test")
 @ExtendWith(SpringExtension::class)
-class ConstExploration {
+class MedeiaTiltCompatibilityTest {
     @Test
     fun sampleTiltJSONSuccessfullyPassesMedeiaValidation(
         @Autowired api: MedeiaJacksonApi,
-        @Value("classpath:tilt-schema-632d064.json") tiltSchemaResource: Resource,
+        @Value("classpath:schema/tilt-schema-632d064.json") tiltSchemaResource: Resource,
         @Value("classpath:valid-tilt-1.json") testResource: Resource,
         @Autowired objectMapper: ObjectMapper
     ) {

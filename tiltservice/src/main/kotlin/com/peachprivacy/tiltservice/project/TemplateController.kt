@@ -15,10 +15,10 @@ class TemplateController @Autowired constructor(
     private val templateService: TemplateService
 ) {
     @GetMapping("/{id}/resolve")
-    fun resolveById(@PathVariable id: UUID, @RequestBody values: Map<String, String>): ResponseEntity<String> {
-
-
-        return ResponseEntity.ok("")
+    fun resolveById(@PathVariable id: UUID, @RequestBody values: Map<String, String>): ResponseEntity<String?> {
+        return templateService.getValueDefinitionsOfTemplate(id)?.let { valueDefinitions ->
+            ResponseEntity.ok(valueDefinitions)
+        } ?: ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()  // TODO: Detailed error
     }
 
     @GetMapping("/{id}")
@@ -32,10 +32,10 @@ class TemplateController @Autowired constructor(
         if (template.id != null) return ResponseEntity.badRequest().build()
         if (template.children.isNotEmpty()) return ResponseEntity.badRequest().build()
 
-        return templateService.create(template).let { id ->
+        return templateService.create(template).let { createdTemplate ->
             val handlerUri = httpRequest.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString()
-            val uri = URI("$handlerUri/$id")
-            ResponseEntity.created(uri).build()
+            val uri = URI("$handlerUri/${createdTemplate.id}")
+            ResponseEntity.created(uri).body(createdTemplate)
         }
     }
     @PutMapping("/{id}")

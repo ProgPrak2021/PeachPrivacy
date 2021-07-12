@@ -1,4 +1,4 @@
-package com.peachprivacy.templateservice.validation
+package com.peachprivacy.templateservice.resolve
 
 enum class MergingStrategy {
     NONE,       // No strategy was applied

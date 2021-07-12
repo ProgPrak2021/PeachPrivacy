@@ -15,7 +15,7 @@ class ProjectController @Autowired constructor(
     private val projectService: ProjectService
 ) {
     @GetMapping()
-    fun get5RandomProjects(): ResponseEntity<List<Project>> {
+    fun getProjects(): ResponseEntity<List<Project>> {
         return ResponseEntity.ok(projectService.getRandom(5))
     }
 
@@ -31,10 +31,10 @@ class ProjectController @Autowired constructor(
         if (project.id != null) return ResponseEntity.badRequest().build()
         if (project.versions.size > 1) return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).build()
 
-        return projectService.create(project).let { id ->
+        return projectService.create(project).let { createdProject ->
             val handlerUri = httpRequest.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE).toString()
-            val uri = URI("$handlerUri/$id")
-            ResponseEntity.created(uri).build()
+            val uri = URI("$handlerUri/${createdProject.id}")
+            ResponseEntity.created(uri).body(createdProject)
         }
     }
 

@@ -25,21 +25,11 @@ open class SchemaRemoteTSRepository @Autowired constructor(
 
     private fun WebClient.RequestHeadersSpec<*>.retrieveString() = webClientResult(this)
 
-    override fun getMergedPaths(ids: Collection<UUID>): String? {
-        val schemas = ids.map { get(it) ?: return null /* TODO specify error message instead of just null */ }
-        return schemaMicroserviceWebClient.post().uri("/api/template/validation/resolve/merge/path")
+    override fun getValueDefinitions(schema: UUID, dependencies: Map<UUID, Any>): String? {
+        return schemaMicroserviceWebClient.post().uri("/api/template/resolve/values/$schema")
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON)
-            .body(BodyInserters.fromValue(schemas))
-            .retrieveString()
-    }
-
-    override fun getMerged(ids: Collection<UUID>): String? {
-        val schemas = ids.map { get(it) ?: return null /* TODO specify error message instead of just null */ }
-        return schemaMicroserviceWebClient.post().uri("/api/template/validation/resolve/merge")
-            .accept(MediaType.APPLICATION_JSON)
-            .contentType(MediaType.APPLICATION_JSON)
-            .body(BodyInserters.fromValue(schemas))
+            .body(BodyInserters.fromValue(dependencies))
             .retrieveString()
     }
 
