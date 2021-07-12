@@ -34,7 +34,7 @@ open class SchemaRemoteTSRepository @Autowired constructor(
     }
 
     override fun createValueDefinitions(schema: UUID, values: Map<String, Any?>): String? {
-        return schemaMicroserviceWebClient.post().uri("/api/template/data/$schema/values")
+        return schemaMicroserviceWebClient.post().uri("/api/template/templates/data/$schema/values")
             .accept(MediaType.APPLICATION_JSON)
             .contentType(MediaType.APPLICATION_JSON)
             .body(BodyInserters.fromValue(values))
