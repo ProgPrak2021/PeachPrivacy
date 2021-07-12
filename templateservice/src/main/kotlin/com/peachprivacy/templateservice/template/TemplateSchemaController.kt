@@ -11,6 +11,17 @@ import java.util.*
 class TemplateSchemaController(
     @Autowired private val schemaService: TemplateSchemaService
 ) {
+    @PostMapping("/data/{id}/values")
+    fun addConstToTemplate(@PathVariable id: UUID, @RequestBody values: Map<String, Any?>): ResponseEntity<Any> {
+        return schemaService.getSchema(id)?.let {
+            val schema = schemaService.specifySchemaConst(it, values.mapKeys { (key, _) -> key.split("/") })
+
+            schemaService.setSchema(schema)
+
+            ResponseEntity.ok(schema)
+        } ?: ResponseEntity.notFound().build()
+    }
+
     @GetMapping("/data/{id}")
     fun justGetTemplate(@PathVariable id: UUID): ResponseEntity<String> {
         return schemaService.getSchema(id)?.let {

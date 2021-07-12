@@ -13,6 +13,10 @@ class TemplateService @Autowired constructor(
     private val schemaRepository: SchemaRepository,
     private val templateRepository: TemplateRepository
 ) {
+    fun createValueDefinitions(id: UUID, values: Map<String, Any?>): String? {
+        return schemaRepository.createValueDefinitions(id, values)
+    }
+
     fun getValueDefinitionsOfTemplate(id: UUID): String? {
         val resolvedTemplates = mutableMapOf<List<UUID>, Template>()
         val resolvingTemplatesQueue = mutableListOf(listOf(id))

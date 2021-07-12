@@ -16,9 +16,16 @@ class TemplateController @Autowired constructor(
     private val templateService: TemplateService
 ) {
     @GetMapping("/{id}/resolve")
-    fun resolveById(@PathVariable id: UUID, @RequestBody values: Map<String, String>): ResponseEntity<String?> {
+    fun resolveById(@PathVariable id: UUID): ResponseEntity<String?> {
         return templateService.getValueDefinitionsOfTemplate(id)?.let { valueDefinitions ->
             ResponseEntity.ok(valueDefinitions)
+        } ?: ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()  // TODO: Detailed error
+    }
+
+    @PostMapping("/{id}/resolve")
+    fun specifyValues(@PathVariable id: UUID, @RequestBody values: Map<String, Any?>): ResponseEntity<String?> {
+        return templateService.createValueDefinitions(id, values)?.let { newSchema ->
+            ResponseEntity.ok(newSchema)
         } ?: ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()  // TODO: Detailed error
     }
 
