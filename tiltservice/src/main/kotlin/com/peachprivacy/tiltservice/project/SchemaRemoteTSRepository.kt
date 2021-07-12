@@ -41,6 +41,12 @@ open class SchemaRemoteTSRepository @Autowired constructor(
             .retrieveString()
     }
 
+    override fun resolveObject(schema: UUID, dependencies: Map<UUID, Any>): String? {
+        return schemaMicroserviceWebClient.get().uri("/api/template/resolve/$schema/object")
+            .accept(MediaType.APPLICATION_JSON)
+            .retrieveString()
+    }
+
     override fun get(id: UUID) =
         schemaMicroserviceWebClient.get().uri("/api/template/templates/data/$id").retrieveString()
 

@@ -13,11 +13,23 @@ class TemplateService @Autowired constructor(
     private val schemaRepository: SchemaRepository,
     private val templateRepository: TemplateRepository
 ) {
+    fun getResolvedObject(id: UUID): String? {
+        val dependencyMap = getDependencyMap(id)
+
+        return schemaRepository.resolveObject(id, dependencyMap)
+    }
+
     fun createValueDefinitions(id: UUID, values: Map<String, Any?>): String? {
         return schemaRepository.createValueDefinitions(id, values)
     }
 
     fun getValueDefinitionsOfTemplate(id: UUID): String? {
+        val dependencyMap = getDependencyMap(id)
+
+        return schemaRepository.getValueDefinitions(id, dependencyMap)
+    }
+
+    fun getDependencyMap(id: UUID): Map<UUID, Any> {
         val resolvedTemplates = mutableMapOf<List<UUID>, Template>()
         val resolvingTemplatesQueue = mutableListOf(listOf(id))
 
@@ -65,9 +77,7 @@ class TemplateService @Autowired constructor(
             }
         }
 
-        return schemaRepository.getValueDefinitions(id, dependencyMap)
-
-        // return resolvedTemplates.values.first().also { it.schema = mergedPaths ?: "(NULL merged path)" }
+        return dependencyMap
     }
 
     fun get(id: UUID): Template? {

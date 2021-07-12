@@ -29,6 +29,13 @@ class TemplateController @Autowired constructor(
         } ?: ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).build()  // TODO: Detailed error
     }
 
+    @GetMapping("/{id}/resolve/object")
+    fun getResolvedObject(@PathVariable id: UUID): ResponseEntity<String?> {
+        return templateService.getResolvedObject(id)?.let { newSchema ->
+            ResponseEntity.ok(newSchema)
+        } ?: ResponseEntity.status(HttpStatus.BAD_REQUEST).build()  // TODO: Detailed error
+    }
+
     @ApiOperation("Access Template information using the uuid")
     @ApiImplicitParams(
         ApiImplicitParam(name = "id", value = "The uuid of the template to show information for"),

@@ -11,6 +11,23 @@ class ResolveService(
     @Autowired private val templateService: TemplateSchemaService,
     @Autowired private val resolveToolsService: ResolveToolsService
 ) {
+    fun getResolvedObject(valueDefinitions: List<ValueDefinitionItem<Any>>): Map<String, Any?>? {
+        val objectMap = mutableMapOf<String, Any?>()
+
+        valueDefinitions.forEach { valueDefinitionItem ->
+            val targetNode = valueDefinitionItem.path.dropLast(1).fold(objectMap) { pathNode, pathElement ->
+                (pathNode[pathElement] as? MutableMap<String, Any?>) ?: mutableMapOf<String, Any?>().also { subNode ->
+                    pathNode[pathElement] = subNode
+                }
+            }
+
+            targetNode[valueDefinitionItem.path.last()] =
+                (valueDefinitionItem.definition as? SuccessfulValueDefinition)?.value ?: return null
+        }
+
+        return objectMap
+    }
+
     fun getAllValueDefinitions(schema: UUID, subSchemas: Map<UUID, Any>): List<ValueDefinitionItem<Any>> {
         val pathAttempts = subSchemas.map { (subSchema, value) ->
             ((value as? Map<String, Any>)?.let { subSubSchemas ->

@@ -11,9 +11,17 @@ class ResolveController(
     @Autowired private val resolveService: ResolveService
 ) {
     @PostMapping("/values/{schema}")
-    fun getConflicts(@RequestBody dependencies: Map<UUID, Map<UUID, Any>>, @PathVariable schema: UUID): ResponseEntity<List<ValueDefinitionItem<Any>>> {
+    fun getConflicts(@PathVariable schema: UUID, @RequestBody dependencies: Map<UUID, Map<UUID, Any>>): ResponseEntity<List<ValueDefinitionItem<Any>>> {
         val valueDefinitions = resolveService.getAllValueDefinitions(schema, dependencies)
 
         return ResponseEntity.ok(valueDefinitions)
+    }
+
+    @GetMapping("/api/template/resolve/{schema}/object")
+    fun getResolvedObject(@PathVariable schema: UUID, @RequestBody dependencies: Map<UUID, Map<UUID, Any>>): ResponseEntity<Map<String, Any?>> {
+        val valueDefinitions = resolveService.getAllValueDefinitions(schema, dependencies)
+        resolveService.getResolvedObject(valueDefinitions)?.let {
+            return ResponseEntity.ok(it)
+        } ?: return ResponseEntity.badRequest().build()
     }
 }
