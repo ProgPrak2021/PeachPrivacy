@@ -13,8 +13,14 @@
             <div class="text-center">
               <template v-for="version in project.versions">
                 <div :key="version">
-                  <md-button class="md-info" @click="rawTilt(version)"
-                    >TILT Schema für {{ version }} </md-button
+                  <md-button class="md-info" @click="tiltSchema(version)"
+                    >TILT Schema für {{ version }}
+                  </md-button>
+                  <md-button
+                    v-if="available.includes(version)"
+                    class="md-success"
+                    @click="tilt(version)"
+                    >TILT für {{ version }} </md-button
                   ><br />
                 </div>
               </template>
@@ -41,7 +47,8 @@ export default {
     return {
       project: {
         name: ""
-      }
+      },
+      available: []
     };
   },
   async created() {
@@ -55,14 +62,27 @@ export default {
         }
       );
       this.project = response.data;
+      for (const version of this.project.versions) {
+        try {
+          const response = await axios.get(
+            "/api/tilt/templates/" + version + "/resolve/object"
+          );
+          if (response.status === 200) {
+            this.available.push(version);
+          }
+        } catch (error) {}
+      }
       console.log(this.project);
     } catch (error) {
       await this.$router.push("/profile");
     }
   },
   methods: {
-    rawTilt(id) {
-      this.$router.push("/api/tilt/templates/" + id); // TODO ../schema to only display schema
+    tiltSchema(id) {
+      window.location = "/api/tilt/templates/" + id;
+    },
+    tilt(id) {
+      window.location = "/api/tilt/templates/" + id + "/resolve/object";
     },
     async deleteProject() {
       try {

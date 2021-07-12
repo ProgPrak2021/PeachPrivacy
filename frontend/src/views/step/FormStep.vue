@@ -2,12 +2,12 @@
   <div>
     <h3>{{ prefix }}</h3>
     <template
-      v-for="field in value.schema"
-      v-if="field.path.startsWith(prefix)"
+      v-for="field in value.fields"
+      v-if="field.path.join('/').startsWith(prefix)"
     >
-      <div :key="field.path" class="md-layout">
+      <div :key="field.path.join('/')" class="md-layout">
         <div class="md-layout-item">
-          <md-field v-if="field.type === 'string'">
+          <md-field v-if="field.type === 'string' || field.type === 'array'">
             <label>{{ field.question }}</label>
             <md-input
               type="text"
@@ -15,8 +15,8 @@
               @input="update"
             ></md-input>
           </md-field>
-          <md-field v-if="field.type === 'double'">
-            <label>{{ field.question }} double</label>
+          <md-field v-if="field.type === 'integer' || field.type === 'number'">
+            <label>{{ field.question }} number</label>
             <md-input
               type="number"
               pattern="\d+(,\d{2})?"

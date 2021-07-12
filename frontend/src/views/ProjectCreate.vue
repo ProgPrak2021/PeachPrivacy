@@ -58,6 +58,7 @@ import NameStep from "@/views/step/NameStep";
 import TemplateStep from "@/views/step/TemplateStep";
 import axios from "axios";
 import FormStep from "@/views/step/FormStep";
+import DefaultSchema from "@/assets/default-schema.json";
 
 export default {
   name: "ProjectCreate",
@@ -69,105 +70,13 @@ export default {
       steps: [],
       stepCount: 10,
       state: {
+        templateId: "",
         name: "",
         description: "",
+        schema: JSON.stringify(DefaultSchema),
         projects: [],
         valid: false,
-        schema: [
-          {
-            path: "accessAndDataPortability/description",
-            question: "AccessAndDataPortability",
-            description:
-              "Description of the requirements according to Art. 20 GDPR.",
-            type: "string",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          },
-          {
-            path: "accessAndDataPortability/URL",
-            question: "Beschreibungdjanfijadnifnjad",
-            description: "fdakfmnadlkfad",
-            type: "string",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          },
-          {
-            path: "accessAndDataPortability/available",
-            question: "AccessAndDataPortability - Available",
-            description:
-              "Defining the right to access and data portability. - The information is subject to the requirements of Art. 20 (right to data portability) GDPR.",
-            type: "boolean",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          },
-          {
-            path: "accessAndDataPortability/identificationFeatures",
-            question: "Beschreibungdjanfijadnifnjad",
-            description: "fdakfmnadlkfad",
-            type: "string",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          },
-          {
-            path: "accessAndDataPortability/email",
-            question: "Beschreibungdjanfijadnifnjad",
-            description: "fdakfmnadlkfad",
-            type: "string",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          },
-          {
-            path: "accessAndDataPortability/dataFormats",
-            question: "Beschreibungdjanfijadnifnjad",
-            description: "fdakfmnadlkfad",
-            type: "string",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          },
-          {
-            path: "accessAndDataPortability/administrativeFee/amount",
-            question: "Beschreibungdjanfijadnifnjad",
-            description: "fdakfmnadlkfad",
-            type: "double",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          },
-          {
-            path: "accessAndDataPortability/administrativeFee/currency",
-            question: "Beschreibungdjanfijadnifnjad",
-            description: "fdakfmnadlkfad",
-            type: "string",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-              // value: "Lorem Ipsum..."
-            }
-          },
-          {
-            path: "test/feld1",
-            question: "Feld 1",
-            description: "das ist feld 1",
-            type: "string",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          },
-          {
-            path: "test/feld2",
-            question: "Feld 2",
-            description: "das ist feld 2",
-            type: "string",
-            definition: {
-              schema: "10f240c4-f0bc-4108-ac65-eb1ea1c6cd3c"
-            }
-          }
-        ]
+        fields: []
       }
     };
   },
@@ -185,20 +94,24 @@ export default {
     },
     async pageUpdate(add) {
       if (this.step === 1 && add === 1) {
-        await this.createProject();
-        new Set(
-          this.state.schema.map(field => field.path.split("/")[0])
-        ).forEach(prefix => {
-          this.steps.push({
-            type: "FormStep",
-            prefix: prefix
-          });
-        });
+        if (!(await this.createProject())) return;
+        if (!(await this.resolveFields())) return;
+        new Set(this.state.fields.map(field => field.path[0])).forEach(
+          prefix => {
+            this.steps.push({
+              type: "FormStep",
+              prefix: prefix
+            });
+          }
+        );
         this.stepCount = this.steps.length;
         this.step += add;
       } else if (this.step === this.steps.length - 1 && add === 1) {
         console.log("request");
         console.log(this.state);
+        if (!(await this.pushFields())) return;
+
+        await this.$router.push("/profile");
       } else {
         this.step += add;
       }
@@ -219,14 +132,14 @@ export default {
             }
           }
         );
-        console.log(projectResponse);
         const template = {
           project: {
-            id: projectResponse.headers.location.split("/").slice(-1)[0]
+            id: projectResponse.data.id
           },
           version: 1,
           changelog: "Initial",
-          parents: []
+          parents: [],
+          schema: this.state.schema
         };
         this.state.projects.forEach(templateId => {
           template.parents.push({ id: templateId });
@@ -241,9 +154,65 @@ export default {
             }
           }
         );
+        this.state.templateId = templateResponse.data.id;
+        return true;
       } catch (error) {
-        await this.$alert(error, "Projekt kann nicht erstellt werden");
         console.error(error);
+        await this.$alert(error, "Projekt kann nicht erstellt werden");
+        return false;
+      }
+    },
+    async resolveFields() {
+      try {
+        const resolveResponse = await axios.get(
+          "/api/tilt/templates/" + this.state.templateId + "/resolve",
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        );
+        this.state.fields = resolveResponse.data.filter(field => {
+          if (field.definition === null) {
+            field.definition = {};
+          }
+          return field.definition.value === undefined;
+        });
+        console.log(this.state.fields);
+        return true;
+      } catch (error) {
+        console.error(error);
+        await this.$alert(error, "Template kann nicht erstellt werden");
+        return false;
+      }
+    },
+    async pushFields() {
+      try {
+        const push = {};
+        this.state.fields.forEach(field => {
+          if (
+            field.definition.value !== undefined &&
+            field.definition.value !== null &&
+            field.definition.value !== ""
+          ) {
+            push[field.path.join("/")] = field.definition.value;
+          }
+        });
+        const pushResponse = await axios.post(
+          "/api/tilt/templates/" + this.state.templateId + "/resolve",
+          push,
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token")
+            }
+          }
+        );
+        console.log(pushResponse.data);
+        return true;
+      } catch (error) {
+        console.error(error);
+        await this.$alert(error, "Template kann nicht geupdated werden");
+        return false;
       }
     },
     cancel() {

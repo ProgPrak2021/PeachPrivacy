@@ -14,6 +14,10 @@
         @input="update"
       ></md-input>
     </md-field>
+    <md-field>
+      <label>Schema</label>
+      <md-input type="text" v-model="value.schema" @input="update"></md-input>
+    </md-field>
   </div>
 </template>
 
@@ -29,7 +33,8 @@ export default {
       default() {
         return {
           name: "",
-          description: ""
+          description: "",
+          schemaSchema: ""
         };
       }
     }
