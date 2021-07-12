@@ -17,7 +17,7 @@ class ResolveController(
         return ResponseEntity.ok(valueDefinitions)
     }
 
-    @GetMapping("/{schema}/object")
+    @PostMapping("/{schema}/object")
     fun getResolvedObject(@PathVariable schema: UUID, @RequestBody dependencies: Map<UUID, Map<UUID, Any>>): ResponseEntity<Map<String, Any?>> {
         val valueDefinitions = resolveService.getAllValueDefinitions(schema, dependencies)
         resolveService.getResolvedObject(valueDefinitions)?.let {
