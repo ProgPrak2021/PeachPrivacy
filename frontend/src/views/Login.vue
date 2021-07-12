@@ -48,6 +48,11 @@ export default {
     };
   },
   props: {},
+  created() {
+    if (JSON.parse(localStorage.getItem("authenticated")) === true) {
+      this.$router.push("/profile");
+    }
+  },
   computed: {
     headerStyle() {
       return {
@@ -76,7 +81,7 @@ export default {
         .then(response => {
           localStorage.setItem("token", response.data);
           console.log(response.data);
-          this.$alert("Wilkommen zurück", "login-sucess", "success");
+          this.$alert("Willkommen zurück", "login-sucess", "success");
           this.$router.push("profile");
         })
         .catch(function(error) {

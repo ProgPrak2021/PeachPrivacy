@@ -52,7 +52,7 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
             .inputStream
             .readAllBytes()
             .decodeToString()
-            .replace("%LINK%", "https://peachprivacy.dev/api/auth/verify/${account.emailToken}")
+            .replace("%LINK%", "https://peachprivacy.dev/#/verify/${account.emailToken}")
 
         messageHelper.setText(html, true)
 
@@ -105,7 +105,7 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
             .inputStream
             .readAllBytes()
             .decodeToString()
-            .replace("%LINK%", "https://peachprivacy.dev/reset/${account.resetToken}")
+            .replace("%LINK%", "https://peachprivacy.dev/#/reset/${account.resetToken}")
 
         messageHelper.setText(html, true)
 

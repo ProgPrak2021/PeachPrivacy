@@ -10,16 +10,16 @@
               <h4 slot="title" class="card-title">Passwort zurücksetzen</h4>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock_outline</md-icon>
-                <label>Passwort...(min 6 Zeichen)</label>
+                <label>Passwort</label>
                 <md-input v-model="password" type="password"></md-input>
               </md-field>
               <md-field class="md-form-group" slot="inputs">
-                <md-icon>lock</md-icon>
-                <label>wiederhole Passwort</label>
-                <md-input v-model="confirm_password" type="password"></md-input>
+                <md-icon>lock_outline</md-icon>
+                <label>Passwort bestätigen</label>
+                <md-input v-model="confirmPassword" type="password"></md-input>
               </md-field>
               <md-button v-on:click="reset" slot="footer" class="md-danger">
-                Registrieren
+                Zurücksetzen
               </md-button>
             </login-card>
           </div>
@@ -31,16 +31,31 @@
 
 <script>
 import axios from "axios";
+import { LoginCard } from "@/components";
 export default {
   name: "Reset",
+  components: {
+    LoginCard
+  },
   data() {
     return {
-      user: {
-        password: "",
-        confirm_password: "",
-        token_isright: true
-      }
+      password: "",
+      confirmPassword: ""
     };
+  },
+  async created() {
+    try {
+      const response = await axios.get(
+        "/api/auth/reset/" + this.$route.params.token,
+        {}
+      );
+      if (response.data !== true) {
+        console.log(response.data);
+        await this.$router.push("/login");
+      }
+    } catch (error) {
+      console.error(err);
+    }
   },
   computed: {
     headerStyle() {
@@ -55,42 +70,37 @@ export default {
   },
   methods: {
     reset() {
-      this.get();
-      if (!this.token_isright) {
+      if (this.password.length < 6) {
         this.$alert(
-          "Versuchen Sie das Passwort wieder zurückzusetzen",
-          "Die Adresse ist abgelaufen. ",
-          "success"
+          "Passwort muss min. 6 Zeichen enthalten",
+          "Passwort ist zu kurz",
+          "error"
         );
-        this.$router.push("/forgot");
+        return;
+      }
+      if (this.password !== this.confirmPassword) {
+        this.$alert("Die Passwörter stimmen nicht überein", "Fehler", "error");
+        return;
       }
 
       axios
         .post("/api/auth/reset", null, {
           params: {
-            old_password: this.old_password,
+            password: this.password,
             token: this.$route.params.token
           }
         })
         .then(response => {
           this.$alert(
-            "Sie haben ihr Passwort geändert",
-            "Passwort Änderung",
+            "Sie haben Ihr Passwort geändert",
+            "Passwort geändert",
             "success"
           );
-          console.log(response.data);
-          this.$router.push("/profile");
+          this.$router.push("/login");
         })
         .catch(function(error) {
           console.log(error);
-          this.$alert("Versuchen Sie es nochmal  ", "Fehler", "error");
         });
-    },
-    get() {
-      const sieben = "/api/auth/reset/" + this.$route.params.token;
-      axios.get(sieben).then(response => {
-        this.token_isright = response.data.data();
-      });
     }
   }
 };

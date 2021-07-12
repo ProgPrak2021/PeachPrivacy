@@ -14,7 +14,7 @@
                 <md-input v-model="email" type="email"></md-input>
               </md-field>
               <md-button v-on:click="HandleOk" slot="footer" class="md-danger">
-                Passwort zurücksetzten
+                Passwort zurücksetzen
               </md-button>
             </login-card>
           </div>
@@ -49,8 +49,8 @@ export default {
         .then(response => {
           this.register_response = response.data;
           this.$alert(
-            "Sie erhalten eine Email, wenn die Email im System existier",
-            "Email",
+            "Wir schicken Ihnen eine E-Mail mit weiteren Instruktionen",
+            "Passwort zurückgesetzt",
             "success"
           );
         })
@@ -65,19 +65,14 @@ export default {
         )
       ) {
         this.$alert(
-          " Geben Sie eine valide Email an",
+          "Geben Sie eine valide Email an",
           "Email existiert nicht",
           "error"
         );
         return;
       }
       this.forgot_password();
-      this.$alert(
-        "Sie erhalten eine Email um ihr Passwort zu verändern ",
-        "Email existiert ",
-        "success"
-      );
-      this.$router.push("landing");
+      this.$router.push("/");
     }
   },
   computed: {

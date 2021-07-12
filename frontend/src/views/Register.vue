@@ -20,7 +20,7 @@
               </md-field>
               <md-field class="md-form-group" slot="inputs">
                 <md-icon>lock</md-icon>
-                <label>wiederhole Passwort</label>
+                <label>Wiederhole Passwort</label>
                 <md-input v-model="confirm_password" type="password"></md-input>
               </md-field>
               <md-button v-on:click="handleOk" slot="footer" class="md-danger">
@@ -58,6 +58,11 @@ export default {
       };
     }
   },
+  created() {
+    if (JSON.parse(localStorage.getItem("authenticated")) === true) {
+      this.$router.push("/profile");
+    }
+  },
   methods: {
     register() {
       //Login Aufruf für an den Server
@@ -72,29 +77,25 @@ export default {
         .then(response => {
           console.log(this.register_response);
           this.$alert(
-            "Sie erhlaten eine Bestätigungsemail",
+            "Sie erhalten eine Bestätigungsemail!",
             "Registrierung erfolgreich",
             "success"
           );
           this.register_response = response.data;
         })
-        .catch(function(error) {
-          this.$alert(
-            "Etwas ist schiefgelaufen, versuchen Sie es nochmal",
-            "Fehler",
-            "info"
-          );
+        .catch(error => {
           console.log(error);
+          this.$alert("Diese E-Mail ist vergeben", "Fehler", "error");
         });
     },
     handleOk() {
       // Prevent modal from closing
       if (this.email.length >= 255 || this.password.length >= 255) {
-        this.$alert("Passwort oder Email ist zu lang ", "Fehler", "info");
+        this.$alert("Passwort oder Email ist zu lang", "Fehler", "info");
         return;
       }
       if (this.email.length === 0) {
-        this.$alert("Geben Sie eine Email  ein", "Fehler", "info");
+        this.$alert("Geben Sie eine Email ein", "Fehler", "info");
         return;
       }
       if (this.password.length === 0) {
@@ -112,7 +113,7 @@ export default {
       if (this.confirm_password.length === 0) {
         this.$alert(
           "Wiederholen Sie das Passwort",
-          " Passwort wurde nicht wiederholt",
+          "Passwort wurde nicht wiederholt",
           "info"
         );
         return;
@@ -120,7 +121,7 @@ export default {
       if (this.confirm_password.length < 6) {
         this.$alert(
           "Passwort muss min. 6 Zeichen enthalten",
-          " Passwort ist zu kurz",
+          "Passwort ist zu kurz",
           "info"
         );
         return;
@@ -139,7 +140,7 @@ export default {
         )
       ) {
         this.$alert(
-          " Geben Sie eine valide Email an",
+          "Geben Sie eine valide Email an",
           "Email existiert nicht",
           "error"
         );
@@ -147,6 +148,7 @@ export default {
       }
       // Trigger submit handler
       this.register();
+      this.$router.push("/login");
     }
   }
 };
