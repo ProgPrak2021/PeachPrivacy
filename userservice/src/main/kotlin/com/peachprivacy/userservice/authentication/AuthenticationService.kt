@@ -19,6 +19,7 @@ import javax.annotation.PostConstruct
 class AuthenticationService @Autowired constructor(val accountRepository: AccountRepository, val mailSender: JavaMailSender) {
     val salt: String = BCrypt.gensalt()
 
+    val from = "PeachPrivacy <no-reply@peachprivacy.com>"
     @Value("\${jwt.secret}")
     lateinit var secret: String
     lateinit var key: Key
@@ -34,7 +35,7 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
             this.email = email
             this.password = BCrypt.hashpw(password, salt)
             this.role = "default"
-            this.emailToken = UUID.randomUUID().toString().replace("-", "")
+            this.emailToken = randomToken()
         })
         sendRegisterMail(account)
         return true
@@ -43,9 +44,9 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
     private fun sendRegisterMail(account: Account) {
         val message = mailSender.createMimeMessage()
         val messageHelper = MimeMessageHelper(message)
-        messageHelper.setFrom("no-reply@peachprivacy.com")
+        messageHelper.setFrom(from)
         messageHelper.setTo(account.email)
-        messageHelper.setSubject("PeachPrivacy - Account bestätigen")
+        messageHelper.setSubject("Account bestätigen")
 
         val html = ClassPathResource("account-confirmation.html")
             .inputStream
@@ -76,6 +77,41 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
         )
     }
 
+    fun resetRequest(email: String) {
+        val account = accountRepository.findByEmail(email) ?: return
+        account.resetToken = randomToken()
+        accountRepository.save(account)
+        sendResetMail(account)
+    }
+
+    fun resetValid(token: String): Boolean = accountRepository.existsByResetToken(token)
+
+    fun reset(token: String, password: String): Boolean {
+        val account = accountRepository.findByResetToken(token) ?: return false
+        account.password = BCrypt.hashpw(password, salt)
+        account.resetToken = null
+        accountRepository.save(account)
+        return true
+    }
+
+    private fun sendResetMail(account: Account) {
+        val message = mailSender.createMimeMessage()
+        val messageHelper = MimeMessageHelper(message)
+        messageHelper.setFrom(from)
+        messageHelper.setTo(account.email)
+        messageHelper.setSubject("Passwort zurücksetzen")
+
+        val html = ClassPathResource("account-reset.html")
+            .inputStream
+            .readAllBytes()
+            .decodeToString()
+            .replace("%LINK%", "https://peachprivacy.dev/reset/${account.resetToken}")
+
+        messageHelper.setText(html, true)
+
+        mailSender.send(message)
+    }
+
     fun generateToken(id: String, email: String, authorities: List<String>): String =
         Jwts.builder()
             .setClaims(mutableMapOf("id" to id, "authorities" to authorities.joinToString(",")))
@@ -88,4 +124,6 @@ class AuthenticationService @Autowired constructor(val accountRepository: Accoun
             )
             .signWith(key)
             .compact()
+
+    private fun randomToken() = UUID.randomUUID().toString().replace("-", "")
 }

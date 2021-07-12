@@ -18,4 +18,7 @@ class Account {
 
     @Column(nullable = true, unique = true)
     var emailToken: String? = null
+
+    @Column(nullable = true, unique = true)
+    var resetToken: String? = null
 }
