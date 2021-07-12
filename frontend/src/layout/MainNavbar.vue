@@ -4,7 +4,8 @@
       <img
         :src="require('@/assets/peachPrivacy.png')"
         width="250"
-        style="filter: drop-shadow(2px 2px 2px #954f18)"
+        style="filter: drop-shadow(2px 2px 2px #954f18); cursor: pointer"
+        @click="landingPage"
       />
       <div class="md-toolbar-section-start">
         <!--<h3 class="md-title">Primary Color</h3>-->
@@ -127,6 +128,9 @@ export default {
     }
   },
   methods: {
+    landingPage() {
+      this.$router.push("/");
+    },
     bodyClick() {
       let bodyClick = document.getElementById("bodyClick");
 

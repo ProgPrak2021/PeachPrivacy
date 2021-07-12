@@ -81,10 +81,10 @@ export default {
         .then(response => {
           localStorage.setItem("token", response.data);
           console.log(response.data);
-          this.$alert("Willkommen zurück", "login-sucess", "success");
+          this.$alert("Willkommen zurück", "Erfolgreich", "success");
           this.$router.push("profile");
         })
-        .catch(function(error) {
+        .catch(error => {
           console.log(error);
           this.$alert("Passwort oder Email ist falsch ", "Fehler", "error");
         });

@@ -13,33 +13,8 @@
             </a>
           </li>
           <li>
-            <a href="https://peachprivacy.dev">
-              Spring Cloud
-            </a>
-          </li>
-          <li>
-            <a href="https://peachprivacy.dev">
-              Template-Service
-            </a>
-          </li>
-           <li>
-            <a href="https://peachprivacy.dev">
-              User-Service
-            </a>
-          </li>
-          <li>
-            <a href="https://peachprivacy.dev">
-              Tilt-Service
-            </a>
-          </li>
-          <li>
             <a href="https://www.creative-tim.com/license">
-              License Tim
-            </a>
-          </li>
-          <li>
-            <a href="https://www.creative-tim.com/license">
-              License PP
+              License Creative-Tim
             </a>
           </li>
         </ul>
