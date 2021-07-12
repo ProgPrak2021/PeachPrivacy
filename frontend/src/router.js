@@ -15,7 +15,6 @@ import ProjectView from "@/views/ProjectView";
 Vue.use(Router);
 
 let router = new Router({
-  mode: "history",
   routes: [
     {
       path: "/",
