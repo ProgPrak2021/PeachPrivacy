@@ -24,7 +24,7 @@ export default {
   props: {
     image: {
       type: String,
-      default: require("@/assets/leaves.jpg")
+      default: require("@/assets/tiltdoc.png")
     },
     title: {
       type: String,
