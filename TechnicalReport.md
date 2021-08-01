@@ -49,7 +49,7 @@ Der TiltService verwaltet die Metadaten der Projekte. Hier wird die Referenz der
 
 [Swagger, direkt auf Service](http://35.246.192.209:30001/swagger-ui.html)
 
-[SwaggerHub](https://ap.swaggerhub.com/apis-docs/p4skal/peachprivacytiltservice/1.0)
+[SwaggerHub](https://app.swaggerhub.com/apis-docs/p4skal/peachprivacytiltservice/1.0)
 
 ### Andere
 
