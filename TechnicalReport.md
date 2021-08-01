@@ -27,9 +27,9 @@ Der UserService ist für user-bezogene Aktionen wie beispielsweise die Registrie
 
 ![Swagger UserService](images/swagger-userservice.png)
 
-[http://35.246.192.209:30000/swagger-ui.html](Swagger, direkt auf Service)
+[Swagger, direkt auf Service](http://35.246.192.209:30000/swagger-ui.html)
 
-[https://app.swaggerhub.com/apis/p4skal/peachprivacyuserservice/1.0](SwaggerHub)
+[SwaggerHub](https://app.swaggerhub.com/apis/p4skal/peachprivacyuserservice/1.0)
 
 ### TemplateService
 
@@ -37,9 +37,9 @@ Der TemplateService ist sowohl für das Abspeichern der Tilt-Schemas in **MongoD
 
 ![Swagger TemplateService](images/swagger-templateservice.png)
 
-[http://35.246.192.209:30002/swagger-ui.html](Swagger, direkt auf Service)
+[Swagger, direkt auf Service](http://35.246.192.209:30002/swagger-ui.html)
 
-[https://app.swaggerhub.com/apis/p4skal/peachprivacytemplateservice/1.0](SwaggerHub)
+[SwaggerHub](https://app.swaggerhub.com/apis/p4skal/peachprivacytemplateservice/1.0)
 
 ### TiltService
 
@@ -47,9 +47,9 @@ Der TiltService verwaltet die Metadaten der Projekte. Hier wird die Referenz der
 
 ![Swagger TiltService](images/swagger-tiltservice.png)
 
-[http://35.246.192.209:30001/swagger-ui.html](Swagger, direkt auf Service)
+[Swagger, direkt auf Service](http://35.246.192.209:30001/swagger-ui.html)
 
-[https://app.swaggerhub.com/apis/p4skal/peachprivacytiltservice/1.0](SwaggerHub)
+[SwaggerHub](https://app.swaggerhub.com/apis/p4skal/peachprivacytiltservice/1.0)
 
 ### Andere
 
@@ -65,7 +65,7 @@ Um das volle Potential von Spring Cloud und die damit verbundenen Vorteile zu nu
 
 Das gesamte Backend wurde in **Kotlin** programmiert, da wir so komplexe Abläufe mit relativ wenig Zeilen Code abbilden konnten. Als Build Management Tool haben wir **Gradle** im Kotlin-Syntax genutzt, damit ein **Multi-Module** Projekt erzeugt und den entsprechenden Modulen die benötigten Dependencies bereitgestellt. Für das Web-Modul von Spring haben wir beispielsweise in einigen Modulen **Spring Boot WebFlux** verwendet und in anderen **Spring Boot Web MVC**. Für die Postgre-Datenbank haben wir **Spring Boot Data JPA** (mit Hibernate) verwendet, was jedoch teilweise das Reactive Programming Paradigma, vorgegeben von Spring Boot Webflux / Project Reactor einschränkt. Für Unit Tests bzw. Integration Tests, welche in diesem Projekt weitestgehend vernachlässigt wurden, haben wir H2 als In-Memory SQL Database verwendet. Dokumentation wie beispielsweise KDoc wurde in diesem Projekt ebenfalls vernachlässigt. Lediglich Swagger wurde zur Visualisierung der Endpunkte für die Entwicklung des Frontends verwendet.
 
-Das Frontend wurde mit **Vue** realisiert und zusätzlich um das *Vue Material Kit* von [https://creative-tim.com](Creative Tim) erweitert. Hier wird mithilfe einer **Dockerfile** das Frontend containerized.
+Das Frontend wurde mit **Vue** realisiert und zusätzlich um das *Vue Material Kit* von [Creative Tim](https://creative-tim.com) erweitert. Hier wird mithilfe einer **Dockerfile** das Frontend containerized.
 
 Authentication, sprich das Validieren der Zugriffserlaubnis eines Clients, wird mit **JWT** (**J**SON **W**eb **T**oken) realisiert, welches als Bearer Token im Authorization Header des HTTP-Protokolls für jede geschützte Anfrage mitgegeben wird. Falls der Token präsent und valid ist, wird dieser von Spring Cloud Gateway geparsed und die nötigen Informationen werden per HTTP-Header an die Microservices geschickt. Hier wird das Authentication Module relevant, welches als Library für Microservices verwendet wird. Dieses setzt ein Authentication Objekt mit den übergebenen Informationen in Spring Security. Authorization, die entscheidet wer welchen Zugriff hat, übernehmen somit die Microservices via Spring Security selbst. Authentification, sprich das Ausstellen der Tokens übernimmt der UserService. Hierfür werden Informationen wie die E-Mail, die Rolle, sowie andere Daten in ein JWT-Token gepackt, signiert und an das FrontEnd als Antwort zurückgegeben.
 
@@ -106,15 +106,15 @@ Fragebogen A hat eine Frage: "Beschreiben Sie ihr Auto". Fragebogen B ist spezie
 
 Tilt ist allerdings keine Programmiersprache, ein fertiges Dokument entspricht einem JSON-Objekt. Objektorientierung behalten wir also vorerst im Hinterkopf - JSON selbst unterstützt sie nicht, dafür wurde die Notation nicht entwickelt.
 
-Wie wird vorgegeben, wie Tilt auszusehen hat? Wie wird sichergestellt, dass ein JSON-Objekt, die erstellt wird, auch wirklich ein valides Tilt-Dokument ist? Hierzu wird JSON Schema genutzt: [https://github.com/Transparency-Information-Language/schema/blob/master/tilt-schema.json](Tilt-Schema). JSON Schema ist "ein Vokabular, welches JSON Dokumente annotieren und validieren kann" ([https://json-schema.org/](json-schema.org)).
+Wie wird vorgegeben, wie Tilt auszusehen hat? Wie wird sichergestellt, dass ein JSON-Objekt, die erstellt wird, auch wirklich ein valides Tilt-Dokument ist? Hierzu wird JSON Schema genutzt: [Tilt-Schema](https://github.com/Transparency-Information-Language/schema/blob/master/tilt-schema.json). JSON Schema ist "ein Vokabular, welches JSON Dokumente annotieren und validieren kann" ([json-schema.org](https://json-schema.org/)).
 
 Bei JSON Schema handelt es sich allerdings NICHT um eine Validierungstechnik mit direkter Unterstützung für Objektorientierung. Es gibt einige Features, welche den Eindruck machen, als würden sie Objektorientierung anbieten, jedoch ist bspw. das Überladen von Validierungen nicht einfach bzw. nicht "echte" Objektorientierung - das ist allerdings eine Vorraussetzung (siehe Beispiel Audi).
 
-Für mehr Info über die Problematik mit JSON Schema Objekt-Orientierung empfiehlt sich dieser [https://stackoverflow.com/a/63497112](StackOverflow-Post).
+Für mehr Info über die Problematik mit JSON Schema Objekt-Orientierung empfiehlt sich dieser [StackOverflow-Post](https://stackoverflow.com/a/63497112).
 
 Wir brauchen also einen Fragebogen, und JSON Schema stellt die Fragen in Form von Anforderungen. Der letzte Schritt, um das Konzept zusammenzubringen, ist die Antworten zu hinterlegen. Dafür gibt es eine unseres Wissens nach grundsätzlich neue Lösung - die Herleitung von Werten aus Konstanten in JSON Schema.
 
-JSON Schema erlaubt es, Werte mit Enums zu validieren. Nutzt man einen einzigen Enum-Wert, gibt man quasi eine Konstante vor, wodurch ein bestimmtes Feld in einem JSON-Objekt diesem Wert entsprechen muss. Das man so Konstanten definieren kann, wird ab [https://json-schema.org/understanding-json-schema/reference/generic.html#constant-values](Draft 6) als das Keyword "const" in JSON Schema als syntaktischer Zucker angeboten. Die grundsätzlich neue "Lösung" ist eigentlich lediglich eine triviale Schlussfolgerung - Wenn ein Schema auf eine Konstante validiert, muss das JSON-Objekt, welches validiert wird, diese Konstante als Wert definieren. Das heißt, dass sich Werte eines JSON-Objektes über "const" in JSON-Schemas herleiten lassen - Dementsprechend lassen sich Antworten in den Fragebogen selbst definieren, quasi als ob manche Fragen schon vorausgefüllt wären.
+JSON Schema erlaubt es, Werte mit Enums zu validieren. Nutzt man einen einzigen Enum-Wert, gibt man quasi eine Konstante vor, wodurch ein bestimmtes Feld in einem JSON-Objekt diesem Wert entsprechen muss. Das man so Konstanten definieren kann, wird ab [Draft 6](https://json-schema.org/understanding-json-schema/reference/generic.html#constant-values) als das Keyword "const" in JSON Schema als syntaktischer Zucker angeboten. Die grundsätzlich neue "Lösung" ist eigentlich lediglich eine triviale Schlussfolgerung - Wenn ein Schema auf eine Konstante validiert, muss das JSON-Objekt, welches validiert wird, diese Konstante als Wert definieren. Das heißt, dass sich Werte eines JSON-Objektes über "const" in JSON-Schemas herleiten lassen - Dementsprechend lassen sich Antworten in den Fragebogen selbst definieren, quasi als ob manche Fragen schon vorausgefüllt wären.
 
 Auch Mehrfachvererbung wurde konzeptioniert - Ein Fragebogen könnte sinnvollerweise auch Fragen von mehreren anderen Fragebögen beantworten, welche letztendlich natürlich aber zumindest indirekt wieder von dem "Kern-Schema" erben: Tilt-Schema. Tilt-Schema ist "Kern-Schema", weil auf diesem Schema alle Werte bzw. Antworten bekannt (also definiert) sein müssen, um ein vollständiges Tilt-Objekt zu erzeugen.
 
@@ -126,7 +126,7 @@ In der Mehrfachvererbung gibt es generell die Problematik mit Konflikten. Progra
 
 Da JSON-Schema keine Objektorientierung unterstützt, unterstützt es auch nicht Mehrfachvererbung. Auch hier haben wir uns eigene, neue Lösungen überlegt, um mit den möglichen Konflikten klarzukommen. Mit diesem Gedanken wurde das Parsen der Werte für das JSON-Objekt von Grund auf geplant - Deshalb ist jede Auflösung eines Wertes auch eine Auflösung eines "Konflikts". In der Terminologie des Projektes ist ein Konflikt also ein Treffpunkt aller möglichen Werte. Hier gibt es "Resolved Conflicts" und "Unresolved Conflicts". Ein Unresolved Conflict kann keinen, aber auch mehrere Werte beinhalten. Die Idee ist hier, dass ein Nutzer immer Unresolved Conflicts beantworten muss - ob es keinen oder zu viele Werte gibt, spielt dabei keine Rolle. Die Conflicts können per Vererbung ggf. overridden werden. Conflicts können auch Merge-Strategien unterstützen, konkret interessant ist dies für Arrays, in denen mehrere Werte nicht zwingend zu Unresolved Conflicts führen.
 
-Da wir in Kotlin programmiert haben, hat es sich neben den Java-Bibliotheken angeboten, eine Kotlin-Bibliothek für das Validieren und als API für JSON Schemas zu nutzen. Hierzu nutzen wir [https://github.com/worldturner/medeia-validator](Medeia). Dadurch war es deutlich einfacher, eine algorithmische Lösung zur Auflösung der Werte von verschachtelten JSON-Objekten zu finden.
+Da wir in Kotlin programmiert haben, hat es sich neben den Java-Bibliotheken angeboten, eine Kotlin-Bibliothek für das Validieren und als API für JSON Schemas zu nutzen. Hierzu nutzen wir [Medeia](https://github.com/worldturner/medeia-validator). Dadurch war es deutlich einfacher, eine algorithmische Lösung zur Auflösung der Werte von verschachtelten JSON-Objekten zu finden.
 
 Konstanten für JSON-Objekte selbst werden vom Algorithmus nicht unterstützt, da die Darstellung mit Konflikten pro simplem Wert sich dafür nicht eignet. Nach aktuellem Stand sind Referenzen noch nicht implementiert, allerdings ist der existierende Code explizit dafür entwickelt, dies zu unterstützen - Conflicts mit Referenzen als Werte würden diese reiterativ auflösen, bis keine Änderung mehr entsteht. Im Frontend gibt es noch keine "echte" Unterstützung zum Mergen von Arrays, der Teil des Codes im Algorithmus ist allerdings (ungetestet) bereits entwickelt (Siehe Merge-Strategien bzgl. Arrays).
 
